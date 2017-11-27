@@ -70,11 +70,10 @@ public class LoginView extends JFrame implements ActionListener{
             ResultSet resultSet;
             try{
                 statement=DBConnection.getConnection().createStatement();
-                resultSet = statement.executeQuery("select * from"+ Usercode.TABLE);
+                resultSet = statement.executeQuery("select * from "+ Usercode.TABLE);
                 System.out.println(resultSet.wasNull());
                 while (resultSet.next()){
-                	System.out.println(resultSet.getString(Usercode.ID)+String.valueOf(passwordField.getPassword()));
-                    if(resultSet.getString(Usercode.ID).equals(usernameField.getText()))
+                    if(resultSet.getString(Usercode.NAME).equals(usernameField.getText()))
                         if(String.valueOf(passwordField.getPassword()).equals(resultSet.getString(Usercode.PW))){
                             correct=true;break;
                         }
@@ -87,7 +86,10 @@ public class LoginView extends JFrame implements ActionListener{
                 if(!correct)
                     JOptionPane.showMessageDialog(this,"The username or password is incorrect.",
                             "Invalid",JOptionPane.ERROR_MESSAGE);
-                else ;//TODO jump to main page.
+                else {
+                    System.out.println("login:ok");
+                    MainPageView.getInstance();
+                    this.dispose();
             }
         }else{
             this.dispose();
