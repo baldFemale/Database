@@ -8,18 +8,14 @@ import java.sql.*;
 import java.sql.Connection;
 
 public class DBConnection {
+    private static Connection conn=null;
     private static final DBConnection ourInstance = new DBConnection();
     public static DBConnection getInstance() {
         return ourInstance;
     }
 
-    // MySQL配置时的用户名
     final String user = "user1";
-    // MySQL配置时的密码
     final String password = "u0001";
-
-    private static Connection conn=null;
-//    private static Statement statement=null;
 
     private DBConnection() {
         // 驱动程序名
@@ -30,11 +26,7 @@ public class DBConnection {
 
         try {
         	Class.forName(driver);
-       //     new com.mysql.jdbc.Driver();
-         //   DriverManager.registerDriver(new Driver());
-
-
-            // 连续数据库
+            // DriverManager.registerDriver(new Driver());
             conn = DriverManager.getConnection(url, user, password);
 
             if(!conn.isClosed())
