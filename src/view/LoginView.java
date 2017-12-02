@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -33,9 +35,11 @@ public class LoginView extends JFrame implements ActionListener{
     private JPanel jPanel1,jPanel2,jPanel3;
     private JTextField usernameField;
     private JPasswordField passwordField;
-    JButton jButtonConfirm,jButtonCancel;
+    private JButton jButtonConfirm,jButtonCancel;
     private LoginView(){
         super("Login");
+        Toolkit toolkit=Toolkit.getDefaultToolkit();
+        Dimension screenSize=toolkit.getScreenSize();
         GridLayout gridLayout=new GridLayout(3,1);
         Container container=this.getContentPane();
         container.setLayout(gridLayout);
@@ -60,6 +64,7 @@ public class LoginView extends JFrame implements ActionListener{
         container.add(jPanel3);
         this.setSize(300,200);
         this.setVisible(true);
+        this.setLocation((screenSize.width-this.getWidth())/2,(screenSize.height-this.getHeight())/2);
     }
 
     @Override
@@ -90,6 +95,7 @@ public class LoginView extends JFrame implements ActionListener{
                     System.out.println("login:ok");
                     MainPageView.getInstance();
                     this.dispose();
+                }
             }
         }else{
             this.dispose();
