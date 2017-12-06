@@ -12,7 +12,7 @@ public class MainControl {
         DBConnection.getInstance();
         LoginView.getInstance();
     }
-    public static boolean addView(Window view){
+    public static boolean addViewToViewscollector(Window view){
         return viewsCollector.add(view);
     }
     public static void disposeAll(){

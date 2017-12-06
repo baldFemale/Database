@@ -2,6 +2,8 @@ package model;
 
 /**
  * Created by Jordan on 2017/11/20.
+ * This is the model for the attrs in the table 'usercode'.
+ * It's simply for convenience.
  */
 
 public final class Usercode {

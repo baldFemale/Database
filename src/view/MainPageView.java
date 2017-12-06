@@ -12,7 +12,7 @@ public class MainPageView extends JFrame{
     private static final MainPageView ourInstance = new MainPageView();
 
     public static MainPageView getInstance() {
-        MainControl.addView(ourInstance);
+        MainControl.addViewToViewscollector(ourInstance);
         return ourInstance;
     }
 

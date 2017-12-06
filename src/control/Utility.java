@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 
 /**
+ * A bunch of tools.
  * Created by Jordan on 2017/12/3.
  */
 
