@@ -1,43 +1,39 @@
 package toolkit;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
-import java.math.*;
 import java.sql.ResultSet;
 import java.util.Vector;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 /**
- * Tabel table = new Tabel(resultset,"tablename")
+ * Tabel table = new Tabel(resultset)
+ * table.jt
+ * table.columnName
+ * table.rowcount
  */
 
-public class Table extends JFrame{
+public class Table{
 	private ResultSet res;
 	private ResultSetMetaData rmd;
 	private Vector rowData = new Vector();
 	private Vector columnName = new Vector();
-	private int rowcount;
-	private int columncount;
-	private JTable jt;
+	public int rowcount;
+	public int columncount;
+	public JTable jt;
 	private JTableHeader head;
 	private JScrollPane jsp=null;  
-	public Table(ResultSet res_in,String s) throws SQLException {
+	
+	public Table(ResultSet res_in) throws SQLException {
 		
 		res = res_in;
 		rmd = res.getMetaData();
 		get_column();
 		get_content();
-		if (rowcount!=0 && columncount!=0) {
-		generate_table(s);
-		}
-		else {
-			generate_wrong();
-		}
+		jt = generate_table();
 	}
 	
 	private void get_column() throws SQLException {
@@ -57,19 +53,13 @@ public class Table extends JFrame{
 			rowData.add(hang);
 		}
 	}
-	private void generate_table(String s) {
+	
+	private JTable generate_table() {
 		JTable jt = new JTable(rowData,columnName){
 	        public boolean isCellEditable(int row, int column)
 	             {return false;}
 	        };
-		jsp = new JScrollPane(jt);
-		this.setTitle(s+"  "+"共有"+rowcount+"条记录,"+columncount+"字段");
-		this.add(jsp);
-		this.setSize(Math.max(100*columncount,400),300);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-	}
-	private void generate_wrong() {
-		JOptionPane.showMessageDialog(null, "没有符合条件的记录，请检查查询条件","wrong",JOptionPane.ERROR_MESSAGE);;
+	    return jt;
 	}
 }
+
