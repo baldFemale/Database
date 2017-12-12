@@ -63,7 +63,7 @@ public class LoginView extends JFrame implements ActionListener{
         container.add(jPanel3);
         this.setSize(300,200);
         this.setVisible(true);
-        Utility.SetWindowAtCenter(this);
+        Utility.setWindowAtCenter(this);
         //this.setLocation((screenSize.width-this.getWidth())/2,(screenSize.height-this.getHeight())/2);
     }
 

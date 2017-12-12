@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.LayoutManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import control.DBConnection;
 import model.Course;
 import model.SC;
+import toolkit.Utility;
 
 /**
  * Created by Jordan on 2017/12/11.
@@ -41,7 +43,7 @@ public final class Item341Act extends JPanel {
 
         upper=new JPanel();
         buttonQuery= new JButton("查询");
-        comboBoxYear=new JComboBox(v1);
+        comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.AYEAR));
         comboBoxCourse=new JComboBox(v2);
         this.upper.setLayout(createLayout());
 
@@ -52,6 +54,10 @@ public final class Item341Act extends JPanel {
         this.add(this.table);
 
         this.setVisible(true);
+        this.setFont(new Font("宋体",Font.ITALIC,30));
+        /*
+        * 尝试解决GUI的中文乱码问题。
+        * */
     }
 
     /**
