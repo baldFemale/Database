@@ -6,7 +6,8 @@ import control.MainControl;
 import toolkit.Utility;
 
 /**
- * Created by Jordan on 2017/11/19.
+ * Singleton. Hence we can get access to the instance with the name of the class.
+ * on 2017/11/19.
  */
 
 public class MainPageView extends JFrame{
@@ -19,9 +20,5 @@ public class MainPageView extends JFrame{
 
     private MainPageView() {
         super();
-        this.add(new Item341Act());
-        this.setVisible(true);
-        Utility.SetWindowAtCenter(this);
-        this.setSize(300,300);
     }
 }
