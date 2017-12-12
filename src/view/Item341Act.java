@@ -3,6 +3,8 @@ package view;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,20 +21,21 @@ import javax.swing.JTable;
 import control.DBConnection;
 import model.Course;
 import model.SC;
+import model.Student;
 import toolkit.Utility;
 
 /**
- * Created by Jordan on 2017/12/11.
+ * 查找某门课程某年最高分的五位同学。
  */
 
-public final class Item341Act extends JPanel {
-    JPanel upper,panelYear,panelCourse,panelResult;
-    JButton buttonQuery;
-    JLabel labelYear,labelCourse;
-    JComboBox comboBoxYear,comboBoxCourse;
-    JTable table;
-    ResultSet resultSet=null;
-    Vector<String> v1,v2;
+public final class Item341Act extends JPanel implements  ActionListener{
+    private JPanel upper,panelYear,panelCourse,panelResult;
+    private JButton buttonQuery;
+    private JLabel labelYear,labelCourse;
+    private JComboBox comboBoxYear,comboBoxCourse;
+    private JTable table;
+    private ResultSet resultSet=null;
+    private Vector<String> v1,v2;
     public Item341Act (){
         super();
         v1=new Vector<>();
@@ -47,14 +50,16 @@ public final class Item341Act extends JPanel {
         comboBoxCourse=new JComboBox(v2);
         this.upper.setLayout(createLayout());
 
+        buttonQuery.addActionListener(this);
+
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(new JLabel("请输入需要查询的学年和课程名称"));
         this.add(this.upper);
-        table=new JTable(3,3);
+        table=new JTable(1,3);
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));
+        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
         /*
         * 尝试解决GUI的中文乱码问题。
         * */
@@ -99,4 +104,15 @@ public final class Item341Act extends JPanel {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+        String sql="select top 5"+SC.S_ID+", "+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
+        if(this.comboBoxYear.getSelectedItem()!=null){
+            sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
+        }
+        if(this.comboBoxCourse.getSelectedItem()!=null)
+            sql.concat("and SC."+SC.C_ID);//TODO SQL语句没写完。
+    }
 }
+
