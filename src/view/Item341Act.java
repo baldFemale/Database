@@ -49,7 +49,7 @@ public final class Item341Act extends JPanel implements  ActionListener{
         upper=new JPanel();
         buttonQuery= new JButton("查询");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.AYEAR));
-        comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,Course.NAME));
+        comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Student.TABLE,Course.NAME));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
@@ -114,7 +114,7 @@ public final class Item341Act extends JPanel implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql="select top 5 "+SC.S_ID+", "+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
+        String sql="select top 5 SC."+SC.S_ID+", S."+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
         if(this.comboBoxYear.getSelectedItem()!=null){
             sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
         }

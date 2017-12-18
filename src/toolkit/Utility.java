@@ -38,7 +38,7 @@ public class Utility {
     public static Vector simpleUniqueQuery(String table, String attr){
         Vector vector=new Vector<String>();
         ResultSet resultSet=null;
-        String sql="select unique "+ attr+" from "+table;
+        String sql="select distinct "+ attr+" from "+table;
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sql);
