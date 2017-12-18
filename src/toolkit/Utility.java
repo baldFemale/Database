@@ -36,7 +36,7 @@ public class Utility {
      * @return A vector of string.
      */
     public static Vector simpleUniqueQuery(String table, String attr){
-        Vector vector=new Vector();
+        Vector vector=new Vector<String>();
         ResultSet resultSet=null;
         String sql="select unique "+ attr+" from "+table;
         try {

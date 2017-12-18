@@ -17,11 +17,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 import control.DBConnection;
 import model.Course;
 import model.SC;
 import model.Student;
+import toolkit.Table;
 import toolkit.Utility;
 
 /**
@@ -29,9 +31,9 @@ import toolkit.Utility;
  */
 
 public final class Item341Act extends JPanel implements  ActionListener{
-    private JPanel upper,panelYear,panelCourse,panelResult;
+    private JPanel upper,top;
     private JButton buttonQuery;
-    private JLabel labelYear,labelCourse;
+    private JLabel labelYear,labelCourse,labelHeading;
     private JComboBox comboBoxYear,comboBoxCourse;
     private JTable table;
     private ResultSet resultSet=null;
@@ -47,15 +49,20 @@ public final class Item341Act extends JPanel implements  ActionListener{
         upper=new JPanel();
         buttonQuery= new JButton("查询");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.AYEAR));
-        comboBoxCourse=new JComboBox(v2);
+        comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,Course.NAME));
         this.upper.setLayout(createLayout());
+
+        top=new JPanel();
+        labelHeading=new JLabel("请输入需要查询的学年和课程名称");
+        //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
+        top.add(labelHeading);
 
         buttonQuery.addActionListener(this);
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.add(new JLabel("请输入需要查询的学年和课程名称"));
+        this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);
+        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
         this.add(this.table);
 
         this.setVisible(true);
@@ -107,12 +114,23 @@ public final class Item341Act extends JPanel implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql="select top 5"+SC.S_ID+", "+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
+        String sql="select top 5 "+SC.S_ID+", "+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
         if(this.comboBoxYear.getSelectedItem()!=null){
             sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
         }
         if(this.comboBoxCourse.getSelectedItem()!=null)
             sql.concat("and SC."+SC.C_ID);//TODO SQL语句没写完。
+        System.out.println(sql);
+        try {
+            Statement statement = DBConnection.getConnection().createStatement();
+            resultSet = statement.executeQuery(sql);
+            table = new Table(resultSet).jt;
+            statement.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
