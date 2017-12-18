@@ -27,7 +27,7 @@ import toolkit.Table;
 import toolkit.Utility;
 
 /**
- * æŸ¥æ‰¾æŸé—¨è¯¾ç¨‹æŸå¹´æœ€é«˜åˆ†çš„äº”ä½åŒå­¦ã€‚
+ * ²éÕÒÄ³ÃÅ¿Î³ÌÄ³Äê×î¸ß·ÖµÄÎåÎ»Í¬Ñ§¡£
  */
 
 public final class Item341Act extends JPanel implements  ActionListener{
@@ -43,17 +43,17 @@ public final class Item341Act extends JPanel implements  ActionListener{
         v1=new Vector<>();
         v2=new Vector<>();
         //prepareCombox();
-        labelYear=new JLabel("å­¦å¹´");
-        labelCourse=new JLabel("è¯¾ç¨‹");
+        labelYear=new JLabel("Ñ§Äê");
+        labelCourse=new JLabel("¿Î³Ì");
 
         upper=new JPanel();
-        buttonQuery= new JButton("æŸ¥è¯¢");
+        buttonQuery= new JButton("²éÑ¯");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.AYEAR));
         comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Student.TABLE,Course.NAME));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„å­¦å¹´å’Œè¯¾ç¨‹åç§°");
+        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÑ§ÄêºÍ¿Î³ÌÃû³Æ");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -66,9 +66,9 @@ public final class Item341Act extends JPanel implements  ActionListener{
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
+        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ĞĞÌáÊ¾ÎÄ×ÖÃ»ÓĞ¾ÓÖĞ¡£
         /*
-        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
+        * ³¢ÊÔ½â¾öGUIµÄÖĞÎÄÂÒÂëÎÊÌâ¡£
         * */
     }
 
@@ -119,7 +119,7 @@ public final class Item341Act extends JPanel implements  ActionListener{
             sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
         }
         if(this.comboBoxCourse.getSelectedItem()!=null)
-            sql.concat("and SC."+SC.C_ID);//TODO SQLè¯­å¥æ²¡å†™å®Œã€‚
+            sql.concat("and SC."+SC.C_ID);//TODO SQLÓï¾äÃ»Ğ´Íê¡£
         System.out.println(sql);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
