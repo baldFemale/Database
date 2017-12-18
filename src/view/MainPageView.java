@@ -63,7 +63,7 @@ public class MainPageView extends JFrame implements ActionListener{
 	JMenuItem item346;
 	JMenuItem item347;
 	
-	JPanel jp1 = new JPanel();
+	JPanel jpBasic = new JPanel();
     
 	//添加响应事件实例
 	view.Item11Act item11Act = new view.Item11Act();
@@ -182,7 +182,7 @@ public class MainPageView extends JFrame implements ActionListener{
 		
 		//显示菜单
 		this.setJMenuBar(mainBar);
-		this.add(jp1);
+		this.add(jpBasic);
 		
 		//add listeners
 		item11.addActionListener(this);
@@ -222,154 +222,154 @@ public class MainPageView extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){  
         if(e.getSource() == item11){//改变图形化界面为“后来”的界面。  
-            jp1.removeAll();  
-            jp1.add("11" , item11Act);//切换代码。  
-            jp1.validate();
-            jp1.updateUI(); 
+            jpBasic.removeAll();  
+            jpBasic.add("11" , item11Act);//切换代码。  
+            jpBasic.validate();
+            jpBasic.updateUI(); 
         }  
         else if(e.getSource() == item12){
-            jp1.removeAll();
-            jp1.add("12", item12Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("12", item12Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item13){
-            jp1.removeAll();
-            jp1.add("13", item13Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("13", item13Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         /*else if(e.getSource() == item14){
-            jp1.removeAll();
-            jp1.add("14", item14Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("14", item14Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item15){ 
-            jp1.removeAll();
-            jp1.add("15", item15Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("15", item15Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item16){
-            jp1.removeAll();
-            jp1.add("16", item16Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("16", item16Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item21){
-            jp1.removeAll();
-            jp1.add("21", item21Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("21", item21Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item22){
-            jp1.removeAll();
-            jp1.add("22", item22Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("22", item22Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item23){  
-            jp1.removeAll();
-            jp1.add("23", item23Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("23", item23Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item24){
-            jp1.removeAll();
-            jp1.add("24", item24Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("24", item24Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item25){
-            jp1.removeAll();
-            jp1.add("25", item25Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("25", item25Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item26){  
-            jp1.removeAll();
-            jp1.add("26", item26Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("26", item26Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item311){
-            jp1.removeAll();
-            jp1.add("311", item311Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("311", item311Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item312){
-            jp1.removeAll();
-            jp1.add("312", item312Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("312", item312Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item321){
-            jp1.removeAll();
-            jp1.add("321", item321Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("321", item321Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item322){
-            jp1.removeAll();
-            jp1.add("322", item322Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("322", item322Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item323){  
-            jp1.removeAll();
-            jp1.add("323", item323Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("323", item323Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item331){
-            jp1.removeAll();
-            jp1.add("331", item331Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("331", item331Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item341){
-            jp1.removeAll();
-            jp1.add("341", item341Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("341", item341Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item342){
-            jp1.removeAll();
-            jp1.add("342", item342Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("342", item342Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item343){
-            jp1.removeAll();
-            jp1.add("343", item343Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("343", item343Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item344){
-            jp1.removeAll();
-            jp1.add("344", item344Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("344", item344Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item345){
-            jp1.removeAll();
-            jp1.add("345", item345Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("345", item345Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item346){ 
-            jp1.removeAll();
-            jp1.add("346", item346Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("346", item346Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }
         else if(e.getSource() == item347){
-            jp1.removeAll();
-            jp1.add("347", item347Act);
-            jp1.validate();  
-            jp1.updateUI();
+            jpBasic.removeAll();
+            jpBasic.add("347", item347Act);
+            jpBasic.validate();  
+            jpBasic.updateUI();
         }*/
     }
     
