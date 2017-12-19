@@ -26,10 +26,10 @@ public class Item311Act extends JPanel implements ActionListener {
 	JComboBox jcb1,jcb2;
 	JTable jt1;
 	public Item311Act(){
-		jl1 = new JLabel("Ñ§Äê");
-		jl2 = new JLabel("ÈÎ¿Î½ÌÊ¦");
-		jl3 = new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÑ§ÄêºÍ½ÌÊ¦ĞÕÃû");
-		jb1 = new JButton("²éÑ¯");
+		jl1 = new JLabel("å­¦å¹´");
+		jl2 = new JLabel("ä»»è¯¾æ•™å¸ˆ");
+		jl3 = new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„å­¦å¹´å’Œæ•™å¸ˆå§“å");
+		jb1 = new JButton("æŸ¥è¯¢");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(SC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(SC.TABLE, Teacher.NAME));
 		jt1 = new JTable(1,3);
@@ -63,7 +63,7 @@ public class Item311Act extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		String sql = "create view A as select C_id,tc.T_id,T_name,T_prof,Rating from teacher,tc where "
 				+ "teacher.T_id=tc.T_id and T_name="+jcb2.getSelectedItem()+" and tc.Ayear="+jcb1.getSelectedItem()+";"+"select"
-						+ " T_id,T_name,T_prof,C_name,Rating from A,course where A.C_id=course.C_id";
+						+ " T_id,T_name,T_prof,C_name,Rating from A,course where A.C_id=course.C_id;";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {
