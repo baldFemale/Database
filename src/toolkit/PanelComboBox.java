@@ -10,24 +10,28 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Created by Jordan on 2017/12/18.
+ * Create a panel with a series of combo box and titled with an instruction.
  */
 
 public class PanelComboBox extends JPanel {
-    List<RowCombo> listElement=new ArrayList<RowCombo>();
-    JButton buttonQuery;
+    public List<RowCombo> listElement=new ArrayList<RowCombo>();
+    public JButton buttonQuery;
     List<GroupLayout.ParallelGroup> listVGroup = new ArrayList<>();
+    JLabel instruction = new JLabel("请选择查询项目");
 
+    /**
+     * @param items A list of the combo of title, table and attr.
+     */
     public PanelComboBox(List<ComboBoxSearch> items){
         super();
-        buttonQuery=new JButton("鏌ヨ");
+        buttonQuery=new JButton("查询");
         GroupLayout layout=new GroupLayout(this);
         layout.setAutoCreateContainerGaps(true);
 
-        GroupLayout.ParallelGroup hGroup1=layout.createParallelGroup();//.addComponent(labelYear).addComponent(labelCourse);
-        GroupLayout.ParallelGroup hGroup2=layout.createParallelGroup();//.addComponent(comboBoxYear).addComponent(comboBoxCourse);
+        GroupLayout.ParallelGroup hGroup1=layout.createParallelGroup();///.addComponent(instruction);//.addComponent(labelYear).addComponent(labelCourse);
+        GroupLayout.ParallelGroup hGroup2=layout.createParallelGroup().addComponent(instruction);//.addComponent(comboBoxYear).addComponent(comboBoxCourse);
         //.addComponent(buttonQuery);
-        GroupLayout.SequentialGroup vGroup=layout.createSequentialGroup();
+        GroupLayout.SequentialGroup vGroup=layout.createSequentialGroup().addComponent(instruction);
         for (ComboBoxSearch comboItem:items) {
             JLabel label=new JLabel(comboItem.title);
             JComboBox comboBox=new JComboBox<String>(Utility.simpleUniqueQuery(comboItem.table,comboItem.attr));
@@ -47,22 +51,7 @@ public class PanelComboBox extends JPanel {
 
         this.setLayout(layout);
     }
-    public class ComboBoxSearch {
-        String title;
-        String table;
-        String attr;
 
-        /**
-         * @param title the content of the JLabel
-         * @param table The table to select item from.
-         * @param attr The attribute to select.
-         */
-        public ComboBoxSearch(String title, String table, String attr){
-            this.title=title;
-            this.table=table;
-            this.attr=attr;
-        }
-    }
 
     /**
      * The label and a combo box.

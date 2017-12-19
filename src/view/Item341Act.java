@@ -114,7 +114,7 @@ public final class Item341Act extends JPanel implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql="select top 5 SC."+SC.S_ID+", S."+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
+        String sql="select top 5 user1.SC."+SC.S_ID+", user1.S."+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
         if(this.comboBoxYear.getSelectedItem()!=null){
             sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
         }
