@@ -21,6 +21,8 @@ public class Item342Act extends Item3 implements ActionListener{
         List<ComboBoxSearch> searchList = new ArrayList<>();
         ComboBoxSearch search = new ComboBoxSearch("id","ta","dd");
         searchList.add(search);
+        searchList.add(new ComboBoxSearch("kk","dd","cc"));
+        //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
         this.lower=new JScrollPane();
         lower.add(new JTable(3,5));
@@ -35,5 +37,6 @@ public class Item342Act extends Item3 implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         lower.add(new JTable(3,5));
         this.updateUI();
+        //TODO 添加where后条件的循环的封装。
     }
 }

@@ -2,6 +2,7 @@ package toolkit;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
  */
 
 public class PanelComboBox extends JPanel {
-    public List<RowCombo> listElement=new ArrayList<RowCombo>();
+    List<RowCombo> listElement=new ArrayList<RowCombo>();
     public JButton buttonQuery;
     List<GroupLayout.ParallelGroup> listVGroup = new ArrayList<>();
     JLabel instruction = new JLabel("请选择查询项目");
@@ -34,7 +35,10 @@ public class PanelComboBox extends JPanel {
         GroupLayout.SequentialGroup vGroup=layout.createSequentialGroup().addComponent(instruction);
         for (ComboBoxSearch comboItem:items) {
             JLabel label=new JLabel(comboItem.title);
-            JComboBox comboBox=new JComboBox<String>(Utility.simpleUniqueQuery(comboItem.table,comboItem.attr));
+            Vector vec=Utility.simpleUniqueQuery(comboItem.table,comboItem.attr);
+            vec.add(0,"");
+            JComboBox comboBox=new JComboBox<String>(vec);
+            comboBox.setSelectedIndex(0);
             listElement.add(new RowCombo(label,comboBox));
             hGroup1.addComponent(label);
             hGroup2.addComponent(comboBox);
@@ -50,6 +54,9 @@ public class PanelComboBox extends JPanel {
         layout.setVerticalGroup(vGroup);
 
         this.setLayout(layout);
+    }
+    public Object getSelected(int i){
+        return listElement.get(i).comboBox.getSelectedItem();
     }
 
 
