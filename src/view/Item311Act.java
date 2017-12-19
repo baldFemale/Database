@@ -61,7 +61,9 @@ public class Item311Act extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT TC.T_id,Teacher.T_name,Teacher.Prof,Course.C_name,TC.Rating from "+jcb1.getSelectedItem();
+		String sql = "create view A as select C_id,tc.T_id,T_name,T_prof,Rating from teacher,tc where "
+				+ "teacher.T_id=tc.T_id and T_name="+jcb2.getSelectedItem()+" and tc.Ayear="+jcb1.getSelectedItem()+";"+"select"
+						+ " T_id,T_name,T_prof,C_name,Rating from A,course where A.C_id=course.C_id";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {
