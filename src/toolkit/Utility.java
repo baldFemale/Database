@@ -51,6 +51,7 @@ public class Utility {
             System.out.println("Error!simpleUniqueQuery!");
             e.printStackTrace();
         }finally {
+            vector.add(null);
             return vector;
         }
     }
