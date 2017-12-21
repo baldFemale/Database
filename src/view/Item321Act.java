@@ -14,23 +14,24 @@ import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.JTable;
 import toolkit.Table;
-import model.Teacher;
+import model.Course;
 import model.TC;
 import toolkit.Utility;
 
-public class Item311Act extends JPanel implements ActionListener {
+public class Item321Act extends JPanel implements ActionListener{
 	JLabel jl1,jl2,jl3;
 	JButton jb1;
 	JPanel jp1,jp2;
 	JComboBox jcb1,jcb2;
 	JTable jt1;
-	public Item311Act(){
+	public Item321Act() {
+		// TODO Auto-generated constructor stub
 		jl1 = new JLabel("学年");
-		jl2 = new JLabel("任课教师");
-		jl3 = new JLabel("请输入需要查询的学年和教师姓名");
+		jl2 = new JLabel("课程");
+		jl3 = new JLabel("请输入需要查询的学年和课程名");
 		jb1 = new JButton("查询");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
-		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
+		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.NAME));
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
@@ -42,7 +43,6 @@ public class Item311Act extends JPanel implements ActionListener {
 		this.add(jt1);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
-		
 	}
 	private LayoutManager createLayout() {
 		GroupLayout layout = new GroupLayout(jp1);
@@ -60,9 +60,7 @@ public class Item311Act extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "create view A as select C_id,tc.T_id,T_name,T_prof,Rating from teacher,tc where "
-				+ "teacher.T_id=tc.T_id and T_name="+jcb2.getSelectedItem()+" and tc.Ayear="+jcb1.getSelectedItem()+";"+"select"
-						+ " T_id,T_name,T_prof,C_name,Rating from A,course where A.C_id=course.C_id";
+		String sql = "test";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {
