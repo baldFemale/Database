@@ -24,19 +24,21 @@ public class Item342Act extends Item3 implements ActionListener{
         searchList.add(new ComboBoxSearch("kk","dd","cc"));
         //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
+        JTable table=new JTable(3,5);
         this.lower=new JScrollPane();
-        lower.add(new JTable(3,5));
+        //lower.updateUI();
         this.add(upper);
-        //this.add(lower);
-        this.add(new JTable(3,5));
+        this.add(lower);
+        //this.add(new JTable(3,5));
         this.setVisible(true);
         upper.buttonQuery.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        lower.add(new JTable(3,5));
-        this.updateUI();
+        //lower.removeAll();
+        lower.setViewportView(new JTable(5,5));
+        //lower.updateUI();
         //TODO 添加where后条件的循环的封装。
     }
 }
