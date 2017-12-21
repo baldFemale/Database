@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import control.DBConnection;
 import model.Course;
@@ -53,6 +54,23 @@ public class Utility {
         }finally {
             vector.add(null);
             return vector;
+        }
+    }
+    public static JScrollPane getJSPfromResultSet(ResultSet rs){
+        try {
+            if(rs==null){
+                System.out.println("Result set is null.");
+                return null;
+            }
+            Table t=new Table(rs);
+            JScrollPane jsp = new JScrollPane();
+            jsp.setViewportView(t.jt);
+            rs.close();
+            return jsp;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            return null;
         }
     }
 }
