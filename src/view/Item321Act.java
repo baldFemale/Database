@@ -60,7 +60,8 @@ public class Item321Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "test";
+		String sql = "select Count(*) from sc where Ayear="+jcb1.getSelectedItem()+" and C_id in (select"
+				+ " C_id from course where C_name="+jcb2.getSelectedItem()+");";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {

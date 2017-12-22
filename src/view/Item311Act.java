@@ -60,9 +60,9 @@ public class Item311Act extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "create view A as select C_id,tc.T_id,T_name,T_prof,Rating from teacher,tc where "
-				+ "teacher.T_id=tc.T_id and T_name="+jcb2.getSelectedItem()+" and tc.Ayear="+jcb1.getSelectedItem()+";"+"select"
-						+ " T_id,T_name,T_prof,C_name,Rating from A,course where A.C_id=course.C_id";
+		String sql = "select tc.T_id,teacher.T_name.teacher.Prof,course.C_name,Rating from tc,teacher,course where Ayear="+jcb1.getSelectedItem()+" and T_id in ("
+				+ "select T_id from teacher where T_name="+jcb2.getSelectedItem()+") and tc.T_id=teacher.T_id and "
+						+ "tc.C_id = course.C_id;";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {

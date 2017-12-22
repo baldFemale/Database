@@ -43,7 +43,8 @@ public class Item312Act extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		ResultSet res;
 		Statement statement = null;
-		String sql = "";
+		String sql = "select teacher.T_Name,course.C_Name from tc,course,teacher where teacher.T_id not in (select distinct T_id from tc where Rating=\"Á¼ºÃ\")"
+				+ " and tc.C_id=course.C_id and tc.T_id=teacher.T_id;";
 		System.out.println(sql);
 		try {
 			statement = DBConnection.getConnection().createStatement();
