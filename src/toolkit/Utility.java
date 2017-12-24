@@ -28,7 +28,7 @@ public class Utility {
         window.setLocation((screenSize.width-window.getWidth())/2,(screenSize.height-window.getHeight())/2);
     }
     public static void reportErrorEmptyTable(){
-        JOptionPane.showMessageDialog(null, "æ²¡æœ‰ç¬¦åˆæ¡ä»¶çš„è®°å½•ï¼Œè¯·æ£€æŸ¥æŸ¥è¯¢æ¡ä»¶","wrong",JOptionPane.ERROR_MESSAGE);;
+        JOptionPane.showMessageDialog(null, "Ã»ÓĞ·ûºÏÌõ¼şµÄ¼ÇÂ¼£¬Çë¼ì²é²éÑ¯Ìõ¼ş","wrong",JOptionPane.ERROR_MESSAGE);;
     }
 
     /**
@@ -57,20 +57,22 @@ public class Utility {
         }
     }
     public static JScrollPane getJSPfromResultSet(ResultSet rs){
+        JScrollPane jsp=null;
         try {
             if(rs==null){
                 System.out.println("Result set is null.");
                 return null;
             }
             Table t=new Table(rs);
-            JScrollPane jsp = new JScrollPane();
+            jsp = new JScrollPane();
             jsp.setViewportView(t.jt);
             rs.close();
             return jsp;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("sql error in get JSP");
         }finally {
-            return null;
+            return jsp;
         }
     }
 }

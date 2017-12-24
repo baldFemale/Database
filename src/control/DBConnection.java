@@ -18,11 +18,11 @@ public class DBConnection {
     private final String password = "u0001";
 
     private DBConnection() {
-        // é©±åŠ¨ç¨‹åºå
+        // Çı¶¯³ÌĞòÃû
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String driverMySQL="com.mysql.jdbc.Driver";
 
-        // URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“åscutcs
+        // URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûscutcs
         String url = "jdbc:sqlserver://192.168.0.250:1433;DatabaseName=student";
         String databaseName="student";
         String urlMySQL="jdbc:mysql://localhost:3306/"+databaseName;

@@ -36,7 +36,7 @@ public class PanelComboBox extends JPanel {
         for (ComboBoxSearch comboItem:items) {
             JLabel label=new JLabel(comboItem.title);
             Vector vec=Utility.simpleUniqueQuery(comboItem.table,comboItem.attr);
-            vec.add(0,"");
+            //vec.add(0,"");
             JComboBox comboBox=new JComboBox<String>(vec);
             comboBox.setSelectedIndex(0);
             listElement.add(new RowCombo(label,comboBox));

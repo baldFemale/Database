@@ -10,6 +10,8 @@ import javax.swing.JTable;
 
 import toolkit.ComboBoxSearch;
 import toolkit.PanelComboBox;
+import toolkit.TestUnit;
+import toolkit.Utility;
 
 /**
  * Created by Jordan on 2017/12/19.
@@ -24,8 +26,6 @@ public class Item342Act extends Item3 implements ActionListener{
         searchList.add(new ComboBoxSearch("kk","dd","cc"));
         //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
-        JTable table=new JTable(3,5);
-        this.lower=new JScrollPane();
         //lower.updateUI();
         this.add(upper);
         this.add(lower);
@@ -37,8 +37,13 @@ public class Item342Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
-        lower.setViewportView(new JTable(5,5));
+        rs= TestUnit.getTestRS();
+        jsp=Utility.getJSPfromResultSet(rs);
+        lower.removeAll();
+        lower.add(jsp);
+        lower.updateUI();
+        //lower.setViewportView(new JTable(5,5));
         //lower.updateUI();
-        //TODO æ·»åŠ whereåæ¡ä»¶çš„å¾ªç¯çš„å°è£…ã€‚
+        //TODO Ìí¼ÓwhereºóÌõ¼şµÄÑ­»·µÄ·â×°¡£
     }
 }
