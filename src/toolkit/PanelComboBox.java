@@ -55,6 +55,11 @@ public class PanelComboBox extends JPanel {
 
         this.setLayout(layout);
     }
+
+    /**
+     * @param i the index of the combo box. start from 0.
+     * @return an Object. need to be converted to String.
+     */
     public Object getSelected(int i){
         return listElement.get(i).comboBox.getSelectedItem();
     }

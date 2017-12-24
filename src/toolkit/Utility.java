@@ -75,4 +75,29 @@ public class Utility {
             return jsp;
         }
     }
+    public static JScrollPane jspFromSQL(String sql){
+        ResultSet rs=null;
+        JScrollPane jsp=null;
+        try{
+            Statement statement = DBConnection.getConnection().createStatement();
+            rs=statement.executeQuery(sql);
+            jsp=getJSPfromResultSet(rs);
+            rs.last();
+            if(rs.getRow()==0)Utility.reportErrorEmptyTable();
+            rs.close();
+            statement.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+            jsp=new JScrollPane();
+        }
+        return jsp;
+    }
+
+    /**
+     * @param s
+     * @return 's'
+     */
+    public static String quote(String s){
+        return "'"+s+"'";
+    }
 }

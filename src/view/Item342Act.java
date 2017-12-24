@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import model.Department;
+import model.SC;
 import toolkit.ComboBoxSearch;
 import toolkit.PanelComboBox;
 import toolkit.TestUnit;
@@ -21,9 +23,9 @@ public class Item342Act extends Item3 implements ActionListener{
 
     public Item342Act(){
         List<ComboBoxSearch> searchList = new ArrayList<>();
-        ComboBoxSearch search = new ComboBoxSearch("id","ta","dd");
+        ComboBoxSearch search = new ComboBoxSearch("学年", SC.TABLE,SC.AYEAR);
         searchList.add(search);
-        searchList.add(new ComboBoxSearch("kk","dd","cc"));
+        searchList.add(new ComboBoxSearch("系别", Department.TABLE,Department.NAME));
         //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
         //lower.updateUI();
@@ -37,8 +39,19 @@ public class Item342Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
-        rs= TestUnit.getTestRS();
-        jsp=Utility.getJSPfromResultSet(rs);
+        String sql="select S_name as Name, sum(SC.gpa * C.score)/sum(C.score) as GPA, rank() over(order by GPA)" +
+                "from Student as S, SC, Course as C" +
+                "where ";
+        if(upper.getSelected(1)!=null)sql=sql +"S.Dept_id = (select Dept_id from Department where Dept_name = '"+upper.getSelected(1).toString()+"') and ";
+        if(upper.getSelected(0)!=null)sql=sql+
+                "SC.Ayear = "+Utility.quote(upper.getSelected(0).toString()) +" and ";
+        sql=sql+
+                "and S.S_id = SC.S_id" +
+                "and C.C_id = SC.C_id" +
+                "group by SC.S_id" +
+                "order by GPA";
+        //rs= TestUnit.getTestRS();
+        //jsp=Utility.getJSPfromResultSet(rs);
         lower.removeAll();
         lower.add(jsp);
         lower.updateUI();
