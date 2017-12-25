@@ -39,19 +39,19 @@ public final class Item23Act extends JPanel implements  ActionListener{
 	
     public Item23Act (){
         super();
-        labelID=new JLabel("Ñ§ºÅ");
-        labelName=new JLabel("ĞÕÃû");
-        labelSex = new JLabel("ĞÔ±ğ");
-        labelBirth = new JLabel("³öÉúÈÕÆÚ");
-        labelProv = new JLabel("À´×ÔÊ¡·İ");
-        labelInto = new JLabel("ÈëĞ£Äê·İ");
-        labelDept = new JLabel("ËùÊôÏµ±ğÃû³Æ");
-        labelTo = new JLabel("ÖÁ");
-        labelTo1 = new JLabel("ÖÁ");
-        labelTo2 = new JLabel("ÖÁ");
+        labelID=new JLabel("å­¦å·");
+        labelName=new JLabel("å§“å");
+        labelSex = new JLabel("æ€§åˆ«");
+        labelBirth = new JLabel("å‡ºç”Ÿæ—¥æœŸ");
+        labelProv = new JLabel("æ¥è‡ªçœä»½");
+        labelInto = new JLabel("å…¥æ ¡å¹´ä»½");
+        labelDept = new JLabel("æ‰€å±ç³»åˆ«åç§°");
+        labelTo = new JLabel("è‡³");
+        labelTo1 = new JLabel("è‡³");
+        labelTo2 = new JLabel("è‡³");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxSex=new JComboBox(Utility.simpleUniqueQuery(Student.TABLE, Student.SEX));
         comboBoxProv=new JComboBox(Utility.simpleUniqueQuery(Student.TABLE,Student.PROV));
         comboBoxDept=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.NAME));
@@ -65,7 +65,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -78,9 +78,9 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ĞĞÌáÊ¾ÎÄ×ÖÃ»ÓĞ¾ÓÖĞ¡£
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖĞÎÄÂÒÂëÎÊÌâ¡£
+        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
         * */
     }
     
@@ -110,7 +110,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select * from " + Student.TABLE + " and " + Department.TABLE + " where " + Student.DEPT + " = " + Department.ID; //TODO
+		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID; //TODO
 		System.out.print(sqlString);
 		if(this.textIDMin.getText() != null) {
 			float idMin = Float.parseFloat(textIDMin.getText());
@@ -121,14 +121,14 @@ public final class Item23Act extends JPanel implements  ActionListener{
 			sqlString.concat(" and" + Student.ID + " <= " + idMax);
 		}
 		if(this.textName.getText() != null) {
-			//WHERE TN LIKE ¡®ÕÅ%¡¯
-			sqlString.concat(" and " + Student.NAME + " like % " + textName.getText() + " %");
+			//WHERE TN LIKE â€˜å¼ %â€™
+			sqlString.concat(" and " + Student.NAME + " like '% " + textName.getText() + " %'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
-			sqlString.concat(" and " + Student.SEX + " = " + comboBoxSex.getSelectedItem());
-		//TODO ³öÉúÈÕÆÚÒò¸ñÊ½Î´Öª£¬»¹Î´¼ÓÉÏÈ¥
+			sqlString.concat(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
+		//TODO å‡ºç”Ÿæ—¥æœŸå› æ ¼å¼æœªçŸ¥ï¼Œè¿˜æœªåŠ ä¸Šå»
 		if(this.comboBoxProv.getSelectedItem() != null)
-			sqlString.concat(" and " + Student.PROV + " = " + comboBoxProv.getSelectedItem());
+			sqlString.concat(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
 		if(this.textIntoMin.getText() != null) {
 			float intoMin = Float.parseFloat(textIntoMin.getText());
 			sqlString.concat(" and " + Student.INTO + " >= " + intoMin);
@@ -138,8 +138,8 @@ public final class Item23Act extends JPanel implements  ActionListener{
 			sqlString.concat(" and" + Student.INTO + " <= " + intoMax);
 		}
 		if(this.comboBoxDept.getSelectedItem() != null) {
-			//TODO »¹ĞèÔÙÈ·ÈÏ²»Í¬±í¸ñÊÇ·ñÒ²¿ÉÒÔÕâÑù×ö
-			sqlString.concat(" and " + Department.NAME + " = " + comboBoxProv.getSelectedItem());
+			//TODO è¿˜éœ€å†ç¡®è®¤ä¸åŒè¡¨æ ¼æ˜¯å¦ä¹Ÿå¯ä»¥è¿™æ ·åš
+			sqlString.concat(" and " + Department.NAME + " = '" + comboBoxProv.getSelectedItem() + "'");
 		}
 		System.out.println(sqlString);
         try {
