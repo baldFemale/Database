@@ -33,7 +33,7 @@ public class Item311Act extends JPanel implements ActionListener {
 		jb1 = new JButton("查询");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
-		jsp1 = new Table.jsp1();
+		jsp1 = new JScrollPan();
 		jp1 = new JPanel();
 		jp2 = new JPanel();
 		jb1.addActionListener(this);
@@ -75,7 +75,7 @@ public class Item311Act extends JPanel implements ActionListener {
 		}
 		try {
 			ResultSet resultSet = statement.executeQuery(sql);
-			jt1 = new Table(resultSet).jt; 
+			jsp1 = new Table(resultSet).jsp1; 
 			statement.close();
 			resultSet.close();
 		} catch (SQLException e) {
