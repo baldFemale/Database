@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import control.DBConnection;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.JTable;
@@ -24,6 +25,7 @@ public class Item311Act extends JPanel implements ActionListener {
 	JPanel jp1,jp2;
 	JComboBox jcb1,jcb2;
 	JTable jt1;
+	JScrollPane jsp1;
 	public Item311Act(){
 		jl1 = new JLabel("学年");
 		jl2 = new JLabel("任课教师");
@@ -32,6 +34,8 @@ public class Item311Act extends JPanel implements ActionListener {
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
 		jt1 = new JTable(1,3);
+		jsp = new JScrollPane();
+		jsp.add(jt1);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
 		jb1.addActionListener(this);
@@ -39,7 +43,7 @@ public class Item311Act extends JPanel implements ActionListener {
 		jp2.add(jl3);
 		this.add(jp2);
 		this.add(jp1);
-		this.add(jt1);
+		this.add(jsp);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
 		
