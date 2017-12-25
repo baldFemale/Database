@@ -61,7 +61,7 @@ public class Item321Act extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		String sql = "select Count(*) as 'COUNT' from sc where Ayear="+jcb1.getSelectedItem()+" and C_id in (select"
-				+ " C_id from course where C_name="+jcb2.getSelectedItem()+");";
+				+ " C_id from course where C_name='"+jcb2.getSelectedItem()+"');";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {

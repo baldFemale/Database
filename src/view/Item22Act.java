@@ -63,7 +63,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
         this.add(this.top);
         this.add(this.upper);
         table=new JTable(1,3);//todo What should be presented when no result has been acquired.
-        this.add(this.table);
+        
 
         this.setVisible(true);
         this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
@@ -110,6 +110,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
+	    this.add(this.table);
             this.updateUI();
             statement.close();
             resultSet.close();

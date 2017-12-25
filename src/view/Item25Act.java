@@ -81,7 +81,7 @@ public final class Item25Act extends JPanel implements ActionListener{
         this.add(this.top);
         this.add(this.upper);
         table=new JTable(1,3);//todo What should be presented when no result has been acquired.
-        this.add(this.table);
+        
 
         this.setVisible(true);
         this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
@@ -135,7 +135,15 @@ public final class Item25Act extends JPanel implements ActionListener{
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString.concat(" and " + Teacher.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		//TODO 出生日期因格式未知，还未加上去
+		if(this.textBirthMin.getText() != null) {
+			float idMin = Float.parseFloat(textBirthMin.getText());
+			sqlString.concat(" and " + Teacher.BIRTH + " >= " + idMin);
+		}
+		if(this.textBirthMax.getText() != null) {
+			float idMax = Float.parseFloat(textBirthMax.getText());
+			sqlString.concat(" and" + Teacher.BIRTH + " <= " + idMax);
+		}
+		
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString.concat(" and " + Teacher.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
 		if(this.comboBoxRegion.getSelectedItem() != null)
@@ -159,6 +167,7 @@ public final class Item25Act extends JPanel implements ActionListener{
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
+	    this.add(this.table);
             this.updateUI();
             statement.close();
             resultSet.close();

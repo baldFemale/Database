@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JTable;
 import toolkit.Table;
 import model.Student;
+import model.Department;
 import toolkit.Utility;
 public class Item331Act extends JPanel implements ActionListener{
 	JLabel jl1,jl2;
@@ -25,8 +26,9 @@ public class Item331Act extends JPanel implements ActionListener{
 	public Item331Act() {
 		jl1 = new JLabel("系别");
 		jl2 = new JLabel("查询各系来自各省份的学生人数");
-		jcb1 = new JComboBox(Utility.simpleUniqueQuery(Student.TABLE, Student.DEPT));
+		jcb1 = new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.NAME));
 		jb1 = new JButton("查询");
+		jb1.addActionListener(this);
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
@@ -46,8 +48,8 @@ public class Item331Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select S_prov,count(*) as COUNT from student where Dept_id in (select Dept_id from department"
-				+ "where dept_name="+jcb1.getSelectedItem()+") group by S_prov;";
+		String sql = "select S_prov,count(*) as COUNT from student where Dept_id in (select Dept_id from department "
+				+ "where dept_name='"+jcb1.getSelectedItem()+"') group by S_prov;";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {

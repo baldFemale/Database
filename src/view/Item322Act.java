@@ -63,7 +63,7 @@ public class Item322Act extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		String sql = "select Avg(Score) as 'MEAN',Max(Score) as 'MAX',Min(Score) as 'MIN' from sc where Ayear="+jcb1.getSelectedItem()+" and C_id in ("
-				+ "select Distinct C_id from course where C_name="+jcb2.getSelectedItem()+");";
+				+ "select Distinct C_id from course where C_name='"+jcb2.getSelectedItem()+"');";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {

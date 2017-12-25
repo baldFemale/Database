@@ -72,7 +72,7 @@ public class MainPageView extends JFrame implements ActionListener{
 	/*view.Item14Act item14Act = new view.Item14Act();
 	view.Item15Act item15Act = new view.Item15Act();
 	view.Item16Act item16Act = new view.Item16Act();
-	view.Item21Act item21Act = new view.Item21Act();
+	view.Item21Act item21Act = new view.Item21Act();*/
 	view.Item22Act item22Act = new view.Item22Act();
 	view.Item23Act item23Act = new view.Item23Act();
 	view.Item24Act item24Act = new view.Item24Act();
@@ -85,7 +85,7 @@ public class MainPageView extends JFrame implements ActionListener{
 	view.Item322Act item322Act = new view.Item322Act();
 	view.Item323Act item323Act = new view.Item323Act();
 	view.Item331Act item331Act = new view.Item331Act();
-	view.Item341Act item341Act = new view.Item341Act();
+	/*view.Item341Act item341Act = new view.Item341Act();
 	view.Item342Act item342Act = new view.Item342Act();
 	view.Item343Act item343Act = new view.Item343Act();
 	view.Item344Act item344Act = new view.Item344Act();
@@ -262,7 +262,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.add("21", item21Act);
             jpBasic.validate();  
             jpBasic.updateUI();
-        }
+        }*/
         else if(e.getSource() == item22){
             jpBasic.removeAll();
             jpBasic.add("22", item22Act);
@@ -329,7 +329,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.validate();  
             jpBasic.updateUI();
         }
-        else if(e.getSource() == item341){
+        /*else if(e.getSource() == item341){
             jpBasic.removeAll();
             jpBasic.add("341", item341Act);
             jpBasic.validate();  

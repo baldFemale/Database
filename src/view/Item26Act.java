@@ -35,21 +35,21 @@ public final class Item26Act extends JPanel implements ActionListener{
     private JButton buttonQuery;
     private JLabel labelYear,labelSemester,labelTeacherName,labelCourse,labelRating,labelHeading,labelTo;
     private JComboBox comboBoxYear,comboBoxSemester,comboBoxCourse,comboBoxRating;
-    private JTextField textTeacherName; //ÓÃ½ÌÊ¦Ãû×Ö±È½ÌÊ¦ºÅ²éÑ¯¸ü±ãÀû
+    private JTextField textTeacherName; //ç”¨æ•™å¸ˆåå­—æ¯”æ•™å¸ˆå·æŸ¥è¯¢æ›´ä¾¿åˆ©
     private JTable table;
     private ResultSet resultSet=null;
     
     public Item26Act (){
         super();
-        labelYear=new JLabel("Ñ§Äê");
-        labelSemester=new JLabel("Ñ§ÆÚ");
-        labelTeacherName = new JLabel("½ÌÊ¦ĞÕÃû");
-        labelCourse = new JLabel("¿Î³ÌÃû³Æ");
-        labelRating = new JLabel("ÆÀ½ÌµÈ¼¶");
-        labelTo = new JLabel("ÖÁ");
+        labelYear=new JLabel("å­¦å¹´");
+        labelSemester=new JLabel("å­¦æœŸ");
+        labelTeacherName = new JLabel("æ•™å¸ˆå§“å");
+        labelCourse = new JLabel("è¯¾ç¨‹åç§°");
+        labelRating = new JLabel("è¯„æ•™ç­‰çº§");
+        labelTo = new JLabel("è‡³");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
         comboBoxSemester=new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.SEMESTER));
         comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.NAME));
@@ -58,7 +58,7 @@ public final class Item26Act extends JPanel implements ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -68,12 +68,12 @@ public final class Item26Act extends JPanel implements ActionListener{
         this.add(this.top);
         this.add(this.upper);
         table=new JTable(1,3);//todo What should be presented when no result has been acquired.
-        this.add(this.table);
+        
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ĞĞÌáÊ¾ÎÄ×ÖÃ»ÓĞ¾ÓÖĞ¡£
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖĞÎÄÂÒÂëÎÊÌâ¡£
+        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
         * */
     }
     
@@ -100,25 +100,28 @@ public final class Item26Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		// TODO Auto-generated method stub
-		String sqlString = "select * from " + TC.TABLE + " and " + Course.TABLE + " and " + Teacher.TABLE + " where " + TC.C_ID + " = " + Course.ID + " and " + Teacher.ID + " = " + TC.T_ID;
+		String sqlString = "select * from " + TC.TABLE + ", " + Course.TABLE + ", " + Teacher.TABLE 
+				+ " where " + TC.TABLE + "." + TC.C_ID + " = " + Course.TABLE + "." + Course.ID 
+				+ " and " +  Teacher.TABLE + "." +Teacher.ID + " = " +  TC.TABLE + "." +TC.T_ID;
 		System.out.print(sqlString);
 		if(this.comboBoxYear.getSelectedItem() != null)
 			sqlString.concat(" and " + TC.AYEAR + " = " + comboBoxYear.getSelectedItem());
 		if(this.comboBoxSemester.getSelectedItem() != null)
-			sqlString.concat(" and " + TC.SEMESTER + " = " + comboBoxSemester.getSelectedItem());
+			sqlString.concat(" and " + TC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
 		if(this.textTeacherName.getText() != null) {
-			//WHERE TN LIKE ¡®ÕÅ%¡¯
-			sqlString.concat(" and " + Teacher.NAME + " like %" + textTeacherName.getText() + "%");
+			//WHERE TN LIKE â€˜å¼ %â€™
+			sqlString.concat(" and " + Teacher.NAME + " like '%" + textTeacherName.getText() + "%'");
 		}
 		if(this.comboBoxCourse.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.NAME + " = " + comboBoxCourse.getSelectedItem());
+			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
 		if(this.comboBoxRating.getSelectedItem() != null)
-			sqlString.concat(" and " + TC.RATING + " = " + comboBoxRating.getSelectedItem());
+			sqlString.concat(" and " + TC.RATING + " = '" + comboBoxRating.getSelectedItem() + "'");
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
+	    this.add(this.table);
             this.updateUI();
             statement.close();
             resultSet.close();

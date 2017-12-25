@@ -17,18 +17,13 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
-
 import control.DBConnection;
-import jdk.internal.dynalink.beans.StaticClass;
-import sun.security.krb5.internal.crypto.crc32;
 import toolkit.Table;
 
 public class Item11Act extends JPanel implements ItemListener,ActionListener{
@@ -48,7 +43,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     JLabel jl16;
     JLabel jl17;
     JLabel jl21;
-    JTable jT1;
+    JTable jTa1;
     JButton jb1;
     JButton jb2;
     JButton jb3;
@@ -63,6 +58,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     JTextField jt6;
     JTextField jt7;
     JComboBox<String> jc1;
+    //JScrollPane js1;
     
     JRadioButton jr1;
     JRadioButton jr2;
@@ -74,8 +70,6 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     GridBagConstraints c = new GridBagConstraints();
     GridBagLayout gbl2 = new GridBagLayout();
 	GridBagConstraints c2 = new GridBagConstraints();
-	
-	String stuProperty=null;
     
     void createSubPage(){
     	
@@ -92,14 +86,15 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	bg1.add(jr3);
     	jp1 = new JPanel();
     	jl21 = new JLabel("¸ü¸ÄÎª:");
-    	jT1 = new JTable(null);
+    	jTa1 = new JTable();
+    	//js1=new JScrollPane(jTa1);
     	
     	//add items
     	add(jr1);
     	add(jr2);
     	add(jr3);
     	add(jp1);
-    	jp1.add(jT1);
+    	//jp1.add(jTa1);
     	
     	//set JPanel2 layout
     	jp2.setLayout(gbl2);
@@ -126,33 +121,41 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	gbl.setConstraints(jp2, c);
     	c.gridwidth=6;
     	c.gridheight=8;
-    	c.gridx=3;
-    	c.gridy=0;
+    	c.gridx=0;
+    	c.gridy=10;
     	gbl.setConstraints(jp1, c);
     	
     	//add RedioButton ActionListener
-    	jr1.addItemListener(this);
-    	jr2.addItemListener(this);
-    	jr3.addItemListener(this);
+    	jr1.addActionListener(new  ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				createInsertView();
+			}
+		});
+    	jr2.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				createUpdateView();
+			}
+		});
+    	jr3.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				createDeleteView();
+			}
+		});
 
     }
-
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==jr1){
-			createInsertView();
-		}
-		else if(e.getSource()==jr2){
-			createUpdateView();
-		}
-		else if(e.getSource()==jr3){
-			createDeleteView();
-		}
-	}
 	
 	void createInsertView(){
     	
+		setLayout(gbl);
     	jp2.setLayout(gbl2);
 		
 		//initialize items
@@ -289,9 +292,11 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridwidth=1;
     	gbl2.setConstraints(jb2, c2);
     	
-    	validate();
-    	updateUI();
+    	//validate();
+    	//updateUI();
     	jp2.validate();
+    	//jp2.repaint();
+    	
     	jp2.updateUI();
     	
     	jb1.addActionListener(this);
@@ -302,6 +307,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 		
 		String[] stuProperties = {"S_name","S_sex","S_birth","S_prov","S_into","Dept_id"};
 		
+		setLayout(gbl);
 		jp2.setLayout(gbl2);
 		
 		//initialize items
@@ -386,6 +392,8 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 	}
 	
 	void createDeleteView(){
+		
+		setLayout(gbl);
 		jp2.setLayout(gbl2);
 		
 		//initialize items
@@ -441,16 +449,6 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	
     	jb5.addActionListener(this);
     	//jb6.addActionListener(this);
-    	
-    	//add listener and get item
-    	jc1.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO Auto-generated method stub
-				stuProperty = e.getItem().toString();
-			}
-		});
 	}
 
 	@Override
@@ -477,7 +475,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb2){
-			String sql = "select from student order by S_id;";
+			String sql = "select * from student order by S_id;";
 			System.out.println(sql);
 			Statement statement = null;	 
 			try {
@@ -488,8 +486,8 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			}
 			try {
 				ResultSet resultSet = statement.executeQuery(sql);
-				jT1 = new Table(resultSet).jt;
-				jp1.validate();
+				jTa1 = new Table(resultSet).jt;
+				jp1.add(jTa1);
 				jp1.updateUI();
 				statement.close();
 				resultSet.close();
@@ -535,5 +533,11 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 				e2.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
