@@ -40,18 +40,19 @@ public class Item342Act extends Item3 implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
         String sql="select S_name as Name, sum(SC.gpa * C.score)/sum(C.score) as GPA, rank() over(order by GPA)" +
-                "from Student as S, SC, Course as C" +
+                "from Student as S, SC, Course as C " +
                 "where ";
         if(upper.getSelected(1)!=null)sql=sql +"S.Dept_id = (select Dept_id from Department where Dept_name = '"+upper.getSelected(1).toString()+"') and ";
         if(upper.getSelected(0)!=null)sql=sql+
                 "SC.Ayear = "+Utility.quote(upper.getSelected(0).toString()) +" and ";
         sql=sql+
-                "and S.S_id = SC.S_id" +
-                "and C.C_id = SC.C_id" +
-                "group by SC.S_id" +
+                "and S.S_id = SC.S_id " +
+                "and C.C_id = SC.C_id " +
+                "group by SC.S_id " +
                 "order by GPA";
         //rs= TestUnit.getTestRS();
         //jsp=Utility.getJSPfromResultSet(rs);
+        jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);
         lower.updateUI();
