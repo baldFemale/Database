@@ -12,6 +12,7 @@ import java.sql.SQLException;
 /**
  * Tabel table = new Tabel(resultset)
  * table.jt
+ * table.jsp
  * table.columnName
  * table.rowcount
  */
@@ -25,7 +26,7 @@ public class Table{
 	public int columncount;
 	public JTable jt;
 	private JTableHeader head;
-	private JScrollPane jsp=null;  
+	public JScrollPane jsp=null;  
 	
 	public Table(ResultSet res_in) throws SQLException {
 		
@@ -34,6 +35,7 @@ public class Table{
 		get_column();
 		get_content();
 		jt = generate_table();
+		jsp.add(jt);
 	}
 	
 	private void get_column() throws SQLException {
