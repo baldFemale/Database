@@ -1,6 +1,7 @@
 package view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,9 +22,10 @@ import toolkit.Utility;
 public class Item321Act extends JPanel implements ActionListener{
 	JLabel jl1,jl2,jl3;
 	JButton jb1;
-	JPanel jp1,jp2;
+	JPanel jp1,jp2,jp3;
 	JComboBox jcb1,jcb2;
 	JTable jt1;
+	JScrollPane jsp1;
 	public Item321Act() {
 		// TODO Auto-generated constructor stub
 		jl1 = new JLabel("学年");
@@ -34,13 +36,14 @@ public class Item321Act extends JPanel implements ActionListener{
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.NAME));
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
+		jsp1 = new JScrollPane();
 		jp2 = new JPanel();
+		jp3 = new JPanel();
 		jb1.addActionListener(this);
 		this.jp1.setLayout(createLayout());
 		jp2.add(jl3);
 		this.add(jp2);
 		this.add(jp1);
-		this.add(jt1);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
 	}
@@ -72,7 +75,11 @@ public class Item321Act extends JPanel implements ActionListener{
 		}
 		try {
 			ResultSet resultSet = statement.executeQuery(sql);
-			jt1 = new Table(resultSet).jt; 
+			jsp1 = new Table(res).jsp1;
+			jp3.removeALL();
+			jp3.add(jsp1);
+			this.add(jp3);
+			this.updateUI();
 			statement.close();
 			resultSet.close();
 		} catch (SQLException e) {
