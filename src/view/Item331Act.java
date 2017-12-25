@@ -27,6 +27,7 @@ public class Item331Act extends JPanel implements ActionListener{
 		jl2 = new JLabel("查询各系来自各省份的学生人数");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(Student.TABLE, Student.DEPT));
 		jb1 = new JButton("查询");
+		jb1.addActionListener(this);
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
