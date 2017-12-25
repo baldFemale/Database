@@ -34,8 +34,8 @@ public class Item311Act extends JPanel implements ActionListener {
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
 		jt1 = new JTable(1,3);
-		jsp = new JScrollPane();
-		jsp.add(jt1);
+		jsp1 = new JScrollPane();
+		jsp1.add(jt1);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
 		jb1.addActionListener(this);
