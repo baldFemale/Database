@@ -27,8 +27,8 @@ public class Item347Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String sql = "select S_prov as Province, count(*) as count from Student " +
-                " where S_dept = " + Utility.quote(upper.getSelected(0).toString())+
-                "group by S_prov;";
+                " where dept_id = (select Dept_id from Department where dept_name =  " + Utility.quote(upper.getSelected(0).toString())+
+                ") group by S_prov;";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

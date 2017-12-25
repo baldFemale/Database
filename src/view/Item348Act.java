@@ -18,8 +18,8 @@ public class Item348Act extends Item3 implements ActionListener{
     JLabel instruct;
     JButton jb;
     public Item348Act(){
-        instruct=new JLabel("²éÑ¯×îÇ¿Ñ§ÉúÎåÈË");
-        jb=new JButton("²éÑ¯");
+        instruct=new JLabel("ï¿½ï¿½Ñ¯ï¿½ï¿½Ç¿Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        jb=new JButton("ï¿½ï¿½Ñ¯");
         this.add(instruct);
         this.add(jb);
         this.add(lower);
@@ -27,9 +27,10 @@ public class Item348Act extends Item3 implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql="select top 5 S.S_id as ID, S_name as Name, " +
-                "sum(SC.gpa * Course.credit)/sum(Course.credit) as gpa " +
-                "from Student as S, SC, Course group by SC.S_id having min(SC.score) >= 60 ";
+        String sql="select top 5 SC.S_id as ID, S.s_name as Name, " +
+                "sum(SC.score * Course.credit)/sum(Course.credit) as gpa " +
+                "from Student as S, SC, Course where S.S_id = SC.S_id and " +
+                "Course.C_id = SC.C_id group by SC.S_id, S.S_name having min(SC.score) >= 60;";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

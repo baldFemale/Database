@@ -29,7 +29,7 @@ public class Item345Act extends Item3 implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         String sql="select C.C_name as course, count(*) as count from Course as C, SC where C.C_id = SC.C_id and SC.Ayear = "
                 +Utility.quote(upper.getSelected(0).toString())+
-                " and SC.S_id in (select S_id from S where S.Dept_id in(select Dept_id from Department where Dept_name = "
+                " and SC.S_id in (select S_id from student as S where S.Dept_id in(select Dept_id from Department where Dept_name = "
                 +Utility.quote(upper.getSelected(1).toString())+
                 ")) group by SC.C_id having count(*) > 2";
         jsp = Utility.jspFromSQL(sql);
