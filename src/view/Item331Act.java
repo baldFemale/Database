@@ -47,7 +47,7 @@ public class Item331Act extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		String sql = "select S_prov,count(*) as COUNT from student where Dept_id in (select Dept_id from department"
-				+ "where dept_name="+jcb1.getSelectedItem()+") group by S_prov;";
+				+ "where dept_name='"+jcb1.getSelectedItem()+"') group by S_prov;";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {
