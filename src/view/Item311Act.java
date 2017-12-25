@@ -61,7 +61,7 @@ public class Item311Act extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		String sql = "select tc.T_id,teacher.T_name,teacher.Prof,course.C_name,Rating from tc,teacher,course where Ayear="+jcb1.getSelectedItem()+" and tc.T_id in ("
-				+ "select T_id from teacher where T_name="+jcb2.getSelectedItem()+") and tc.T_id=teacher.T_id and "
+				+ "select T_id from teacher where T_name='"+jcb2.getSelectedItem()+"') and tc.T_id=teacher.T_id and "
 						+ "tc.C_id = course.C_id;";
 		System.out.println(sql);
 		Statement statement = null;	 
