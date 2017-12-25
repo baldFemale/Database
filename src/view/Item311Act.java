@@ -41,7 +41,6 @@ public class Item311Act extends JPanel implements ActionListener {
 		jp2.add(jl3);
 		this.add(jp2);
 		this.add(jp1);
-		this.add(jsp1);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
 		
@@ -76,6 +75,7 @@ public class Item311Act extends JPanel implements ActionListener {
 		try {
 			ResultSet resultSet = statement.executeQuery(sql);
 			jsp1 = new Table(resultSet).jsp1; 
+			this.add(jsp1);
 			statement.close();
 			resultSet.close();
 		} catch (SQLException e) {
