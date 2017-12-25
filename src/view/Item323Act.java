@@ -65,7 +65,7 @@ public class Item323Act extends JPanel implements ActionListener{
 				+ "count(case when Score between 79 and 69 then 1 end) as '69-79分',"
 				+ "count(case when Score between 69 and 59 then 1 end) as '59-69分',"
 				+ "count(case when Score Score<60 then 1 end) as '不及格' from sc where C_id in (select"
-				+ " C_id from course where C_name="+jcb2.getSelectedItem()+") and Ayear="+jcb1.getSelectedItem()+";";
+				+ " C_id from course where C_name='"+jcb2.getSelectedItem()+"') and Ayear="+jcb1.getSelectedItem()+";";
 		System.out.println(sql);
 		Statement statement = null;	 
 		try {
