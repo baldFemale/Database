@@ -27,7 +27,7 @@ import toolkit.Table;
 import toolkit.Utility;
 
 /**
- * ²éÕÒÄ³ÃÅ¿Î³ÌÄ³Äê×î¸ß·ÖµÄÎåÎ»Í¬Ñ§¡£
+ * ï¿½ï¿½ï¿½ï¿½Ä³ï¿½Å¿Î³ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ß·Öµï¿½ï¿½ï¿½Î»Í¬Ñ§ï¿½ï¿½
  */
 
 public final class Item341Act extends JPanel implements  ActionListener{
@@ -41,19 +41,19 @@ public final class Item341Act extends JPanel implements  ActionListener{
     public Item341Act (){
         super();
         v1=new Vector<>();
-        v2=new Vector<>();
+        v2=new Vector<>();//TODO table not shown.
         //prepareCombox();
-        labelYear=new JLabel("Ñ§Äê");
-        labelCourse=new JLabel("¿Î³Ì");
+        labelYear=new JLabel("Ñ§ï¿½ï¿½");
+        labelCourse=new JLabel("ï¿½Î³ï¿½");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("ï¿½ï¿½Ñ¯");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.AYEAR));
-        comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Student.TABLE,Course.NAME));
+        comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëÐèÒª²éÑ¯µÄÑ§ÄêºÍ¿Î³ÌÃû³Æ");
+        labelHeading=new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ñ¯ï¿½ï¿½Ñ§ï¿½ï¿½Í¿Î³ï¿½ï¿½ï¿½ï¿½");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -65,10 +65,10 @@ public final class Item341Act extends JPanel implements  ActionListener{
         table=new JTable(1,3);//todo What should be presented when no result has been acquired.
         this.add(this.table);
 
-        this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ÐÐÌáÊ¾ÎÄ×ÖÃ»ÓÐ¾ÓÖÐ¡£
+        //this.setVisible(true);
+        this.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.ITALIC,30));//TODo ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â»¹ï¿½Ú£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð¾ï¿½ï¿½Ð¡ï¿½
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖÐÎÄÂÒÂëÎÊÌâ¡£
+        * ï¿½ï¿½ï¿½Ô½ï¿½ï¿½GUIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â¡£
         * */
     }
 
@@ -116,15 +116,16 @@ public final class Item341Act extends JPanel implements  ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         String sql="select top 5 S.S_id, S.S_name, SC.score from SC, Student as S where SC.S_id = S.S_id ";
         if(this.comboBoxYear.getSelectedItem()!=null){
-            sql=sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem().toString());
+            sql=sql.concat(" and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem().toString());
         }
         if(this.comboBoxCourse.getSelectedItem()!=null)
-            sql=sql.concat("and SC."+SC.C_ID+" = ( select C_id from Course where S_name = "+comboBoxCourse.getSelectedItem().toString()+")");//TODO SQLÓï¾äÃ»Ð´Íê¡£
+            sql=sql.concat(" and SC."+SC.C_ID+" = ( select C_id from Course where C_name = '"+comboBoxCourse.getSelectedItem().toString()+"')");//TODO SQLï¿½ï¿½ï¿½Ã»Ð´ï¿½ê¡£
         System.out.println(sql);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sql);
             table = new Table(resultSet).jt;
+            this.add(table);
             statement.close();
             resultSet.close();
         } catch (SQLException e) {
