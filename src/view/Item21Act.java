@@ -92,17 +92,18 @@ public final class Item21Act extends JPanel implements  ActionListener{
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Department.TABLE + " where 1 = 1 ";
 		System.out.println("dfs" + sqlString);
-		if(comboBoxID.getSelectedItem().toString() != null)
+		if(this.comboBoxID.getSelectedItem()!=null )
 			sqlString = sqlString + (" and " + Department.ID + "=" + comboBoxID.getSelectedItem().toString());
-		if(comboBoxName.getSelectedItem().toString() != null)
+		if(this.comboBoxName.getSelectedItem() != null)
 			sqlString = sqlString + (" and " + Department.NAME + "= '" + comboBoxName.getSelectedItem().toString() + "'");
-		if(comboBoxLocation.getSelectedItem().toString() != null)
+		if(this.comboBoxLocation.getSelectedItem() != null)
 			sqlString = sqlString + (" and " + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem().toString() + "'");
 		System.out.println("222" + sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
+            table.removeAll();
 	        this.add(this.table);
             this.updateUI();
             statement.close();

@@ -110,22 +110,29 @@ public final class Item23Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
-		if(this.textIDMin.getText() != null) {
-			float idMin = Float.parseFloat(textIDMin.getText());
+		if(textIDMin.getText().equals(null))
+			System.out.print("zhendemeiyou");
+		if (this.textIDMin.getText().equals("") ){}
+		else{
+			System.out.print("有没有呀呀呀！");
+			int idMin = Integer.parseInt(textIDMin.getText());
 			sqlString = sqlString+(" and " + Student.ID + " >= " + idMin);
 		}
-		if(this.textIDMax.getText() != null) {
-			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString = sqlString+(" and" + Student.ID + " <= " + idMax);
+		if(this.textIDMax.getText().equals("")){}
+		else{
+			int idMax = Integer.parseInt(textIDMax.getText());
+			sqlString = sqlString+(" and " + Student.ID + " <= " + idMax);
 		}
-		if(this.textName.getText() != null) {
+		if(this.textName.getText().equals("")) {}
+		else{
 			//WHERE TN LIKE ‘张%’
-			sqlString = sqlString+(" and " + Student.NAME + " like '% " + textName.getText() + " %'");
+			sqlString = sqlString+(" and " + Student.NAME + " like '%" + textName.getText() + "%'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
 		//TODO 出生日期因格式未知，还未加上去
-		if(this.textBirthMin.getText() != null) {
+		/*
+		if(this.textBirthMin.getText() != "") {
 			float idMin = Float.parseFloat(textBirthMin.getText());
 			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + idMin);
 		}
@@ -133,16 +140,18 @@ public final class Item23Act extends JPanel implements  ActionListener{
 			float idMax = Float.parseFloat(textBirthMax.getText());
 			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + idMax);
 		}
-		
+		*/
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
-		if(this.textIntoMin.getText() != null) {
+		if(this.textIntoMin.getText().equals("")){}
+		else{
 			float intoMin = Float.parseFloat(textIntoMin.getText());
 			sqlString = sqlString+(" and " + Student.INTO + " >= " + intoMin);
 		}
-		if(this.textIntoMax.getText() != null) {
+		if(this.textIntoMax.getText().equals("")){}
+		else{
 			float intoMax = Float.parseFloat(textIntoMax.getText());
-			sqlString = sqlString+(" and" + Student.INTO + " <= " + intoMax);
+			sqlString = sqlString+(" and " + Student.INTO + " <= " + intoMax);
 		}
 		if(this.comboBoxDept.getSelectedItem() != null) {
 			//TODO 还需再确认不同表格是否也可以这样做

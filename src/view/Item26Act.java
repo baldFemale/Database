@@ -105,17 +105,18 @@ public final class Item26Act extends JPanel implements ActionListener{
 				+ " and " +  Teacher.TABLE + "." +Teacher.ID + " = " +  TC.TABLE + "." +TC.T_ID;
 		System.out.print(sqlString);
 		if(this.comboBoxYear.getSelectedItem() != null)
-			sqlString.concat(" and " + TC.AYEAR + " = " + comboBoxYear.getSelectedItem());
+			sqlString = sqlString+(" and " + TC.AYEAR + " = " + comboBoxYear.getSelectedItem());
 		if(this.comboBoxSemester.getSelectedItem() != null)
-			sqlString.concat(" and " + TC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
-		if(this.textTeacherName.getText() != null) {
+			sqlString = sqlString+(" and " + TC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
+		if(this.textTeacherName.getText().equals("")){}
+		else{
 			//WHERE TN LIKE ‘张%’
-			sqlString.concat(" and " + Teacher.NAME + " like '%" + textTeacherName.getText() + "%'");
+			sqlString = sqlString+(" and " + Teacher.NAME + " like '%" + textTeacherName.getText() + "%'");
 		}
 		if(this.comboBoxCourse.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
+			sqlString = sqlString+(" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
 		if(this.comboBoxRating.getSelectedItem() != null)
-			sqlString.concat(" and " + TC.RATING + " = '" + comboBoxRating.getSelectedItem() + "'");
+			sqlString = sqlString+(" and " + TC.RATING + " = '" + comboBoxRating.getSelectedItem() + "'");
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();

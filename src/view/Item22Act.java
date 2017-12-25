@@ -97,11 +97,13 @@ public final class Item22Act extends JPanel implements  ActionListener{
 			sqlString = sqlString + (" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
 			sqlString = sqlString + (" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
-		if(this.textCreditMin.getText() != null) {
+		if(this.textCreditMin.getText().equals("")){}
+		else {
 			float creditMin = Float.parseFloat(textCreditMin.getText());
 			sqlString = sqlString + (" and " + Course.CREDIT + " >= " + creditMin);
 		}
-		if(this.textCreditMax.getText() != null) {
+		if(this.textCreditMax.getText().equals("")){}
+		else{
 			float creditMax = Float.parseFloat(textCreditMax.getText());
 			sqlString = sqlString + (" and " + Course.CREDIT + " <= " + creditMax);
 		}
@@ -110,6 +112,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
+            table.removeAll();
             this.add(this.table);
             this.updateUI();
             statement.close();
