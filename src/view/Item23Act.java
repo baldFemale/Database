@@ -76,7 +76,6 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.add(this.upper);
         table=new JTable(1,3);//todo What should be presented when no result has been acquired.
         
-
         this.setVisible(true);
         this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
         /*
