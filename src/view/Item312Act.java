@@ -24,7 +24,7 @@ public class Item312Act extends JPanel implements ActionListener{
 	JLabel jl1;
 	JButton Jb1;
 	JTable jt1;
-	J
+	JScrollPane jsp1;
 	public Item312Act() {
 		jl1 = new JLabel("查询所讲授课程的评教等级全优的教师名单及所授课程");
 		Jb1 = new JButton("查询");
