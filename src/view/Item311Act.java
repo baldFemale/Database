@@ -76,6 +76,7 @@ public class Item311Act extends JPanel implements ActionListener {
 			ResultSet resultSet = statement.executeQuery(sql);
 			jsp1 = new Table(resultSet).jsp1; 
 			jp1.add(jsp1);
+			jp1.updateUI();
 			statement.close();
 			resultSet.close();
 		} catch (SQLException e) {
