@@ -59,7 +59,7 @@ public class Item323Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select count (case Score when 100 then 1 end) as '满分',"
+		String sql = "select count (case when Score 100 then 1 end) as '满分',"
 				+ "count(case when Score between 99 and 89 then 1 end) as '89-99分',"
 				+ "count(case when Score between 89 and 79 then 1 end) as '79-89分',"
 				+ "count(case when Score between 79 and 69 then 1 end) as '69-79分',"
