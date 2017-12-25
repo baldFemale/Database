@@ -26,10 +26,10 @@ public class Item322Act extends JPanel implements ActionListener{
 	JTable jt1;
 	public Item322Act() {
 		// TODO Auto-generated constructor stub
-		jl1 = new JLabel("学年");
-		jl2 = new JLabel("课程");
-		jl3 = new JLabel("请输入需要查询的学年和课程名");
-		jb1 = new JButton("查询");
+		jl1 = new JLabel("瀛﹀勾");
+		jl2 = new JLabel("璇剧▼");
+		jl3 = new JLabel("璇疯緭鍏ラ渶瑕佹煡璇㈢殑瀛﹀勾鍜岃绋嬪悕");
+		jb1 = new JButton("鏌ヨ");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.NAME));
 		jt1 = new JTable(1,3);
@@ -62,7 +62,7 @@ public class Item322Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select Avg(Score),Max(Score),Min(Score) from sc where Ayear="+jcb1.getSelectedItem()+" and C_id in ("
+		String sql = "select Avg(Score) as 'MEAN',Max(Score) as 'MAX',Min(Score) as 'MIN' from sc where Ayear="+jcb1.getSelectedItem()+" and C_id in ("
 				+ "select Distinct C_id from course where C_name="+jcb2.getSelectedItem()+");";
 		System.out.println(sql);
 		Statement statement = null;	 

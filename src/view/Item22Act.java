@@ -39,13 +39,13 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	
 	public Item22Act (){
         super();
-        labelID=new JLabel("¿Î³Ì´úÂë");
-        labelName=new JLabel("¿Î³ÌÃû³Æ");
-        labelCredit = new JLabel("Ñ§·Ö");
-        labelTo = new JLabel("ÖÁ");
+        labelID=new JLabel("è¯¾ç¨‹ä»£ç ");
+        labelName=new JLabel("è¯¾ç¨‹åç§°");
+        labelCredit = new JLabel("å­¦åˆ†");
+        labelTo = new JLabel("è‡³");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
         textCreditMin=new JTextField(30);
@@ -53,7 +53,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -66,9 +66,9 @@ public final class Item22Act extends JPanel implements  ActionListener{
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ĞĞÌáÊ¾ÎÄ×ÖÃ»ÓĞ¾ÓÖĞ¡£
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖĞÎÄÂÒÂëÎÊÌâ¡£
+        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
         * */
     }
 	
@@ -92,17 +92,11 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		if(textCreditMin.getText().length() != 0) {
-			System.out.print("sdaf");
-			float a = Float.parseFloat(textCreditMin.getText());
-			System.out.print(a);
-			System.out.println(a+4);
-		}
 		String sqlString = "select * from " + Course.TABLE+ " where 1 = 1";
 		if(this.comboBoxID.getSelectedItem() != null)
 			sqlString.concat(" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.NAME + " = " + comboBoxName.getSelectedItem());
+			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
 		if(this.textCreditMin.getText() != null) {
 			float creditMin = Float.parseFloat(textCreditMin.getText());
 			sqlString.concat(" and " + Course.CREDIT + " >= " + creditMin);

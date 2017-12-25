@@ -25,10 +25,10 @@ public class Item311Act extends JPanel implements ActionListener {
 	JComboBox jcb1,jcb2;
 	JTable jt1;
 	public Item311Act(){
-		jl1 = new JLabel("Ñ§Äê");
-		jl2 = new JLabel("ÈÎ¿Î½ÌÊ¦");
-		jl3 = new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÑ§ÄêºÍ½ÌÊ¦ĞÕÃû");
-		jb1 = new JButton("²éÑ¯");
+		jl1 = new JLabel("å­¦å¹´");
+		jl2 = new JLabel("ä»»è¯¾æ•™å¸ˆ");
+		jl3 = new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„å­¦å¹´å’Œæ•™å¸ˆå§“å");
+		jb1 = new JButton("æŸ¥è¯¢");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
 		jt1 = new JTable(1,3);
@@ -60,7 +60,7 @@ public class Item311Act extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select tc.T_id,teacher.T_name.teacher.Prof,course.C_name,Rating from tc,teacher,course where Ayear="+jcb1.getSelectedItem()+" and T_id in ("
+		String sql = "select tc.T_id,teacher.T_name,teacher.Prof,course.C_name,Rating from tc,teacher,course where Ayear="+jcb1.getSelectedItem()+" and tc.T_id in ("
 				+ "select T_id from teacher where T_name="+jcb2.getSelectedItem()+") and tc.T_id=teacher.T_id and "
 						+ "tc.C_id = course.C_id;";
 		System.out.println(sql);

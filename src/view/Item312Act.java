@@ -24,8 +24,8 @@ public class Item312Act extends JPanel implements ActionListener{
 	JButton Jb1;
 	JTable jt1;
 	public Item312Act() {
-		jl1 = new JLabel("²éÑ¯Ëù½²ÊÚ¿Î³ÌµÄÆÀ½ÌµÈ¼¶È«ÓÅµÄ½ÌÊ¦Ãûµ¥¼°ËùÊÚ¿Î³Ì");
-		Jb1 = new JButton("²éÑ¯");
+		jl1 = new JLabel("æŸ¥è¯¢æ‰€è®²æˆè¯¾ç¨‹çš„è¯„æ•™ç­‰çº§å…¨ä¼˜çš„æ•™å¸ˆåå•åŠæ‰€æˆè¯¾ç¨‹");
+		Jb1 = new JButton("æŸ¥è¯¢");
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
@@ -43,7 +43,7 @@ public class Item312Act extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		ResultSet res;
 		Statement statement = null;
-		String sql = "select teacher.T_Name,course.C_Name from tc,course,teacher where teacher.T_id not in (select distinct T_id from tc where Rating=\"Á¼ºÃ\")"
+		String sql = "select teacher.T_Name,course.C_Name from tc,course,teacher where teacher.T_id not in (select distinct T_id from tc where Rating='è‰¯å¥½')"
 				+ " and tc.C_id=course.C_id and tc.T_id=teacher.T_id;";
 		System.out.println(sql);
 		try {

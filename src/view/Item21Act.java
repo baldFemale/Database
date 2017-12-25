@@ -39,19 +39,19 @@ public final class Item21Act extends JPanel implements  ActionListener{
     
     public Item21Act (){
         super();
-        labelID=new JLabel("Ïµ±ğ´úÂë");
-        labelName=new JLabel("Ïµ±ğÃû³Æ");
-        labelLocation = new JLabel("Ïµ±ğµØÖ·");
+        labelID=new JLabel("ç³»åˆ«ä»£ç ");
+        labelName=new JLabel("ç³»åˆ«åç§°");
+        labelLocation = new JLabel("ç³»åˆ«åœ°å€");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE, Department.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.NAME));
         comboBoxLocation=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.LOCATION));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -64,9 +64,9 @@ public final class Item21Act extends JPanel implements  ActionListener{
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ĞĞÌáÊ¾ÎÄ×ÖÃ»ÓĞ¾ÓÖĞ¡£
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖĞÎÄÂÒÂëÎÊÌâ¡£
+        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
         * */
     }
 	
@@ -94,9 +94,9 @@ public final class Item21Act extends JPanel implements  ActionListener{
 		if(this.comboBoxID.getSelectedItem() != null)
 			sqlString.concat("and" + Department.ID + "=" + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat("and" + Department.NAME + "=" + comboBoxName.getSelectedItem());
+			sqlString.concat("and" + Department.NAME + "= '" + comboBoxName.getSelectedItem() + "'");
 		if(this.comboBoxLocation.getSelectedItem() != null)
-			sqlString.concat("and" + Department.LOCATION + "=" + comboBoxLocation.getSelectedItem());
+			sqlString.concat("and" + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem() + "'");
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
