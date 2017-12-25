@@ -85,13 +85,13 @@ public class MainPageView extends JFrame implements ActionListener{
 	view.Item322Act item322Act = new view.Item322Act();
 	view.Item323Act item323Act = new view.Item323Act();
 	view.Item331Act item331Act = new view.Item331Act();
-	/*view.Item341Act item341Act = new view.Item341Act();
+	view.Item341Act item341Act = new view.Item341Act();
 	view.Item342Act item342Act = new view.Item342Act();
 	view.Item343Act item343Act = new view.Item343Act();
 	view.Item344Act item344Act = new view.Item344Act();
 	view.Item345Act item345Act = new view.Item345Act();
 	view.Item346Act item346Act = new view.Item346Act();
-	view.Item347Act item347Act = new view.Item347Act();*/
+	view.Item347Act item347Act = new view.Item347Act();
 	
     private MainPageView() {
         super();
@@ -329,7 +329,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.validate();  
             jpBasic.updateUI();
         }
-        /*else if(e.getSource() == item341){
+        else if(e.getSource() == item341){
             jpBasic.removeAll();
             jpBasic.add("341", item341Act);
             jpBasic.validate();  
@@ -370,7 +370,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.add("347", item347Act);
             jpBasic.validate();  
             jpBasic.updateUI();
-        }*/
+        }
     }
     
     static void setUIFont()
