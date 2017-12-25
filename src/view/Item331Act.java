@@ -23,10 +23,10 @@ public class Item331Act extends JPanel implements ActionListener{
 	JComboBox jcb1;
 	JTable jt1;
 	public Item331Act() {
-		jl1 = new JLabel("系别");
-		jl2 = new JLabel("查询各系来自各省份的学生人数");
+		jl1 = new JLabel("绯诲埆");
+		jl2 = new JLabel("鏌ヨ鍚勭郴鏉ヨ嚜鍚勭渷浠界殑瀛︾敓浜烘暟");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(Student.TABLE, Student.DEPT));
-		jb1 = new JButton("查询");
+		jb1 = new JButton("鏌ヨ");
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
@@ -46,7 +46,7 @@ public class Item331Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select S_prov,count(*) from student where Dept_id in (select Dept_id from department"
+		String sql = "select S_prov,count(*) as COUNT from student where Dept_id in (select Dept_id from department"
 				+ "where dept_name="+jcb1.getSelectedItem()+") group by S_prov;";
 		System.out.println(sql);
 		Statement statement = null;	 
