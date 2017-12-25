@@ -22,7 +22,7 @@ import toolkit.Utility;
 public class Item311Act extends JPanel implements ActionListener {
 	JLabel jl1,jl2,jl3;
 	JButton jb1;
-	JPanel jp1,jp2;
+	JPanel jp1,jp2,jp3;
 	JComboBox jcb1,jcb2;
 	JTable jt1;
 	JScrollPane jsp1;
@@ -35,6 +35,8 @@ public class Item311Act extends JPanel implements ActionListener {
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Teacher.TABLE, Teacher.NAME));
 		jp1 = new JPanel();
 		jp2 = new JPanel();
+		jp3 = new JPanel();
+		jsp1 = new JScrollPane();
 		jb1.addActionListener(this);
 		this.jp1.setLayout(createLayout());
 		jp2.add(jl3);
@@ -73,9 +75,10 @@ public class Item311Act extends JPanel implements ActionListener {
 		}
 		try {
 			ResultSet resultSet = statement.executeQuery(sql);
-			jsp1.removeAll();
-			jsp1 = new Table(resultSet).jsp1; 
-			this.add(jsp1);
+			jp3.removeAll();
+			jsp1 = new Table(resultSet).jsp1;
+			jp3.add(jsp1);
+			this.add(jp3);
 			this.updateUI();
 			statement.close();
 			resultSet.close();
