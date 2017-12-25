@@ -135,7 +135,15 @@ public final class Item25Act extends JPanel implements ActionListener{
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString.concat(" and " + Teacher.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		//TODO 出生日期因格式未知，还未加上去
+		if(this.textBirthMin.getText() != null) {
+			float idMin = Float.parseFloat(textBirthMin.getText());
+			sqlString.concat(" and " + Teacher.BIRTH + " >= " + idMin);
+		}
+		if(this.textBirthMax.getText() != null) {
+			float idMax = Float.parseFloat(textBirthMax.getText());
+			sqlString.concat(" and" + Teacher.BIRTH + " <= " + idMax);
+		}
+		
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString.concat(" and " + Teacher.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
 		if(this.comboBoxRegion.getSelectedItem() != null)
