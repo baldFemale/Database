@@ -57,7 +57,7 @@ public class Item312Act extends JPanel implements ActionListener{
 		try {
 			res = statement.executeQuery(sql);
 			jsp1 = new Table(res).jsp1;
-			jp3.removeALL();
+			jp3.removeAll();
 			jp3.add(jsp1);
 			this.add(jp3);
 			this.updateUI();
