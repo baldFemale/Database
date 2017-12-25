@@ -40,18 +40,18 @@ public final class Item24Act extends JPanel implements  ActionListener{
     
     public Item24Act (){
         super();
-        labelYear=new JLabel("Ñ§Äê");
-        labelSemester=new JLabel("Ñ§ÆÚ");
-        labelStudentID = new JLabel("Ñ§ºÅ");
-        labelCourse = new JLabel("¿Î³ÌÃû³Æ");
-        labelScore = new JLabel("³É¼¨");
-        labelGpa = new JLabel("¼¨µã");
-        labelTo = new JLabel("ÖÁ");
-        labelTo1 = new JLabel("ÖÁ");
-        labelTo2 = new JLabel("ÖÁ");
+        labelYear=new JLabel("å­¦å¹´");
+        labelSemester=new JLabel("å­¦æœŸ");
+        labelStudentID = new JLabel("å­¦å·");
+        labelCourse = new JLabel("è¯¾ç¨‹åç§°");
+        labelScore = new JLabel("æˆç»©");
+        labelGpa = new JLabel("ç»©ç‚¹");
+        labelTo = new JLabel("è‡³");
+        labelTo1 = new JLabel("è‡³");
+        labelTo2 = new JLabel("è‡³");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE, SC.AYEAR));
         comboBoxSemester=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.SEMESTER));
         comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
@@ -64,7 +64,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("ÇëÊäÈëÐèÒª²éÑ¯µÄÌõ¼þ");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -77,9 +77,9 @@ public final class Item24Act extends JPanel implements  ActionListener{
         this.add(this.table);
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));//TODo ÂÒÂëÎÊÌâ»¹ÔÚ£»µÚÒ»ÐÐÌáÊ¾ÎÄ×ÖÃ»ÓÐ¾ÓÖÐ¡£
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
         /*
-        * ³¢ÊÔ½â¾öGUIµÄÖÐÎÄÂÒÂëÎÊÌâ¡£
+        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
         * */
     }
 	
@@ -108,13 +108,12 @@ public final class Item24Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		// TODO Auto-generated method stub
-		String sqlString = "select * from " + SC.TABLE + " and " + Course.TABLE + " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID;
+		String sqlString = "select * from " + SC.TABLE + ", " + Course.TABLE + " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID;
 		System.out.print(sqlString);
 		if(this.comboBoxYear != null)
 			sqlString.concat(" and " + SC.AYEAR + " = " + comboBoxYear.getSelectedItem());
 		if(this.comboBoxSemester != null)
-			sqlString.concat(" and " + SC.SEMESTER + " = " + comboBoxSemester.getSelectedItem());
+			sqlString.concat(" and " + SC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
 		if(this.textIDMin.getText() != null) {
 			float idMin = Float.parseFloat(textIDMin.getText());
 			sqlString.concat(" and " + SC.S_ID + " >= " + idMin);
@@ -124,7 +123,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
 			sqlString.concat(" and" + SC.S_ID + " <= " + idMax);
 		}
 		if(this.comboBoxCourse != null)
-			sqlString.concat(" and " + Course.NAME + " = " + comboBoxCourse.getSelectedItem());
+			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
 		if(this.textScoreMin.getText() != null) {
 			float scoreMin = Float.parseFloat(textScoreMin.getText());
 			sqlString.concat(" and " + SC.SCORE + " >= " + scoreMin);
