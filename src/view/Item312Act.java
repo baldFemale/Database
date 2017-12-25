@@ -2,6 +2,7 @@ package view;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -19,22 +20,23 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JTable;
 public class Item312Act extends JPanel implements ActionListener{
-	JPanel jp1,jp2;
+	JPanel jp1,jp2,jp3;
 	JLabel jl1;
 	JButton Jb1;
 	JTable jt1;
+	JScrollPane jsp1;
 	public Item312Act() {
 		jl1 = new JLabel("查询所讲授课程的评教等级全优的教师名单及所授课程");
 		Jb1 = new JButton("查询");
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
+		jsp1 = new JScrollPane();
 		jp1.add(jl1);
 		jp2.add(Jb1);
 		Jb1.addActionListener(this);
 		this.add(jp1);
 		this.add(jp2);
-		this.add(jt1);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
 	}
@@ -54,7 +56,11 @@ public class Item312Act extends JPanel implements ActionListener{
 		}
 		try {
 			res = statement.executeQuery(sql);
-			jt1 = new Table(res).jt;
+			jsp1 = new Table(res).jsp1;
+			jp3.removeALL();
+			jp3.add(jsp1);
+			this.add(jp3);
+			this.updateUI();
 			statement.close();
 			res.close();
 		} catch (SQLException e) {
