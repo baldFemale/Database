@@ -35,8 +35,8 @@ public class Table{
 		get_column();
 		get_content();
 		jt = generate_table();
-		jsp1.add(jt);
 	}
+	jsp = new JScrollPane(this.jt)
 	
 	private void get_column() throws SQLException {
 		columncount = rmd.getColumnCount();
