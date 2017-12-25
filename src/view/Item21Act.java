@@ -39,19 +39,19 @@ public final class Item21Act extends JPanel implements  ActionListener{
     
     public Item21Act (){
         super();
-        labelID=new JLabel("系别代码");
-        labelName=new JLabel("系别名称");
-        labelLocation = new JLabel("系别地址");
+        labelID=new JLabel("绯诲埆浠ｇ爜");
+        labelName=new JLabel("绯诲埆鍚嶇О");
+        labelLocation = new JLabel("绯诲埆鍦板潃");
 
         upper=new JPanel();
-        buttonQuery= new JButton("查询");
+        buttonQuery= new JButton("鏌ヨ");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE, Department.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.NAME));
         comboBoxLocation=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.LOCATION));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("请输入需要查询的条件");
+        labelHeading=new JLabel("璇疯緭鍏ラ渶瑕佹煡璇㈢殑鏉′欢");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -64,9 +64,9 @@ public final class Item21Act extends JPanel implements  ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
+        this.setFont(new Font("瀹嬩綋",Font.ITALIC,30));//TODo 涔辩爜闂杩樺湪锛涚涓�鎻愮ず鏂囧瓧娌℃湁灞呬腑銆�
         /*
-        * 尝试解决GUI的中文乱码问题。
+        * 灏濊瘯瑙ｅ喅GUI鐨勪腑鏂囦贡鐮侀棶棰樸�
         * */
     }
 	
@@ -91,18 +91,19 @@ public final class Item21Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Department.TABLE + " where 1 = 1 ";
-		if(this.comboBoxID.getSelectedItem() != null)
-			sqlString.concat("and" + Department.ID + "=" + comboBoxID.getSelectedItem());
-		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat("and" + Department.NAME + "= '" + comboBoxName.getSelectedItem() + "'");
-		if(this.comboBoxLocation.getSelectedItem() != null)
-			sqlString.concat("and" + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem() + "'");
-		System.out.println(sqlString);
+		System.out.println("dfs" + sqlString);
+		if(comboBoxID.getSelectedItem().toString() != null)
+			sqlString = sqlString + (" and " + Department.ID + "=" + comboBoxID.getSelectedItem().toString());
+		if(comboBoxName.getSelectedItem().toString() != null)
+			sqlString = sqlString + (" and " + Department.NAME + "= '" + comboBoxName.getSelectedItem().toString() + "'");
+		if(comboBoxLocation.getSelectedItem().toString() != null)
+			sqlString = sqlString + (" and " + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem().toString() + "'");
+		System.out.println("222" + sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+	        this.add(this.table);
             this.updateUI();
             statement.close();
             resultSet.close();
