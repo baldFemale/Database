@@ -35,7 +35,7 @@ public class Table{
 		get_column();
 		get_content();
 		jt = generate_table();
-		jsp1 = new JScrollPane(this.jt)
+		jsp1 = new JScrollPane(this.jt);
 	}
 	
 	private void get_column() throws SQLException {
