@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.rmi.CORBA.Util;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -40,7 +41,7 @@ public class Item342Act extends Item3 implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
         String sql="select S_name as Name, sum(SC.gpa * C.credit)/sum(C.credit) as GPA     from Student as S, SC, Course as C where " ;
-        if(upper.getSelected(1)!=null)sql=sql +"      S.Dept_id = (select Dept_id from Department where Dept_name = "+upper.getSelected(1).toString();
+        if(upper.getSelected(1)!=null)sql=sql +"      S.Dept_id = (select Dept_id from Department where Dept_name = "+ Utility.quote(upper.getSelected(1).toString()) ;
         if(upper.getSelected(0)!=null)sql=sql+
                 ")  and SC.Ayear =  "+Utility.quote(upper.getSelected(0).toString()) ;
         sql=sql+

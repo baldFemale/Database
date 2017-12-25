@@ -66,7 +66,7 @@ public class Utility {
             Table t=new Table(rs);
             jsp = new JScrollPane();
             jsp.setViewportView(t.jt);
-            rs.close();
+            //rs.close();
             return jsp;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,8 +82,8 @@ public class Utility {
             Statement statement = DBConnection.getConnection().createStatement();
             rs=statement.executeQuery(sql);
             jsp=getJSPfromResultSet(rs);
-            rs.last();
-            if(rs.getRow()==0)Utility.reportErrorEmptyTable();
+            //rs.last();//TODO
+            //if(rs.getRow()==0)Utility.reportErrorEmptyTable();
             rs.close();
             statement.close();
         }catch (SQLException e){

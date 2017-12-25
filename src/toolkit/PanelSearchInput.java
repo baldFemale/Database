@@ -21,7 +21,7 @@ public class PanelSearchInput extends JPanel {
         LayoutManager layout=new BoxLayout(this,BoxLayout.Y_AXIS);
         this.setLayout(layout);
         title = new JLabel(name);
-        jtf=new JTextField();
+        jtf=new JTextField(10);
         instruction = new JLabel(instr);
         jb=new JButton("≤È—Ø");
         down=new JPanel();
