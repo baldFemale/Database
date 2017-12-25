@@ -25,10 +25,10 @@ public class Item323Act extends JPanel implements ActionListener{
 	JTable jt1;
 	public Item323Act() {
 		// TODO Auto-generated constructor stub
-		jl1 = new JLabel("Ñ§Äê");
-		jl2 = new JLabel("¿Î³Ì");
-		jl3 = new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÑ§ÄêºÍ¿Î³ÌÃû");
-		jb1 = new JButton("²éÑ¯");
+		jl1 = new JLabel("å­¦å¹´");
+		jl2 = new JLabel("è¯¾ç¨‹");
+		jl3 = new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„å­¦å¹´å’Œè¯¾ç¨‹å");
+		jb1 = new JButton("æŸ¥è¯¢");
 		jcb1 = new JComboBox(Utility.simpleUniqueQuery(TC.TABLE, TC.AYEAR));
 		jcb2 = new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.NAME));
 		jt1 = new JTable(1,3);
@@ -59,12 +59,12 @@ public class Item323Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		String sql = "select count (case Score when 100 then 1 end) as \"Âú·Ö\","
-				+ "count(case Score when between 99 and 89 than 1 end) as \"89-99·Ö\","
-				+ "count(case Score when between 89 and 79 than 1 end) as \"79-89·Ö\","
-				+ "count(case Score when between 79 and 69 than 1 end) as \"69-79·Ö\","
-				+ "count(case Score when between 69 and 59 than 1 end) as \"59-69·Ö\","
-				+ "count(case Score when Score<60 than 1 end) as \"²»¼°¸ñ\" from sc where C_id in (select"
+		String sql = "select count (case Score when 100 then 1 end) as 'æ»¡åˆ†',"
+				+ "count(case when Score between 99 and 89 then 1 end) as '89-99åˆ†',"
+				+ "count(case when Score between 89 and 79 then 1 end) as '79-89åˆ†',"
+				+ "count(case when Score between 79 and 69 then 1 end) as '69-79åˆ†',"
+				+ "count(case when Score between 69 and 59 then 1 end) as '59-69åˆ†',"
+				+ "count(case when Score Score<60 then 1 end) as 'ä¸åŠæ ¼' from sc where C_id in (select"
 				+ " C_id from course where C_name="+jcb2.getSelectedItem()+") and Ayear="+jcb1.getSelectedItem()+";";
 		System.out.println(sql);
 		Statement statement = null;	 
