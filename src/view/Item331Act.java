@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import toolkit.Table;
 import model.Student;
 import model.Department;
@@ -23,6 +24,7 @@ public class Item331Act extends JPanel implements ActionListener{
 	JPanel jp1,jp2,jp3;
 	JComboBox jcb1;
 	JTable jt1;
+	JScrollPane jsp1;
 	public Item331Act() {
 		jl1 = new JLabel("系别");
 		jl2 = new JLabel("查询各系来自各省份的学生人数");
@@ -33,13 +35,13 @@ public class Item331Act extends JPanel implements ActionListener{
 		jp1 = new JPanel();
 		jp2 = new JPanel();
 		jp3 = new JPanel();
+		jsp1 = new JScrollPane();
 		jp1.add(jl2);
 		jp2.add(jl1);
 		jp2.add(jcb1);
 		jp2.add(jb1);
 		this.add(jp1);
 		this.add(jp2);
-		this.add(jt1);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setVisible(true);
 		// TODO Auto-generated constructor stub
@@ -60,7 +62,11 @@ public class Item331Act extends JPanel implements ActionListener{
 		}
 		try {
 			ResultSet resultSet = statement.executeQuery(sql);
-			jt1 = new Table(resultSet).jt; 
+			jp3.removeAll();
+			jsp1 = new Table(resultSet).jsp1;
+			jp3.add(jsp1);
+			this.add(jp3);
+			this.updateUI();
 			statement.close();
 			resultSet.close();
 		} catch (SQLException e) {
