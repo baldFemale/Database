@@ -94,23 +94,23 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Course.TABLE+ " where 1 = 1";
 		if(this.comboBoxID.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
+			sqlString = sqlString + (" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
+			sqlString = sqlString + (" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
 		if(this.textCreditMin.getText() != null) {
 			float creditMin = Float.parseFloat(textCreditMin.getText());
-			sqlString.concat(" and " + Course.CREDIT + " >= " + creditMin);
+			sqlString = sqlString + (" and " + Course.CREDIT + " >= " + creditMin);
 		}
 		if(this.textCreditMax.getText() != null) {
 			float creditMax = Float.parseFloat(textCreditMax.getText());
-			sqlString.concat(" and " + Course.CREDIT + " <= " + creditMax);
+			sqlString = sqlString + (" and " + Course.CREDIT + " <= " + creditMax);
 		}
 		System.out.println(sqlString);
 		try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
             table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            this.add(this.table);
             this.updateUI();
             statement.close();
             resultSet.close();
