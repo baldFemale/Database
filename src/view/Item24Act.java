@@ -109,36 +109,43 @@ public final class Item24Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + SC.TABLE + ", " + Course.TABLE + " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID;
-		System.out.print(sqlString);
-		if(this.comboBoxYear != null)
-			sqlString.concat(" and " + SC.AYEAR + " = " + comboBoxYear.getSelectedItem());
-		if(this.comboBoxSemester != null)
-			sqlString.concat(" and " + SC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
-		if(this.textIDMin.getText() != null) {
+		//System.out.print(sqlString);
+		//String sqlString="";
+		if(this.comboBoxYear.getSelectedItem() != null)
+			sqlString = sqlString + (" and " + SC.AYEAR + " = " + comboBoxYear.getSelectedItem());
+		if(this.comboBoxSemester.getSelectedItem() != null)
+			sqlString = sqlString + (" and " + SC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
+		if(this.textIDMin.getText().equals("")){}
+		else{
 			float idMin = Float.parseFloat(textIDMin.getText());
-			sqlString.concat(" and " + SC.S_ID + " >= " + idMin);
+			sqlString = sqlString + (" and " + SC.S_ID + " >= " + idMin);
 		}
-		if(this.textIDMax.getText() != null) {
+		if(this.textIDMax.getText().equals("")){}
+		else{
 			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString.concat(" and" + SC.S_ID + " <= " + idMax);
+			sqlString = sqlString + (" and" + SC.S_ID + " <= " + idMax);
 		}
-		if(this.comboBoxCourse != null)
-			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
-		if(this.textScoreMin.getText() != null) {
+		if(this.comboBoxCourse.getSelectedItem() != null)
+			sqlString = sqlString + (" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");
+		if(this.textScoreMin.getText().equals("")){}
+		else{
 			float scoreMin = Float.parseFloat(textScoreMin.getText());
-			sqlString.concat(" and " + SC.SCORE + " >= " + scoreMin);
+			sqlString = sqlString + (" and " + SC.SCORE + " >= " + scoreMin);
 		}
-		if(this.textScoreMax.getText() != null) {
+		if(this.textScoreMax.getText().equals("")){}
+		else{
 			float scoreMax = Float.parseFloat(textScoreMax.getText());
-			sqlString.concat(" and" + SC.SCORE + " <= " + scoreMax);
+			sqlString = sqlString + (" and" + SC.SCORE + " <= " + scoreMax);
 		}
-		if(this.textGpaMin.getText() != null) {
+		if(this.textGpaMin.getText().equals("")){}
+		else{
 			float gpaMin = Float.parseFloat(textScoreMin.getText());
-			sqlString.concat(" and " + SC.GPA + " >= " + gpaMin);
+			sqlString = sqlString + (" and " + SC.GPA + " >= " + gpaMin);
 		}
-		if(this.textGpaMax.getText() != null) {
+		if(this.textGpaMax.getText().equals("")){}
+		else{
 			float gpaMax = Float.parseFloat(textGpaMax.getText());
-			sqlString.concat(" and" + SC.GPA+ " <= " + gpaMax);
+			sqlString = sqlString + (" and" + SC.GPA+ " <= " + gpaMax);
 		}
 		System.out.println(sqlString);
         try {
