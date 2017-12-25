@@ -29,10 +29,10 @@ public class Item344Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String sql="select S.S_name as Name, S.S_id as ID, count(*) as count from Student as S, user1.SC as SC where S.S_id = SC.S_id";
-        if(upper.getSelected(0)!=null)sql=sql+ "and SC.score < 60 and Ayear = "+Utility.quote(upper.getSelected(0).toString());
-        if(upper.getSelected(1)!=null)sql=sql+"and S.Dept_id = (select Dept_id from Department where Dept_name = "+Utility.quote(upper.getSelected(1).toString()) ;
+        if(upper.getSelected(0)!=null)sql=sql+ " and SC.score < 60 and Ayear = "+Utility.quote(upper.getSelected(0).toString());
+        if(upper.getSelected(1)!=null)sql=sql+" and S.Dept_id = (select Dept_id from Department where Dept_name = "+Utility.quote(upper.getSelected(1).toString()) ;
         sql=sql+
-                ") group by SC.S_id having min(Score)<60";
+                ") group by S.S_id, S.S_name having min(Score)<60";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

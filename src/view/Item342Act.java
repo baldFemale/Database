@@ -39,17 +39,12 @@ public class Item342Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
-        String sql="select S_name as Name, sum(SC.gpa * C.score)/sum(C.score) as GPA, rank() over(order by GPA)" +
-                "from Student as S, SC, Course as C " +
-                "where ";
-        if(upper.getSelected(1)!=null)sql=sql +"S.Dept_id = (select Dept_id from Department where Dept_name = '"+upper.getSelected(1).toString()+"') and ";
+        String sql="select S_name as Name, sum(SC.gpa * C.credit)/sum(C.credit) as GPA     from Student as S, SC, Course as C where " ;
+        if(upper.getSelected(1)!=null)sql=sql +"      S.Dept_id = (select Dept_id from Department where Dept_name = "+upper.getSelected(1).toString();
         if(upper.getSelected(0)!=null)sql=sql+
-                "SC.Ayear = "+Utility.quote(upper.getSelected(0).toString()) +" and ";
+                ")  and SC.Ayear =  "+Utility.quote(upper.getSelected(0).toString()) ;
         sql=sql+
-                "and S.S_id = SC.S_id " +
-                "and C.C_id = SC.C_id " +
-                "group by SC.S_id " +
-                "order by GPA";
+                "and S.S_id = SC.S_id   and C.C_id = SC.C_id  group by SC.S_id, S.S_name  order by GPA desc;";
         //rs= TestUnit.getTestRS();
         //jsp=Utility.getJSPfromResultSet(rs);
         jsp = Utility.jspFromSQL(sql);

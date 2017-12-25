@@ -114,12 +114,12 @@ public final class Item341Act extends JPanel implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql="select top 5 user1.SC."+SC.S_ID+", user1.S."+ Student.NAME+", "+SC.SCORE+" from SC, Student as S where SC.S_id = S.S_id ";
+        String sql="select top 5 S.S_id, S.S_name, SC.score from SC, Student as S where SC.S_id = S.S_id ";
         if(this.comboBoxYear.getSelectedItem()!=null){
-            sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem());
+            sql.concat("and SC."+SC.AYEAR+" = "+comboBoxYear.getSelectedItem().toString());
         }
         if(this.comboBoxCourse.getSelectedItem()!=null)
-            sql.concat("and SC."+SC.C_ID);//TODO SQL语句没写完。
+            sql.concat("and SC."+SC.C_ID+" = ( select S_id from Course where S_name = "+comboBoxCourse.getSelectedItem().toString()+")");//TODO SQL语句没写完。
         System.out.println(sql);
         try {
             Statement statement = DBConnection.getConnection().createStatement();

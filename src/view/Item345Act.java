@@ -31,7 +31,7 @@ public class Item345Act extends Item3 implements ActionListener{
                 +Utility.quote(upper.getSelected(0).toString())+
                 " and SC.S_id in (select S_id from student as S where S.Dept_id in(select Dept_id from Department where Dept_name = "
                 +Utility.quote(upper.getSelected(1).toString())+
-                ")) group by SC.C_id having count(*) > 2";
+                ")) group by SC.C_id, C.C_name having count(*) > 2";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

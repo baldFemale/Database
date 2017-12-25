@@ -54,8 +54,8 @@ public class Item343Act extends Item3 {
         return x;
     }
     private void getSscore(int min){
-        String sql="select S.S_id as ID, S.S_name as Name, count(*) as count " +
-                "from S " +
+        String sql="select S.S_id as ID, S.S_name as Name " +
+                "from Student as S " +
                 "where S.S_id in " +
                 "(select S_id from SC " +
                 "group by S_id " +
