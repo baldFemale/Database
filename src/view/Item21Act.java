@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
@@ -30,28 +31,31 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item21Act extends JPanel implements  ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable; //TODO
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelLocation,labelHeading;
     private JComboBox comboBoxID,comboBoxName,comboBoxLocation;
     private JTable table;
+    private JScrollPane jsp1; //TODO
     private ResultSet resultSet=null;
     
     public Item21Act (){
-        super();
-        labelID=new JLabel("绯诲埆浠ｇ爜");
-        labelName=new JLabel("绯诲埆鍚嶇О");
-        labelLocation = new JLabel("绯诲埆鍦板潃");
+    	super();
+        labelID=new JLabel("系别代码");
+        labelName=new JLabel("系别名称");
+        labelLocation = new JLabel("系别地址");
 
         upper=new JPanel();
-        buttonQuery= new JButton("鏌ヨ");
+        buttonQuery= new JButton("查询");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE, Department.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.NAME));
         comboBoxLocation=new JComboBox(Utility.simpleUniqueQuery(Department.TABLE,Department.LOCATION));
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("璇疯緭鍏ラ渶瑕佹煡璇㈢殑鏉′欢");
+        forTable = new JPanel(); //TODO
+        jsp1 = new JScrollPane(); //TODO
+        labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -60,14 +64,11 @@ public final class Item21Act extends JPanel implements  ActionListener{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
+        table=new JTable(1,3);
         
 
         this.setVisible(true);
-        this.setFont(new Font("瀹嬩綋",Font.ITALIC,30));//TODo 涔辩爜闂杩樺湪锛涚涓�鎻愮ず鏂囧瓧娌℃湁灞呬腑銆�
-        /*
-        * 灏濊瘯瑙ｅ喅GUI鐨勪腑鏂囦贡鐮侀棶棰樸�
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
 	
     private LayoutManager createLayout(){
@@ -102,12 +103,14 @@ public final class Item21Act extends JPanel implements  ActionListener{
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-            table.removeAll();
-	        this.add(this.table);
+            //TODO
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

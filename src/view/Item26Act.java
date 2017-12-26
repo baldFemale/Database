@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,16 +32,17 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item26Act extends JPanel implements ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable;
     private JButton buttonQuery;
     private JLabel labelYear,labelSemester,labelTeacherName,labelCourse,labelRating,labelHeading,labelTo;
     private JComboBox comboBoxYear,comboBoxSemester,comboBoxCourse,comboBoxRating;
-    private JTextField textTeacherName; //用教师名字比教师号查询更便利
+    private JTextField textTeacherName; //��ㄦ��甯����瀛�姣����甯���锋�ヨ�㈡�翠究���
     private JTable table;
+    private JScrollPane jsp1;
     private ResultSet resultSet=null;
     
     public Item26Act (){
-        super();
+    	super();
         labelYear=new JLabel("学年");
         labelSemester=new JLabel("学期");
         labelTeacherName = new JLabel("教师姓名");
@@ -58,6 +60,8 @@ public final class Item26Act extends JPanel implements ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
         labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
@@ -71,10 +75,7 @@ public final class Item26Act extends JPanel implements ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
-        /*
-        * 尝试解决GUI的中文乱码问题。
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
     
     private LayoutManager createLayout(){
@@ -110,7 +111,7 @@ public final class Item26Act extends JPanel implements ActionListener{
 			sqlString = sqlString+(" and " + TC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
 		if(this.textTeacherName.getText().equals("")){}
 		else{
-			//WHERE TN LIKE ‘张%’
+			//WHERE TN LIKE ���寮�%���
 			sqlString = sqlString+(" and " + Teacher.NAME + " like '%" + textTeacherName.getText() + "%'");
 		}
 		if(this.comboBoxCourse.getSelectedItem() != null)
@@ -121,11 +122,13 @@ public final class Item26Act extends JPanel implements ActionListener{
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

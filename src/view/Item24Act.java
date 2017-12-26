@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -30,28 +31,29 @@ import toolkit.Utility;
 
 public final class Item24Act extends JPanel implements  ActionListener{
 	
-	private JPanel upper,top;
+	private JPanel upper,top, forTable;
     private JButton buttonQuery;
     private JLabel labelYear,labelSemester,labelStudentID,labelCourse,labelScore,labelGpa,labelHeading,labelTo,labelTo1,labelTo2;
     private JComboBox comboBoxYear,comboBoxSemester,comboBoxCourse;
     private JTextField textIDMin, textIDMax, textScoreMin, textScoreMax, textGpaMin, textGpaMax;
     private JTable table;
+    private JScrollPane jsp1;
     private ResultSet resultSet=null;
     
     public Item24Act (){
-        super();
-        labelYear=new JLabel("å­¦å¹´");
-        labelSemester=new JLabel("å­¦æœŸ");
-        labelStudentID = new JLabel("å­¦å·");
-        labelCourse = new JLabel("è¯¾ç¨‹åç§°");
-        labelScore = new JLabel("æˆç»©");
-        labelGpa = new JLabel("ç»©ç‚¹");
-        labelTo = new JLabel("è‡³");
-        labelTo1 = new JLabel("è‡³");
-        labelTo2 = new JLabel("è‡³");
+    	super();
+        labelYear=new JLabel("Ñ§Äê");
+        labelSemester=new JLabel("Ñ§ÆÚ");
+        labelStudentID = new JLabel("Ñ§ºÅ");
+        labelCourse = new JLabel("¿Î³ÌÃû³Æ");
+        labelScore = new JLabel("³É¼¨");
+        labelGpa = new JLabel("¼¨µã");
+        labelTo = new JLabel("ÖÁ");
+        labelTo1 = new JLabel("ÖÁ");
+        labelTo2 = new JLabel("ÖÁ");
 
         upper=new JPanel();
-        buttonQuery= new JButton("æŸ¥è¯¢");
+        buttonQuery= new JButton("²éÑ¯");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE, SC.AYEAR));
         comboBoxSemester=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.SEMESTER));
         comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
@@ -64,7 +66,9 @@ public final class Item24Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
+        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -77,10 +81,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
-        /*
-        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
-        * */
+        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));
     }
 	
     private LayoutManager createLayout(){
@@ -151,11 +152,13 @@ public final class Item24Act extends JPanel implements  ActionListener{
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
