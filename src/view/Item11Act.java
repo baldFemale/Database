@@ -43,7 +43,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     JLabel jl16;
     JLabel jl17;
     JLabel jl21;
-    JTable jTa1;
+    JScrollPane jsp1;
     JButton jb1;
     JButton jb2;
     JButton jb3;
@@ -73,7 +73,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     
     void createSubPage(){
     	
-    	MainPageView.setUIFont();
+    	//MainPageView.setUIFont();
     	setLayout(gbl);
     	
     	//initialize items
@@ -86,7 +86,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	bg1.add(jr3);
     	jp1 = new JPanel();
     	jl21 = new JLabel("¸ü¸ÄÎª:");
-    	jTa1 = new JTable();
+    	jsp1 = new JScrollPane();
     	//js1=new JScrollPane(jTa1);
     	
     	//add items
@@ -116,8 +116,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	c.gridwidth=3;
     	c.gridheight=6;
     	c.weightx=1;
-    	c.gridx=0;
-    	c.gridy=1;
+    	c.gridx=3;
     	gbl.setConstraints(jp2, c);
     	c.gridwidth=6;
     	c.gridheight=8;
@@ -486,8 +485,9 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			}
 			try {
 				ResultSet resultSet = statement.executeQuery(sql);
-				jTa1 = new Table(resultSet).jt;
-				jp1.add(jTa1);
+				jsp1 = new Table(resultSet).jsp1;
+				jp1.removeAll();
+				jp1.add(jsp1);
 				jp1.updateUI();
 				statement.close();
 				resultSet.close();
