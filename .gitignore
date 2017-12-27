@@ -7,3 +7,6 @@ bin/
 *.iml
 /.metadata/
 Database2/
+.project
+.classpath
+.settings/

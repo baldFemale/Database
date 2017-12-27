@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,23 +30,24 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item22Act extends JPanel implements  ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable; 
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelCredit,labelHeading,labelTo;
     private JComboBox comboBoxID,comboBoxName;
     private JTextField textCreditMin, textCreditMax;
     private JTable table;
+    private JScrollPane jsp1; //TODO
     private ResultSet resultSet=null;
 	
 	public Item22Act (){
-        super();
-        labelID=new JLabel("è¯¾ç¨‹ä»£ç ");
-        labelName=new JLabel("è¯¾ç¨‹åç§°");
-        labelCredit = new JLabel("å­¦åˆ†");
-        labelTo = new JLabel("è‡³");
+		super();
+        labelID=new JLabel("¿Î³Ì´úÂë");
+        labelName=new JLabel("¿Î³ÌÃû³Æ");
+        labelCredit = new JLabel("Ñ§·Ö");
+        labelTo = new JLabel("ÖÁ");
 
         upper=new JPanel();
-        buttonQuery= new JButton("æŸ¥è¯¢");
+        buttonQuery= new JButton("²éÑ¯");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
         textCreditMin=new JTextField(30);
@@ -53,7 +55,9 @@ public final class Item22Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
-        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
+        labelHeading=new JLabel("ÇëÊäÈëÐèÒª²éÑ¯µÄÌõ¼þ");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -62,14 +66,11 @@ public final class Item22Act extends JPanel implements  ActionListener{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
+        table=new JTable(1,3);
         
 
         this.setVisible(true);
-        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));//TODo ä¹±ç é—®é¢˜è¿˜åœ¨ï¼›ç¬¬ä¸€è¡Œæç¤ºæ–‡å­—æ²¡æœ‰å±…ä¸­ã€‚
-        /*
-        * å°è¯•è§£å†³GUIçš„ä¸­æ–‡ä¹±ç é—®é¢˜ã€‚
-        * */
+        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));
     }
 	
 	private LayoutManager createLayout(){
@@ -94,26 +95,30 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Course.TABLE+ " where 1 = 1";
 		if(this.comboBoxID.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
+			sqlString = sqlString + (" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat(" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
-		if(this.textCreditMin.getText() != null) {
+			sqlString = sqlString + (" and " + Course.NAME + " = '" + comboBoxName.getSelectedItem() + "'");
+		if(this.textCreditMin.getText().equals("")){}
+		else {
 			float creditMin = Float.parseFloat(textCreditMin.getText());
-			sqlString.concat(" and " + Course.CREDIT + " >= " + creditMin);
+			sqlString = sqlString + (" and " + Course.CREDIT + " >= " + creditMin);
 		}
-		if(this.textCreditMax.getText() != null) {
+		if(this.textCreditMax.getText().equals("")){}
+		else{
 			float creditMax = Float.parseFloat(textCreditMax.getText());
-			sqlString.concat(" and " + Course.CREDIT + " <= " + creditMax);
+			sqlString = sqlString + (" and " + Course.CREDIT + " <= " + creditMax);
 		}
 		System.out.println(sqlString);
 		try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

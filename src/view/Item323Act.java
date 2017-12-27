@@ -36,6 +36,7 @@ public class Item323Act extends JPanel implements ActionListener{
 		jt1 = new JTable(1,3);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
+		jp3 = new JPanel();
 		jsp1 = new JScrollPane();
 		jb1.addActionListener(this);
 		this.jp1.setLayout(createLayout());

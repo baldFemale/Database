@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
@@ -30,15 +31,16 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item21Act extends JPanel implements  ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable; //TODO
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelLocation,labelHeading;
     private JComboBox comboBoxID,comboBoxName,comboBoxLocation;
     private JTable table;
+    private JScrollPane jsp1; //TODO
     private ResultSet resultSet=null;
     
     public Item21Act (){
-        super();
+    	super();
         labelID=new JLabel("系别代码");
         labelName=new JLabel("系别名称");
         labelLocation = new JLabel("系别地址");
@@ -51,6 +53,8 @@ public final class Item21Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
+        forTable = new JPanel(); //TODO
+        jsp1 = new JScrollPane(); //TODO
         labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
@@ -60,14 +64,11 @@ public final class Item21Act extends JPanel implements  ActionListener{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
+        table=new JTable(1,3);
         
 
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
-        /*
-        * 尝试解决GUI的中文乱码问题。
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
 	
     private LayoutManager createLayout(){
@@ -91,21 +92,25 @@ public final class Item21Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Department.TABLE + " where 1 = 1 ";
-		if(this.comboBoxID.getSelectedItem() != null)
-			sqlString.concat("and" + Department.ID + "=" + comboBoxID.getSelectedItem());
+		System.out.println("dfs" + sqlString);
+		if(this.comboBoxID.getSelectedItem()!=null )
+			sqlString = sqlString + (" and " + Department.ID + "=" + comboBoxID.getSelectedItem().toString());
 		if(this.comboBoxName.getSelectedItem() != null)
-			sqlString.concat("and" + Department.NAME + "= '" + comboBoxName.getSelectedItem() + "'");
+			sqlString = sqlString + (" and " + Department.NAME + "= '" + comboBoxName.getSelectedItem().toString() + "'");
 		if(this.comboBoxLocation.getSelectedItem() != null)
-			sqlString.concat("and" + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem() + "'");
-		System.out.println(sqlString);
+			sqlString = sqlString + (" and " + Department.LOCATION + "= '" + comboBoxLocation.getSelectedItem().toString() + "'");
+		System.out.println("222" + sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            //TODO
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

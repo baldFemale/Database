@@ -1,14 +1,13 @@
 package view;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import model.Department;
-import model.SC;
-import toolkit.ComboBoxSearch;
-import toolkit.PanelComboBox;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import toolkit.Utility;
 
 /**
@@ -16,19 +15,22 @@ import toolkit.Utility;
  */
 
 public class Item347Act extends Item3 implements ActionListener{
+    JLabel instruct;
+    JButton jb;
     public Item347Act(){
-        List<ComboBoxSearch> searchList = new ArrayList<>();
-        searchList.add(new ComboBoxSearch("ϵ��", Department.TABLE,Department.NAME));
-        this.upper=new PanelComboBox(searchList);
-        this.add(upper);
+        instruct=new JLabel("��ѯ��ǿѧ������");
+        jb=new JButton("��ѯ");
+        this.add(instruct);
+        this.add(jb);
         this.add(lower);
-        upper.buttonQuery.addActionListener(this);
+        jb.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        String sql = "select S_prov as Province, count(*) as count from Student " +
-                " where dept_id = (select Dept_id from Department where dept_name =  " + Utility.quote(upper.getSelected(0).toString())+
-                ") group by S_prov;";
+        String sql="select top 5 SC.S_id as ID, S.s_name as Name, " +
+                "sum(SC.score * Course.credit)/sum(Course.credit) as gpa " +
+                "from Student as S, SC, Course where S.S_id = SC.S_id and " +
+                "Course.C_id = SC.C_id group by SC.S_id, S.S_name having min(SC.score) >= 60;";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

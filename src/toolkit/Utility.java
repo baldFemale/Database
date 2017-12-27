@@ -38,6 +38,7 @@ public class Utility {
      */
     public static Vector simpleUniqueQuery(String table, String attr){
         Vector vector=new Vector<String>();
+        vector.add(null);
         ResultSet resultSet=null;
         String sql="select distinct "+ attr+" from "+table;
         try {
@@ -52,7 +53,7 @@ public class Utility {
             System.out.println("Error!simpleUniqueQuery!");
             e.printStackTrace();
         }finally {
-            vector.add(null);
+            
             return vector;
         }
     }
@@ -66,7 +67,7 @@ public class Utility {
             Table t=new Table(rs);
             jsp = new JScrollPane();
             jsp.setViewportView(t.jt);
-            rs.close();
+            //rs.close();
             return jsp;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,8 +83,8 @@ public class Utility {
             Statement statement = DBConnection.getConnection().createStatement();
             rs=statement.executeQuery(sql);
             jsp=getJSPfromResultSet(rs);
-            rs.last();
-            if(rs.getRow()==0)Utility.reportErrorEmptyTable();
+            //rs.last();//TODO
+            //if(rs.getRow()==0)Utility.reportErrorEmptyTable();
             rs.close();
             statement.close();
         }catch (SQLException e){

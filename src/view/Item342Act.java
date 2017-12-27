@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.rmi.CORBA.Util;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -12,7 +13,7 @@ import model.Department;
 import model.SC;
 import toolkit.ComboBoxSearch;
 import toolkit.PanelComboBox;
-import toolkit.TestUnit;
+//import toolkit.TestUnit;
 import toolkit.Utility;
 
 /**
@@ -23,9 +24,9 @@ public class Item342Act extends Item3 implements ActionListener{
 
     public Item342Act(){
         List<ComboBoxSearch> searchList = new ArrayList<>();
-        ComboBoxSearch search = new ComboBoxSearch("Ñ§Äê", SC.TABLE,SC.AYEAR);
+        ComboBoxSearch search = new ComboBoxSearch("Ñ§ï¿½ï¿½", SC.TABLE,SC.AYEAR);
         searchList.add(search);
-        searchList.add(new ComboBoxSearch("Ïµ±ð", Department.TABLE,Department.NAME));
+        searchList.add(new ComboBoxSearch("Ïµï¿½ï¿½", Department.TABLE,Department.NAME));
         //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
         //lower.updateUI();
@@ -40,7 +41,7 @@ public class Item342Act extends Item3 implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         //lower.removeAll();
         String sql="select S_name as Name, sum(SC.gpa * C.credit)/sum(C.credit) as GPA     from Student as S, SC, Course as C where " ;
-        if(upper.getSelected(1)!=null)sql=sql +"      S.Dept_id = (select Dept_id from Department where Dept_name = "+upper.getSelected(1).toString();
+        if(upper.getSelected(1)!=null)sql=sql +"      S.Dept_id = (select Dept_id from Department where Dept_name = "+ Utility.quote(upper.getSelected(1).toString()) ;
         if(upper.getSelected(0)!=null)sql=sql+
                 ")  and SC.Ayear =  "+Utility.quote(upper.getSelected(0).toString()) ;
         sql=sql+
@@ -53,6 +54,6 @@ public class Item342Act extends Item3 implements ActionListener{
         lower.updateUI();
         //lower.setViewportView(new JTable(5,5));
         //lower.updateUI();
-        //TODO Ìí¼ÓwhereºóÌõ¼þµÄÑ­»·µÄ·â×°¡£
+        //TODO ï¿½ï¿½ï¿½whereï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½Ä·ï¿½×°ï¿½ï¿½
     }
 }

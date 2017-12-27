@@ -31,7 +31,7 @@ public class Item343Act extends Item3 {
         top.setHorizontalAlignment(SwingConstants.LEFT);
        this.add(top);
        title=new JLabel("·ÖÊý");
-       input=new JTextField();
+       input=new JTextField(10);
        mid.add(title);
        mid.add(input);
        mid.add(jb);
@@ -49,6 +49,7 @@ public class Item343Act extends Item3 {
        });
     }
     private int checkInput(JTextField jtf){
+        if(jtf.getText().equals(""))return  -1;
         int x = Integer.valueOf(jtf.getText());
         if(x<0||x>100)return -1;
         return x;

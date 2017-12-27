@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -16,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,16 +33,17 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item23Act extends JPanel implements  ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable;
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelSex,labelBirth,labelProv,labelInto,labelDept,labelHeading,labelTo,labelTo1,labelTo2;
     private JComboBox comboBoxSex,comboBoxProv,comboBoxDept;
     private JTextField textIDMin, textIDMax, textName, textBirthMin, textBirthMax, textIntoMin, textIntoMax;
     private JTable table;
+    private JScrollPane jsp1;
     private ResultSet resultSet=null;
 	
     public Item23Act (){
-        super();
+    	super();
         labelID=new JLabel("学号");
         labelName=new JLabel("姓名");
         labelSex = new JLabel("性别");
@@ -65,6 +70,8 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
         labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
@@ -74,13 +81,10 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
+        table=new JTable(1,3);
         
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
-        /*
-        * 尝试解决GUI的中文乱码问题。
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
     
     private LayoutManager createLayout(){
@@ -109,55 +113,64 @@ public final class Item23Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID; //TODO
-		System.out.print(sqlString);
-		if(this.textIDMin.getText() != null) {
-			float idMin = Float.parseFloat(textIDMin.getText());
-			sqlString.concat(" and " + Student.ID + " >= " + idMin);
+		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
+		if (this.textIDMin.getText().equals("") ){}
+		else{
+			int idMin = Integer.parseInt(textIDMin.getText());
+			sqlString = sqlString+(" and " + Student.ID + " >= " + idMin);
 		}
-		if(this.textIDMax.getText() != null) {
-			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString.concat(" and" + Student.ID + " <= " + idMax);
+		if(this.textIDMax.getText().equals("")){}
+		else{
+			int idMax = Integer.parseInt(textIDMax.getText());
+			sqlString = sqlString+(" and " + Student.ID + " <= " + idMax);
 		}
-		if(this.textName.getText() != null) {
-			//WHERE TN LIKE ‘张%’
-			sqlString.concat(" and " + Student.NAME + " like '% " + textName.getText() + " %'");
+		if(this.textName.getText().equals("")) {}
+		else{
+			sqlString = sqlString+(" and " + Student.NAME + " like '%" + textName.getText() + "%'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
-			sqlString.concat(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		//TODO 出生日期因格式未知，还未加上去
-		if(this.textBirthMin.getText() != null) {
-			float idMin = Float.parseFloat(textBirthMin.getText());
-			sqlString.concat(" and " + Student.BIRTH + " >= " + idMin);
+			sqlString = sqlString+(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
+		//TODO 日期  problems with date
+		if(this.textBirthMin.getText().equals("")){} 
+		else {
+			StringTokenizer st = new  StringTokenizer(textBirthMin.getText(), "-");
+			System.out.print("\n"+st+"\n");
+			java.sql.Date dateMin = new java.sql.Date(Integer.parseInt(st.nextToken())); 
+			System.out.print("\n"+dateMin+"\n");
+			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + dateMin);
 		}
-		if(this.textBirthMax.getText() != null) {
-			float idMax = Float.parseFloat(textBirthMax.getText());
-			sqlString.concat(" and" + Student.BIRTH + " <= " + idMax);
+		if(this.textBirthMax.getText().equals("")){}
+		else {
+			StringTokenizer st = new  StringTokenizer(textBirthMax.getText(), "-");     
+			java.sql.Date dateMax = new  java.sql.Date(Integer.parseInt(st.nextToken()));
+			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + dateMax);
 		}
-		
 		if(this.comboBoxProv.getSelectedItem() != null)
-			sqlString.concat(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
-		if(this.textIntoMin.getText() != null) {
+			sqlString = sqlString+(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
+		if(this.textIntoMin.getText().equals("")){}
+		else{
 			float intoMin = Float.parseFloat(textIntoMin.getText());
-			sqlString.concat(" and " + Student.INTO + " >= " + intoMin);
+			sqlString = sqlString+(" and " + Student.INTO + " >= " + intoMin);
 		}
-		if(this.textIntoMax.getText() != null) {
+		if(this.textIntoMax.getText().equals("")){}
+		else{
 			float intoMax = Float.parseFloat(textIntoMax.getText());
-			sqlString.concat(" and" + Student.INTO + " <= " + intoMax);
+			sqlString = sqlString+(" and " + Student.INTO + " <= " + intoMax);
 		}
 		if(this.comboBoxDept.getSelectedItem() != null) {
-			//TODO 还需再确认不同表格是否也可以这样做
-			sqlString.concat(" and " + Department.NAME + " = '" + comboBoxProv.getSelectedItem() + "'");
+			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxDept.getSelectedItem() + "'");
 		}
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
