@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -64,15 +66,17 @@ public class MainPageView extends JFrame implements ActionListener{
 	JMenuItem item347;
 	
 	JPanel jpBasic = new JPanel();
+	
+	//JScrollPane jspBasic = new JScrollPane(jpBasic);
     
 	//添加响应事件实例
 	view.Item11Act item11Act = new view.Item11Act();
 	view.Item12Act item12Act = new view.Item12Act();
 	view.Item13Act item13Act = new view.Item13Act();
-	/*view.Item14Act item14Act = new view.Item14Act();
+	view.Item14Act item14Act = new view.Item14Act();
 	view.Item15Act item15Act = new view.Item15Act();
 	view.Item16Act item16Act = new view.Item16Act();
-	view.Item21Act item21Act = new view.Item21Act();*/
+	view.Item21Act item21Act = new view.Item21Act();
 	view.Item22Act item22Act = new view.Item22Act();
 	view.Item23Act item23Act = new view.Item23Act();
 	view.Item24Act item24Act = new view.Item24Act();
@@ -85,13 +89,13 @@ public class MainPageView extends JFrame implements ActionListener{
 	view.Item322Act item322Act = new view.Item322Act();
 	view.Item323Act item323Act = new view.Item323Act();
 	view.Item331Act item331Act = new view.Item331Act();
-	/*view.Item341Act item341Act = new view.Item341Act();
+	view.Item341Act item341Act = new view.Item341Act();
 	view.Item342Act item342Act = new view.Item342Act();
 	view.Item343Act item343Act = new view.Item343Act();
 	view.Item344Act item344Act = new view.Item344Act();
 	view.Item345Act item345Act = new view.Item345Act();
 	view.Item346Act item346Act = new view.Item346Act();
-	view.Item347Act item347Act = new view.Item347Act();*/
+	view.Item347Act item347Act = new view.Item347Act();
 	
     private MainPageView() {
         super();
@@ -100,7 +104,7 @@ public class MainPageView extends JFrame implements ActionListener{
     
 	public void createMenu(){
 
-        setUIFont();
+        //setUIFont();
 		
         //initialize every item
 		menu1 = new JMenu("数据维护");
@@ -225,7 +229,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.removeAll();  
             jpBasic.add("11" , item11Act);//切换代码。  
             jpBasic.validate();
-            jpBasic.updateUI(); 
+            jpBasic.updateUI();
         }  
         else if(e.getSource() == item12){
             jpBasic.removeAll();
@@ -239,7 +243,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.validate();  
             jpBasic.updateUI();
         }
-        /*else if(e.getSource() == item14){
+        else if(e.getSource() == item14){
             jpBasic.removeAll();
             jpBasic.add("14", item14Act);
             jpBasic.validate();  
@@ -262,7 +266,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.add("21", item21Act);
             jpBasic.validate();  
             jpBasic.updateUI();
-        }*/
+        }
         else if(e.getSource() == item22){
             jpBasic.removeAll();
             jpBasic.add("22", item22Act);
@@ -329,7 +333,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.validate();  
             jpBasic.updateUI();
         }
-        /*else if(e.getSource() == item341){
+        else if(e.getSource() == item341){
             jpBasic.removeAll();
             jpBasic.add("341", item341Act);
             jpBasic.validate();  
@@ -370,10 +374,10 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.add("347", item347Act);
             jpBasic.validate();  
             jpBasic.updateUI();
-        }*/
+        }
     }
     
-    static void setUIFont()
+    /*static void setUIFont()
 	{
 		Font f = new Font("宋体",Font.BOLD,20);
 		String   names[]={ "Label", "CheckBox", "PopupMenu","MenuItem", "CheckBoxMenuItem",
@@ -387,5 +391,5 @@ public class MainPageView extends JFrame implements ActionListener{
 		for (String item : names) {
 			 UIManager.put(item+ ".font",f); 
 		}
-	}
+	}*/
 }
