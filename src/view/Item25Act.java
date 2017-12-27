@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -140,16 +142,30 @@ public final class Item25Act extends JPanel implements ActionListener{
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Teacher.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		if(this.textBirthMin.getText().equals("")){}
+		if(this.textBirthMin.getText().equals("")){} 
 		else {
-			StringTokenizer st = new  StringTokenizer(textBirthMin.getText(), "-");     
-			java.sql.Date dateMin = new  java.sql.Date(Integer.parseInt(st.nextToken()));  			
+			String dateStringToParse = textBirthMin.getText().toString();
+			java.util.Date dateMin = null;
+		    try {
+				dateMin = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDate = new java.sql.Date(dateMin.getTime()); 
 			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + dateMin);
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
-			StringTokenizer st = new  StringTokenizer(textBirthMax.getText(), "-");     
-			java.sql.Date dateMax = new  java.sql.Date(Integer.parseInt(st.nextToken()));
+			String dateStringToParse = textBirthMax.getText().toString();
+			java.util.Date dateMax = null;
+		    try {
+				dateMax = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDate = new java.sql.Date(dateMax.getTime()); 
 			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + dateMax);
 		}
 		

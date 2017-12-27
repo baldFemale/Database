@@ -44,6 +44,18 @@ public final class Item23Act extends JPanel implements  ActionListener{
 	
     public Item23Act (){
     	super();
+    	/* TryDate:
+    	String  dateStringToParse  =  "1996-09-12";     
+    	java.util.Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     
+    	java.sql.Date  sqlDate  =  new java.sql.Date(date.getTime());  
+		System.out.println(date);
+    	*/
         labelID=new JLabel("学号");
         labelName=new JLabel("姓名");
         labelSex = new JLabel("性别");
@@ -133,16 +145,28 @@ public final class Item23Act extends JPanel implements  ActionListener{
 		//TODO 日期  problems with date
 		if(this.textBirthMin.getText().equals("")){} 
 		else {
-			StringTokenizer st = new  StringTokenizer(textBirthMin.getText(), "-");
-			System.out.print("\n"+st+"\n");
-			java.sql.Date dateMin = new java.sql.Date(Integer.parseInt(st.nextToken())); 
-			System.out.print("\n"+dateMin+"\n");
+			String dateStringToParse = textBirthMin.getText().toString();
+			java.util.Date dateMin = null;
+		    try {
+				dateMin = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDate = new java.sql.Date(dateMin.getTime()); 
 			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + dateMin);
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
-			StringTokenizer st = new  StringTokenizer(textBirthMax.getText(), "-");     
-			java.sql.Date dateMax = new  java.sql.Date(Integer.parseInt(st.nextToken()));
+			String dateStringToParse = textBirthMax.getText().toString();
+			java.util.Date dateMax = null;
+		    try {
+				dateMax = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDate = new java.sql.Date(dateMax.getTime()); 
 			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + dateMax);
 		}
 		if(this.comboBoxProv.getSelectedItem() != null)
