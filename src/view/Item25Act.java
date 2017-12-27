@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -141,13 +142,15 @@ public final class Item25Act extends JPanel implements ActionListener{
 			sqlString = sqlString+(" and " + Teacher.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
 		if(this.textBirthMin.getText().equals("")){}
 		else {
-			float idMin = Float.parseFloat(textBirthMin.getText());
-			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + idMin);
+			StringTokenizer st = new  StringTokenizer(textBirthMin.getText(), "-");     
+			java.sql.Date dateMin = new  java.sql.Date(Integer.parseInt(st.nextToken()));  			
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + dateMin);
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
-			float idMax = Float.parseFloat(textBirthMax.getText());
-			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + idMax);
+			StringTokenizer st = new  StringTokenizer(textBirthMax.getText(), "-");     
+			java.sql.Date dateMax = new  java.sql.Date(Integer.parseInt(st.nextToken()));
+			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + dateMax);
 		}
 		
 		if(this.comboBoxProv.getSelectedItem() != null)

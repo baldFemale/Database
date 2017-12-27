@@ -140,13 +140,13 @@ public final class Item24Act extends JPanel implements  ActionListener{
 		}
 		if(this.textGpaMin.getText().equals("")){}
 		else{
-			float gpaMin = Float.parseFloat(textScoreMin.getText());
+			float gpaMin = Float.parseFloat(textGpaMin.getText());
 			sqlString = sqlString + (" and " + SC.GPA + " >= " + gpaMin);
 		}
 		if(this.textGpaMax.getText().equals("")){}
 		else{
 			float gpaMax = Float.parseFloat(textGpaMax.getText());
-			sqlString = sqlString + (" and" + SC.GPA+ " <= " + gpaMax);
+			sqlString = sqlString + (" and " + SC.GPA+ " <= " + gpaMax);
 		}
 		System.out.println(sqlString);
         try {

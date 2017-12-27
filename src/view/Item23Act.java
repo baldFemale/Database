@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -111,11 +114,8 @@ public final class Item23Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
-		if(textIDMin.getText().equals(null))
-			System.out.print("zhendemeiyou");
 		if (this.textIDMin.getText().equals("") ){}
 		else{
-			System.out.print("���娌℃�����������锛�");
 			int idMin = Integer.parseInt(textIDMin.getText());
 			sqlString = sqlString+(" and " + Student.ID + " >= " + idMin);
 		}
@@ -126,22 +126,25 @@ public final class Item23Act extends JPanel implements  ActionListener{
 		}
 		if(this.textName.getText().equals("")) {}
 		else{
-			//WHERE TN LIKE ���寮�%���
 			sqlString = sqlString+(" and " + Student.NAME + " like '%" + textName.getText() + "%'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		//TODO ��虹����ユ�������煎�������ワ��杩�������涓����
-		/*
-		if(this.textBirthMin.getText() != "") {
-			float idMin = Float.parseFloat(textBirthMin.getText());
-			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + idMin);
+		//TODO 日期  problems with date
+		if(this.textBirthMin.getText().equals("")){} 
+		else {
+			StringTokenizer st = new  StringTokenizer(textBirthMin.getText(), "-");
+			System.out.print("\n"+st+"\n");
+			java.sql.Date dateMin = new java.sql.Date(Integer.parseInt(st.nextToken())); 
+			System.out.print("\n"+dateMin+"\n");
+			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + dateMin);
 		}
-		if(this.textBirthMax.getText() != null) {
-			float idMax = Float.parseFloat(textBirthMax.getText());
-			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + idMax);
+		if(this.textBirthMax.getText().equals("")){}
+		else {
+			StringTokenizer st = new  StringTokenizer(textBirthMax.getText(), "-");     
+			java.sql.Date dateMax = new  java.sql.Date(Integer.parseInt(st.nextToken()));
+			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + dateMax);
 		}
-		*/
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
 		if(this.textIntoMin.getText().equals("")){}
@@ -155,8 +158,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
 			sqlString = sqlString+(" and " + Student.INTO + " <= " + intoMax);
 		}
 		if(this.comboBoxDept.getSelectedItem() != null) {
-			//TODO 杩�������纭�璁や�����琛ㄦ�兼�����涔����浠ヨ����峰��
-			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxProv.getSelectedItem() + "'");
+			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxDept.getSelectedItem() + "'");
 		}
 		System.out.println(sqlString);
         try {
