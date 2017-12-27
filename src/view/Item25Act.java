@@ -152,8 +152,8 @@ public final class Item25Act extends JPanel implements ActionListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}     
-    		java.sql.Date sqlDate = new java.sql.Date(dateMin.getTime()); 
-			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + dateMin);
+    		java.sql.Date sqlDateMin = new java.sql.Date(dateMin.getTime()); 
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + sqlDateMin);
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
@@ -165,8 +165,8 @@ public final class Item25Act extends JPanel implements ActionListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}     
-    		java.sql.Date sqlDate = new java.sql.Date(dateMax.getTime()); 
-			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + dateMax);
+    		java.sql.Date sqlDateMax = new java.sql.Date(dateMax.getTime()); 
+			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + sqlDateMax);
 		}
 		
 		if(this.comboBoxProv.getSelectedItem() != null)
