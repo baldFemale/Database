@@ -38,6 +38,7 @@ public class Utility {
      */
     public static Vector simpleUniqueQuery(String table, String attr){
         Vector vector=new Vector<String>();
+        vector.add(null);
         ResultSet resultSet=null;
         String sql="select distinct "+ attr+" from "+table;
         try {
@@ -52,7 +53,7 @@ public class Utility {
             System.out.println("Error!simpleUniqueQuery!");
             e.printStackTrace();
         }finally {
-            vector.add(null);
+            
             return vector;
         }
     }
