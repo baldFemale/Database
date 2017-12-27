@@ -24,9 +24,9 @@ public class Item342Act extends Item3 implements ActionListener{
 
     public Item342Act(){
         List<ComboBoxSearch> searchList = new ArrayList<>();
-        ComboBoxSearch search = new ComboBoxSearch("ѧ��", SC.TABLE,SC.AYEAR);
+        ComboBoxSearch search = new ComboBoxSearch("学年", SC.TABLE,SC.AYEAR);
         searchList.add(search);
-        searchList.add(new ComboBoxSearch("ϵ��", Department.TABLE,Department.NAME));
+        searchList.add(new ComboBoxSearch("系别", Department.TABLE,Department.NAME));
         //ComboBoxSearch[] listSearch=new ComboBoxSearch[]{new ComboBoxSearch("id","ta","dd")};
         this.upper=new PanelComboBox(searchList);
         //lower.updateUI();
@@ -54,6 +54,5 @@ public class Item342Act extends Item3 implements ActionListener{
         lower.updateUI();
         //lower.setViewportView(new JTable(5,5));
         //lower.updateUI();
-        //TODO ���where��������ѭ���ķ�װ��
     }
 }
