@@ -1,4 +1,4 @@
-package view;
+ï»¿package view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -73,15 +73,15 @@ public class Item16Act extends JPanel implements ItemListener,ActionListener{
     	setLayout(gbl);
     	
     	//initialize items
-    	jr1 = new JRadioButton("Â¼Èë");
-    	jr2 = new JRadioButton("ĞŞ¸Ä");
-    	jr3 = new JRadioButton("É¾³ı");
+    	jr1 = new JRadioButton("å½•å…¥");
+    	jr2 = new JRadioButton("ä¿®æ”¹");
+    	jr3 = new JRadioButton("åˆ é™¤");
     	bg1 = new ButtonGroup();
     	bg1.add(jr1);
     	bg1.add(jr2);
     	bg1.add(jr3);
     	jp1 = new JPanel();
-    	jl21 = new JLabel("¸ü¸ÄÎª:");
+    	jl21 = new JLabel("æ›´æ”¹ä¸º:");
     	jsp1 = new JScrollPane();
     	//js1=new JScrollPane(jTa1);
     	
@@ -154,14 +154,14 @@ public class Item16Act extends JPanel implements ItemListener,ActionListener{
     	jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§Äê:");
-    	jl12 = new JLabel("Ñ§ÆÚ:");
-    	jl13 = new JLabel("½ÌÊ¦ºÅ:");
-    	jl14 = new JLabel("¿Î³Ì´úÂë:");
-    	jl15 = new JLabel("ÆÀ½ÌµÈ¼¶:");
+    	jl11 = new JLabel("å­¦å¹´:");
+    	jl12 = new JLabel("å­¦æœŸ:");
+    	jl13 = new JLabel("æ•™å¸ˆå·:");
+    	jl14 = new JLabel("è¯¾ç¨‹ä»£ç :");
+    	jl15 = new JLabel("è¯„æ•™ç­‰çº§:");
     	
-    	jb1 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb1 = new JButton("ç¡®å®š");
+    	jb2 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -276,15 +276,15 @@ public class Item16Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§Äê:");
-    	jl12 = new JLabel("Ñ§ÆÚ:");
-    	jl13 = new JLabel("½ÌÊ¦ºÅ:");
-    	jl14 = new JLabel("¿Î³ÌºÅ:");
-    	jl15 = new JLabel("ÊôĞÔ:");
-    	jl21 = new JLabel("¸ü¸ÄÎª:");
+    	jl11 = new JLabel("å­¦å¹´:");
+    	jl12 = new JLabel("å­¦æœŸ:");
+    	jl13 = new JLabel("æ•™å¸ˆå·:");
+    	jl14 = new JLabel("è¯¾ç¨‹å·:");
+    	jl15 = new JLabel("å±æ€§:");
+    	jl21 = new JLabel("æ›´æ”¹ä¸º:");
 		
-    	jb3 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb3 = new JButton("ç¡®å®š");
+    	jb2 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -399,13 +399,13 @@ public class Item16Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§Äê:");
-    	jl12 = new JLabel("Ñ§ÆÚ:");
-    	jl13 = new JLabel("½ÌÊ¦ºÅ:");
-    	jl14 = new JLabel("¿Î³ÌºÅ:");
+    	jl11 = new JLabel("å­¦å¹´:");
+    	jl12 = new JLabel("å­¦æœŸ:");
+    	jl13 = new JLabel("æ•™å¸ˆå·:");
+    	jl14 = new JLabel("è¯¾ç¨‹å·:");
 		
-    	jb5 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb5 = new JButton("ç¡®å®š");
+    	jb2 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
