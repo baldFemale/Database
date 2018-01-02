@@ -218,8 +218,7 @@ public class MainPageView extends JFrame implements ActionListener{
 		
 		//set UI
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1280, 720);
-		this.setLocation(300, 200);
+		Utility.setWindowAtCenterAndFitSize(this);
 		this.setVisible(true);
 		this.setTitle("数据库大作业 李嘉宁 周俊杰 沈晓斌 唐鑫泽");
 	}
