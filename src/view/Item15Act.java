@@ -129,6 +129,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				createInsertView();
+				jp1.removeAll();
 			}
 		});
     	jr2.addItemListener(new ItemListener() {
@@ -137,6 +138,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				createUpdateView();
+				jp1.removeAll();
 			}
 		});
     	jr3.addItemListener(new ItemListener() {
@@ -145,6 +147,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				createDeleteView();
+				jp1.removeAll();
 			}
 		});
 
