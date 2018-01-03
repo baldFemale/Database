@@ -28,9 +28,9 @@ public class Item347Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String sql="select top 5 SC.S_id as ID, S.s_name as Name, " +
-                "sum(SC.score * Course.credit)/sum(Course.credit) as gpa " +
+                "sum(SC.gpa * Course.credit)/sum(Course.credit) as gpa " +
                 "from Student as S, SC, Course where S.S_id = SC.S_id and " +
-                "Course.C_id = SC.C_id group by SC.S_id, S.S_name having min(SC.score) >= 60;";
+                "Course.C_id = SC.C_id group by SC.S_id, S.S_name having min(SC.score) >= 60 order by gpa desc;";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
         lower.add(jsp);

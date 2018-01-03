@@ -26,8 +26,8 @@ public class Item346Act extends Item3 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String sql="select s_id as ID, s_name as Name from Student as x where not exists (select * from SC as y where" +
-                "  y.s_id = (select s_id from user1.Student where S_name = "
-                +Utility.quote(this.input.jtf.getText().toString()) +
+                "  y.s_id in (select s_id from user1.Student where S_name = "
+                +Utility.quote(this.input.jtf.getText().toString()) +//TODO 输错内容的时候仍然有结果。
                 ") and y.c_id not in ( select z.c_id from SC as z where z.s_id = x.s_id))";
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
