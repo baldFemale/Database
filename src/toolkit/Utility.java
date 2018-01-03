@@ -31,8 +31,8 @@ public class Utility {
     public static void setWindowAtCenterAndFitSize(Window window){
         Toolkit toolkit=Toolkit.getDefaultToolkit();
         Dimension screenSize=toolkit.getScreenSize();
-        window.setLocation((screenSize.width-window.getWidth())/2,(screenSize.height-window.getHeight())/2);
         window.setSize(screenSize.width*3/4, screenSize.height*3/4);
+        window.setLocation((screenSize.width-window.getWidth())/2,(screenSize.height-window.getHeight())/2);
     }
     
     public static void reportErrorEmptyTable(){
