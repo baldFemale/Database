@@ -22,15 +22,15 @@ import toolkit.Table;
  */
 
 public class Item343Act extends Item3 {
-    JLabel top=new JLabel("ÇëÊäÈëËù²éÑ¯µÄ·ÖÊıÏÂÏŞ");
+    JLabel top=new JLabel("è¯·è¾“å…¥æ‰€æŸ¥è¯¢çš„åˆ†æ•°ä¸‹é™");
     JLabel title;
     JTextField input;
-    JButton jb=new JButton("²éÑ¯");
+    JButton jb=new JButton("æŸ¥è¯¢");
     JPanel mid=new JPanel();
     public Item343Act(){
         top.setHorizontalAlignment(SwingConstants.LEFT);
        this.add(top);
-       title=new JLabel("·ÖÊı");
+       title=new JLabel("åˆ†æ•°");
        input=new JTextField(10);
        mid.add(title);
        mid.add(input);

@@ -23,7 +23,7 @@ public class PanelSearchInput extends JPanel {
         title = new JLabel(name);
         jtf=new JTextField(10);
         instruction = new JLabel(instr);
-        jb=new JButton("²éÑ¯");
+        jb=new JButton("æŸ¥è¯¢");
         down=new JPanel();
         down.add(title);
         down.add(jtf);
@@ -31,4 +31,4 @@ public class PanelSearchInput extends JPanel {
         add(instruction);
         add(down);
     }
-}//µ±ÄêÆÆ½â°²×°oracleÊı¾İ¿âÓĞÈıÇ§¿éÇ®¡£
+}//å½“å¹´ç ´è§£å®‰è£…oracleæ•°æ®åº“æœ‰ä¸‰åƒå—é’±ã€‚

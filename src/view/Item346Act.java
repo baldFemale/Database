@@ -1,12 +1,18 @@
 package view;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import control.DBConnection;
 import toolkit.PanelSearchInput;
 import toolkit.Utility;
 
@@ -17,7 +23,7 @@ import toolkit.Utility;
 public class Item346Act extends Item3 implements ActionListener{
     PanelSearchInput input;
     public Item346Act(){
-        input=new PanelSearchInput("ĞÕÃû","ÇëÊäÈëÑ§ÉúĞÕÃû");
+        input=new PanelSearchInput("å§“å","è¯·è¾“å…¥å­¦ç”Ÿå§“å");
         this.add(input);
         this.add(lower);
         this.input.jb.addActionListener(this);
@@ -25,11 +31,22 @@ public class Item346Act extends Item3 implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        String sName=Utility.quote(this.input.jtf.getText().toString());
+        try{
+            Statement st=DBConnection.getConnection().createStatement();
+            ResultSet rs=st.executeQuery("select * from Student where S_name = "+sName);
+            if(!rs.next()){//æŒ‡é’ˆä¸€å¼€å§‹ä½äºç¬¬ä¸€è¡Œä¹‹å‰ï¼Œè‹¥ä¸‹ä¸€ä¸ªæ— å†…å®¹åˆ™è¿”å›falseã€‚
+                Utility.reportErrorEmptyTable();
+                return;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         String sql="select s_id as ID, s_name as Name from Student as x where not exists (select * from SC as y where" +
                 "  y.s_id in (select s_id from user1.Student where S_name = "
-                +Utility.quote(this.input.jtf.getText().toString()) +//TODO Êä´íÄÚÈİµÄÊ±ºòÈÔÈ»ÓĞ½á¹û¡£
+                + sName +//TODO è¾“é”™å†…å®¹çš„æ—¶å€™ä»ç„¶æœ‰ç»“æœã€‚
                 ") and y.c_id not in ( select z.c_id from SC as z where z.s_id = x.s_id))";
-        jsp = Utility.jspFromSQL(sql);
+        jsp = Utility.jspFromSQL(sql);//TODO å°è¯•ä¸‹SQLä¸­çš„ifè¯­å¥ã€‚
         lower.removeAll();
         lower.add(jsp);
         lower.updateUI();

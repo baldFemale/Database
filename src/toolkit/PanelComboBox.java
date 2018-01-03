@@ -18,14 +18,14 @@ public class PanelComboBox extends JPanel {
     List<RowCombo> listElement=new ArrayList<RowCombo>();
     public JButton buttonQuery;
     List<GroupLayout.ParallelGroup> listVGroup = new ArrayList<>();
-    JLabel instruction = new JLabel("请选择查询项目");
+    JLabel instruction = new JLabel("璇烽�夋嫨鏌ヨ椤圭洰");
 
     /**
      * @param items A list of the combo of title, table and attr.
      */
     public PanelComboBox(List<ComboBoxSearch> items){
         super();
-        buttonQuery=new JButton("查询");
+        buttonQuery=new JButton("鏌ヨ");
         GroupLayout layout=new GroupLayout(this);
         layout.setAutoCreateContainerGaps(true);
 
