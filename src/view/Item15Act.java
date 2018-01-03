@@ -46,9 +46,9 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     JButton jb1;
     JButton jb2;
     JButton jb3;
-    //JButton jb4;
+    JButton jb4;
     JButton jb5;
-    //JButton jb6;
+    JButton jb6;
     JTextField jt1;
     JTextField jt2;
     JTextField jt3;
@@ -304,7 +304,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	jl21 = new JLabel("更改为:");
 		
     	jb3 = new JButton("确定");
-    	jb2 = new JButton("查看当前表");
+    	jb4 = new JButton("查看当前表");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -330,7 +330,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	add(jt4);
     	add(jt5);
     	add(jb3);
-    	add(jb2);
+    	add(jb4);
     	add(jc1);
     	
     	//set jp2 layout
@@ -346,7 +346,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	jp2.add(jt4);
     	jp2.add(jt5);
     	jp2.add(jb3);
-    	jp2.add(jb2);
+    	jp2.add(jb4);
     	jp2.add(jc1);
     	
     	c2.fill=GridBagConstraints.BOTH;
@@ -404,13 +404,13 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	gbl2.setConstraints(jb3, c2);
     	c2.gridx=1;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb2, c2);
+    	gbl2.setConstraints(jb4, c2);
     	
     	updateUI();
     	jp2.updateUI();
     	
     	jb3.addActionListener(this);
-    	//jb4.addActionListener(this);
+    	jb4.addActionListener(this);
 	}
 	
 	void createDeleteView(){
@@ -425,7 +425,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	jl14 = new JLabel("课程号:");
 		
     	jb5 = new JButton("确定");
-    	jb2 = new JButton("查看当前表");
+    	jb6 = new JButton("查看当前表");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -445,7 +445,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	add(jt3);
     	add(jt4);
     	add(jb5);
-    	add(jb2);
+    	add(jb6);
     	
     	//set jp2 layout
     	jp2.add(jl11);
@@ -457,7 +457,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	jp2.add(jt3);
     	jp2.add(jt4);
     	jp2.add(jb5);
-    	jp2.add(jb2);
+    	jp2.add(jb6);
     	
     	c2.fill=GridBagConstraints.BOTH;
     	c2.gridwidth=1;
@@ -500,14 +500,14 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
     	gbl2.setConstraints(jb5, c2);
     	c2.gridx=1;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb2, c2);
+    	gbl2.setConstraints(jb6, c2);
     	
     	
     	updateUI();
     	jp2.updateUI();
     	
     	jb5.addActionListener(this);
-    	//jb6.addActionListener(this);
+    	jb6.addActionListener(this);
 	}
 
 	@Override
@@ -533,7 +533,7 @@ public class Item15Act extends JPanel implements ItemListener,ActionListener{
 				e2.printStackTrace();
 			}
 		}
-		else if(e.getSource()==jb2){
+		else if(e.getSource()==jb2 || e.getSource()==jb4 || e.getSource()==jb6){
 			String sql = "select * from sc order by S_id;";
 			System.out.println(sql);
 			Statement statement = null;	 
