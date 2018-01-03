@@ -34,7 +34,7 @@ public final class Item341Act extends Item3 implements  ActionListener{
         }
         if(upper.getSelected(1)!=null)
             sql=sql.concat(" and SC."+SC.C_ID+" = ( select C_id from Course where C_name = '"+upper.getSelected(1).toString()+"')");//TODO SQL????д??
-        sql=sql+"ordered by SC.score;";
+        sql=sql+" order by SC.score desc;";
         System.out.println(sql);
         jsp = Utility.jspFromSQL(sql);
         lower.removeAll();
