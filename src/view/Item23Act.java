@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -16,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,16 +33,29 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item23Act extends JPanel implements  ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable;
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelSex,labelBirth,labelProv,labelInto,labelDept,labelHeading,labelTo,labelTo1,labelTo2;
     private JComboBox comboBoxSex,comboBoxProv,comboBoxDept;
     private JTextField textIDMin, textIDMax, textName, textBirthMin, textBirthMax, textIntoMin, textIntoMax;
     private JTable table;
+    private JScrollPane jsp1;
     private ResultSet resultSet=null;
 	
     public Item23Act (){
-        super();
+    	super();
+    	/* TryDate:
+    	String  dateStringToParse  =  "1996-09-12";     
+    	java.util.Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}     
+    	java.sql.Date  sqlDate  =  new java.sql.Date(date.getTime());  
+		System.out.println(date);
+    	*/
         labelID=new JLabel("学号");
         labelName=new JLabel("姓名");
         labelSex = new JLabel("性别");
@@ -65,6 +82,8 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
         labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
@@ -74,13 +93,10 @@ public final class Item23Act extends JPanel implements  ActionListener{
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(this.top);
         this.add(this.upper);
-        table=new JTable(1,3);//todo What should be presented when no result has been acquired.
+        table=new JTable(1,3);
         
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
-        /*
-        * 尝试解决GUI的中文乱码问题。
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
     
     private LayoutManager createLayout(){
@@ -110,11 +126,8 @@ public final class Item23Act extends JPanel implements  ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
-		if(textIDMin.getText().equals(null))
-			System.out.print("zhendemeiyou");
 		if (this.textIDMin.getText().equals("") ){}
 		else{
-			System.out.print("有没有呀呀呀！");
 			int idMin = Integer.parseInt(textIDMin.getText());
 			sqlString = sqlString+(" and " + Student.ID + " >= " + idMin);
 		}
@@ -125,22 +138,37 @@ public final class Item23Act extends JPanel implements  ActionListener{
 		}
 		if(this.textName.getText().equals("")) {}
 		else{
-			//WHERE TN LIKE ‘张%’
 			sqlString = sqlString+(" and " + Student.NAME + " like '%" + textName.getText() + "%'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		//TODO 出生日期因格式未知，还未加上去
-		/*
-		if(this.textBirthMin.getText() != "") {
-			float idMin = Float.parseFloat(textBirthMin.getText());
-			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + idMin);
+		//TODO 日期  problems with date
+		if(this.textBirthMin.getText().equals("")){} 
+		else {
+			String dateStringToParse = textBirthMin.getText().toString();
+			java.util.Date dateMin = null;
+		    try {
+				dateMin = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDateMin = new java.sql.Date(dateMin.getTime()); 
+			sqlString = sqlString+(" and " + Student.BIRTH + " >= '" + sqlDateMin + "'");
 		}
-		if(this.textBirthMax.getText() != null) {
-			float idMax = Float.parseFloat(textBirthMax.getText());
-			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + idMax);
+		if(this.textBirthMax.getText().equals("")){}
+		else {
+			String dateStringToParse = textBirthMax.getText().toString();
+			java.util.Date dateMax = null;
+		    try {
+				dateMax = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		java.sql.Date sqlDateMax = new java.sql.Date(dateMax.getTime()); 
+			sqlString = sqlString+(" and " + Student.BIRTH + " <= '" + sqlDateMax + "'");
 		}
-		*/
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");
 		if(this.textIntoMin.getText().equals("")){}
@@ -154,18 +182,19 @@ public final class Item23Act extends JPanel implements  ActionListener{
 			sqlString = sqlString+(" and " + Student.INTO + " <= " + intoMax);
 		}
 		if(this.comboBoxDept.getSelectedItem() != null) {
-			//TODO 还需再确认不同表格是否也可以这样做
-			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxProv.getSelectedItem() + "'");
+			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxDept.getSelectedItem() + "'");
 		}
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
-package view;
+ï»¿package view;
 
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
@@ -64,15 +66,17 @@ public class MainPageView extends JFrame implements ActionListener{
 	JMenuItem item347;
 	
 	JPanel jpBasic = new JPanel();
+	
+	//JScrollPane jspBasic = new JScrollPane(jpBasic);
     
-	//Ìí¼ÓÏìÓ¦ÊÂ¼şÊµÀı
+	//æ·»åŠ å“åº”äº‹ä»¶å®ä¾‹
 	view.Item11Act item11Act = new view.Item11Act();
 	view.Item12Act item12Act = new view.Item12Act();
 	view.Item13Act item13Act = new view.Item13Act();
-	/*view.Item14Act item14Act = new view.Item14Act();
+	view.Item14Act item14Act = new view.Item14Act();
 	view.Item15Act item15Act = new view.Item15Act();
 	view.Item16Act item16Act = new view.Item16Act();
-	view.Item21Act item21Act = new view.Item21Act();*/
+	view.Item21Act item21Act = new view.Item21Act();
 	view.Item22Act item22Act = new view.Item22Act();
 	view.Item23Act item23Act = new view.Item23Act();
 	view.Item24Act item24Act = new view.Item24Act();
@@ -100,52 +104,52 @@ public class MainPageView extends JFrame implements ActionListener{
     
 	public void createMenu(){
 
-        setUIFont();
+        //setUIFont();
 		
         //initialize every item
-		menu1 = new JMenu("Êı¾İÎ¬»¤");
-		menu2 = new JMenu("Ä£ºı²éÑ¯");
-		menu3 = new JMenu("Í³¼Æ²éÑ¯");
-		menu31 = new JMenu("½ÌÊ¦ĞÅÏ¢");
-		menu32 = new JMenu("¿Î³ÌÇé¿ö");
-		menu33 = new JMenu("Ñ§Éú»ù±¾ĞÅÏ¢");
-		menu34 = new JMenu("Ñ§Éú³É¼¨ĞÅÏ¢");
+		menu1 = new JMenu("æ•°æ®ç»´æŠ¤");
+		menu2 = new JMenu("æ¨¡ç³ŠæŸ¥è¯¢");
+		menu3 = new JMenu("ç»Ÿè®¡æŸ¥è¯¢");
+		menu31 = new JMenu("æ•™å¸ˆä¿¡æ¯");
+		menu32 = new JMenu("è¯¾ç¨‹æƒ…å†µ");
+		menu33 = new JMenu("å­¦ç”ŸåŸºæœ¬ä¿¡æ¯");
+		menu34 = new JMenu("å­¦ç”Ÿæˆç»©ä¿¡æ¯");
 		
-		item11 = new JMenuItem("Ñ§ÉúĞÅÏ¢");
-		item12 = new JMenuItem("½ÌÊ¦ĞÅÏ¢");
-		item13 = new JMenuItem("Ïµ±ğĞÅÏ¢");
-		item14 = new JMenuItem("¿Î³ÌĞÅÏ¢");
-		item15 = new JMenuItem("Ñ§ÉúÑ¡¿ÎÇé¿ö");
-		item16 = new JMenuItem("½ÌÊ¦ÊÚ¿ÎÇé¿ö");
-		item21 = new JMenuItem("Ñ§ÉúĞÅÏ¢");
-		item22 = new JMenuItem("½ÌÊ¦ĞÅÏ¢");
-		item23 = new JMenuItem("Ïµ±ğĞÅÏ¢");
-		item24 = new JMenuItem("¿Î³ÌĞÅÏ¢");
-		item25 = new JMenuItem("Ñ§ÉúÑ¡¿ÎÇé¿ö");
-		item26 = new JMenuItem("½ÌÊ¦ÊÚ¿ÎÇé¿ö");
+		item11 = new JMenuItem("å­¦ç”Ÿä¿¡æ¯");
+		item12 = new JMenuItem("æ•™å¸ˆä¿¡æ¯");
+		item13 = new JMenuItem("ç³»åˆ«ä¿¡æ¯");
+		item14 = new JMenuItem("è¯¾ç¨‹ä¿¡æ¯");
+		item15 = new JMenuItem("å­¦ç”Ÿé€‰è¯¾æƒ…å†µ");
+		item16 = new JMenuItem("æ•™å¸ˆæˆè¯¾æƒ…å†µ");
+		item21 = new JMenuItem("å­¦ç”Ÿä¿¡æ¯");
+		item22 = new JMenuItem("æ•™å¸ˆä¿¡æ¯");
+		item23 = new JMenuItem("ç³»åˆ«ä¿¡æ¯");
+		item24 = new JMenuItem("è¯¾ç¨‹ä¿¡æ¯");
+		item25 = new JMenuItem("å­¦ç”Ÿé€‰è¯¾æƒ…å†µ");
+		item26 = new JMenuItem("æ•™å¸ˆæˆè¯¾æƒ…å†µ");
 		
-		item311 = new JMenuItem("ÆÀ½ÌµÈ¼¶");
-		item312 = new JMenuItem("È«ÓÅ½ÌÊ¦¼°¿Î³Ì");
-		item321 = new JMenuItem("Ñ¡¿ÎÈËÊı");
-		item322 = new JMenuItem("¿Î³Ì³É¼¨");
-		item323 = new JMenuItem("¿Î³Ì·ÖµµÈËÊı");
-		item331 = new JMenuItem("ÉúÔ´µØÇé¿ö");
-		item341 = new JMenuItem("¿Î³ÌÇ°ÎåÃûµ¥");
-		item342 = new JMenuItem("×Ü³É¼¨ÅÅÃû");
-		item343 = new JMenuItem("È«ÓÅÑ§ÉúÃûµ¥");
-		item344 = new JMenuItem("²»¼°¸ñÑ§Éú");
-		item345 = new JMenuItem("²»¼°¸ñ¿Î³Ì");
-		item346 = new JMenuItem("Ñ¡¿Î°üº¬²éÑ¯");
-		item347 = new JMenuItem("×îÅ£Ñ§Éú²éÑ¯");
+		item311 = new JMenuItem("è¯„æ•™ç­‰çº§");
+		item312 = new JMenuItem("å…¨ä¼˜æ•™å¸ˆåŠè¯¾ç¨‹");
+		item321 = new JMenuItem("é€‰è¯¾äººæ•°");
+		item322 = new JMenuItem("è¯¾ç¨‹æˆç»©");
+		item323 = new JMenuItem("è¯¾ç¨‹åˆ†æ¡£äººæ•°");
+		item331 = new JMenuItem("ç”Ÿæºåœ°æƒ…å†µ");
+		item341 = new JMenuItem("è¯¾ç¨‹å‰äº”åå•");
+		item342 = new JMenuItem("æ€»æˆç»©æ’å");
+		item343 = new JMenuItem("å…¨ä¼˜å­¦ç”Ÿåå•");
+		item344 = new JMenuItem("ä¸åŠæ ¼å­¦ç”Ÿ");
+		item345 = new JMenuItem("ä¸åŠæ ¼è¯¾ç¨‹");
+		item346 = new JMenuItem("é€‰è¯¾åŒ…å«æŸ¥è¯¢");
+		item347 = new JMenuItem("æœ€ç‰›å­¦ç”ŸæŸ¥è¯¢");
         
-		//°Ñ²Ëµ¥Ìí¼Ó½ø²Ëµ¥À¸
+		//æŠŠèœå•æ·»åŠ è¿›èœå•æ 
 		mainBar.add(menu1);
 		mainBar.add(menu2);
 		mainBar.add(menu3);
 		mainBar.setAutoscrolls(true);
 		mainBar.setSize( 1280, 30);
 		
-		//°Ñ²Ëµ¥ÏîÌí½ø²Ëµ¥
+		//æŠŠèœå•é¡¹æ·»è¿›èœå•
 		menu1.add(item11);
 		menu1.add(item12);
 		menu1.add(item13);
@@ -159,13 +163,13 @@ public class MainPageView extends JFrame implements ActionListener{
 		menu2.add(item25);
 		menu2.add(item26);
 		
-		//Ìí¼Ó×Ó²Ëµ¥
+		//æ·»åŠ å­èœå•
 		menu3.add(menu31);
 		menu3.add(menu32);
 		menu3.add(menu33);
 		menu3.add(menu34);
 		
-		//°Ñ²Ëµ¥ÏîÌí¼Ó½ø×Ó²Ëµ¥
+		//æŠŠèœå•é¡¹æ·»åŠ è¿›å­èœå•
 		menu31.add(item311);
 		menu31.add(item312);
 		menu32.add(item321);
@@ -180,7 +184,7 @@ public class MainPageView extends JFrame implements ActionListener{
 		menu34.add(item346);
 		menu34.add(item347);
 		
-		//ÏÔÊ¾²Ëµ¥
+		//æ˜¾ç¤ºèœå•
 		this.setJMenuBar(mainBar);
 		this.add(jpBasic);
 		
@@ -214,18 +218,17 @@ public class MainPageView extends JFrame implements ActionListener{
 		
 		//set UI
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1280, 720);
-		this.setLocation(300, 200);
+		Utility.setWindowAtCenterAndFitSize(this);
 		this.setVisible(true);
-		this.setTitle("Êı¾İ¿â´ó×÷Òµ Àî¼ÎÄş ÖÜ¿¡½Ü ÉòÏş±ó ÌÆöÎÔó");
+		this.setTitle("æ•°æ®åº“å¤§ä½œä¸š æå˜‰å® å‘¨ä¿Šæ° æ²ˆæ™“æ–Œ å”é‘«æ³½");
 	}
 	
 	public void actionPerformed(ActionEvent e){  
-        if(e.getSource() == item11){//¸Ä±äÍ¼ĞÎ»¯½çÃæÎª¡°ºóÀ´¡±µÄ½çÃæ¡£  
+        if(e.getSource() == item11){//æ”¹å˜å›¾å½¢åŒ–ç•Œé¢ä¸ºâ€œåæ¥â€çš„ç•Œé¢ã€‚  
             jpBasic.removeAll();  
-            jpBasic.add("11" , item11Act);//ÇĞ»»´úÂë¡£  
+            jpBasic.add("11" , item11Act);//åˆ‡æ¢ä»£ç ã€‚  
             jpBasic.validate();
-            jpBasic.updateUI(); 
+            jpBasic.updateUI();
         }  
         else if(e.getSource() == item12){
             jpBasic.removeAll();
@@ -239,7 +242,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.validate();  
             jpBasic.updateUI();
         }
-        /*else if(e.getSource() == item14){
+        else if(e.getSource() == item14){
             jpBasic.removeAll();
             jpBasic.add("14", item14Act);
             jpBasic.validate();  
@@ -262,7 +265,7 @@ public class MainPageView extends JFrame implements ActionListener{
             jpBasic.add("21", item21Act);
             jpBasic.validate();  
             jpBasic.updateUI();
-        }*/
+        }
         else if(e.getSource() == item22){
             jpBasic.removeAll();
             jpBasic.add("22", item22Act);
@@ -373,9 +376,9 @@ public class MainPageView extends JFrame implements ActionListener{
         }
     }
     
-    static void setUIFont()
+    /*static void setUIFont()
 	{
-		Font f = new Font("ËÎÌå",Font.BOLD,20);
+		Font f = new Font("å®‹ä½“",Font.BOLD,20);
 		String   names[]={ "Label", "CheckBox", "PopupMenu","MenuItem", "CheckBoxMenuItem",
 				"JRadioButtonMenuItem","ComboBox", "Button", "Tree", "ScrollPane",
 				"TabbedPane", "EditorPane", "TitledBorder", "Menu", "TextArea",
@@ -387,5 +390,5 @@ public class MainPageView extends JFrame implements ActionListener{
 		for (String item : names) {
 			 UIManager.put(item+ ".font",f); 
 		}
-	}
+	}*/
 }

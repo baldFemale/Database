@@ -1,4 +1,4 @@
-package view;
+ï»¿package view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -43,13 +43,13 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     JLabel jl16;
     JLabel jl17;
     JLabel jl21;
-    JTable jTa1;
+    JScrollPane jsp1;
     JButton jb1;
     JButton jb2;
     JButton jb3;
-    //JButton jb4;
+    JButton jb4;
     JButton jb5;
-    //JButton jb6;
+    JButton jb6;
     JTextField jt1;
     JTextField jt2;
     JTextField jt3;
@@ -73,20 +73,20 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     
     void createSubPage(){
     	
-    	MainPageView.setUIFont();
+    	//MainPageView.setUIFont();
     	setLayout(gbl);
     	
     	//initialize items
-    	jr1 = new JRadioButton("Â¼Èë");
-    	jr2 = new JRadioButton("ĞŞ¸Ä");
-    	jr3 = new JRadioButton("É¾³ı");
+    	jr1 = new JRadioButton("å½•å…¥");
+    	jr2 = new JRadioButton("ä¿®æ”¹");
+    	jr3 = new JRadioButton("åˆ é™¤");
     	bg1 = new ButtonGroup();
     	bg1.add(jr1);
     	bg1.add(jr2);
     	bg1.add(jr3);
     	jp1 = new JPanel();
-    	jl21 = new JLabel("¸ü¸ÄÎª:");
-    	jTa1 = new JTable();
+    	jl21 = new JLabel("æ›´æ”¹ä¸º:");
+    	jsp1 = new JScrollPane();
     	//js1=new JScrollPane(jTa1);
     	
     	//add items
@@ -116,8 +116,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	c.gridwidth=3;
     	c.gridheight=6;
     	c.weightx=1;
-    	c.gridx=0;
-    	c.gridy=1;
+    	c.gridx=3;
     	gbl.setConstraints(jp2, c);
     	c.gridwidth=6;
     	c.gridheight=8;
@@ -132,6 +131,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				createInsertView();
+				jp1.removeAll();
 			}
 		});
     	jr2.addItemListener(new ItemListener() {
@@ -140,6 +140,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				createUpdateView();
+				jp1.removeAll();
 			}
 		});
     	jr3.addItemListener(new ItemListener() {
@@ -148,6 +149,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				createDeleteView();
+				jp1.removeAll();
 			}
 		});
 
@@ -159,16 +161,16 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§ºÅ:");
-    	jl12 = new JLabel("ĞÕÃû:");
-    	jl13 = new JLabel("ĞÔ±ğ:");
-    	jl14 = new JLabel("³öÉúÈÕÆÚ:");
-    	jl15 = new JLabel("À´×ÔÊ¡·İ:");
-    	jl16 = new JLabel("ÈëĞ£Äê·İ:");
-    	jl17 = new JLabel("ËùÊôÏµ±ğ´úÂë:");
+    	jl11 = new JLabel("å­¦å·:");
+    	jl12 = new JLabel("å§“å:");
+    	jl13 = new JLabel("æ€§åˆ«:");
+    	jl14 = new JLabel("å‡ºç”Ÿæ—¥æœŸ:");
+    	jl15 = new JLabel("æ¥è‡ªçœä»½:");
+    	jl16 = new JLabel("å…¥æ ¡å¹´ä»½:");
+    	jl17 = new JLabel("æ‰€å±ç³»åˆ«ä»£ç :");
     	
-    	jb1 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb1 = new JButton("ç¡®å®š");
+    	jb2 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -311,12 +313,12 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§ºÅ:");
-    	jl12 = new JLabel("ÊôĞÔ:");
-    	jl21 = new JLabel("¸ü¸ÄÎª:");
+    	jl11 = new JLabel("å­¦å·:");
+    	jl12 = new JLabel("å±æ€§:");
+    	jl21 = new JLabel("æ›´æ”¹ä¸º:");
 		
-    	jb3 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb3 = new JButton("ç¡®å®š");
+    	jb4 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -333,7 +335,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	add(jt1);
     	add(jt2);
     	add(jb3);
-    	add(jb2);
+    	add(jb4);
     	add(jc1);
     	
     	//set jp2 layout
@@ -343,7 +345,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	jp2.add(jt1);
     	jp2.add(jt2);
     	jp2.add(jb3);
-    	jp2.add(jb2);
+    	jp2.add(jb4);
     	jp2.add(jc1);
     	
     	c2.fill=GridBagConstraints.BOTH;
@@ -380,7 +382,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	gbl2.setConstraints(jb3, c2);
     	c2.gridx=1;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb2, c2);
+    	gbl2.setConstraints(jb4, c2);
     	
     	validate();
     	updateUI();
@@ -388,7 +390,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	jp2.updateUI();
     	
     	jb3.addActionListener(this);
-    	//jb4.addActionListener(this);
+    	jb4.addActionListener(this);
 	}
 	
 	void createDeleteView(){
@@ -397,10 +399,10 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("Ñ§ºÅ:");
+    	jl11 = new JLabel("å­¦å·:");
 		
-    	jb5 = new JButton("È·¶¨");
-    	jb2 = new JButton("²é¿´µ±Ç°±í");
+    	jb5 = new JButton("ç¡®å®š");
+    	jb6 = new JButton("æŸ¥çœ‹å½“å‰è¡¨");
     	
     	jt1 = new JTextField(14);
     	
@@ -411,13 +413,13 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	add(jl11);
     	add(jt1);
     	add(jb5);
-    	add(jb2);
+    	add(jb6);
     	
     	//set jp2 layout
     	jp2.add(jl11);
     	jp2.add(jt1);
     	jp2.add(jb5);
-    	jp2.add(jb2);
+    	jp2.add(jb6);
     	
     	c2.fill=GridBagConstraints.BOTH;
     	c2.gridwidth=1;
@@ -440,7 +442,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridx=1;
     	c2.gridy=1;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb2, c2);
+    	gbl2.setConstraints(jb6, c2);
     	
     	validate();
     	updateUI();
@@ -448,7 +450,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
     	jp2.updateUI();
     	
     	jb5.addActionListener(this);
-    	//jb6.addActionListener(this);
+    	jb6.addActionListener(this);
 	}
 
 	@Override
@@ -474,7 +476,7 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 				e2.printStackTrace();
 			}
 		}
-		else if(e.getSource()==jb2){
+		else if(e.getSource()==jb2 || e.getSource()==jb4 || e.getSource()==jb6){
 			String sql = "select * from student order by S_id;";
 			System.out.println(sql);
 			Statement statement = null;	 
@@ -486,8 +488,9 @@ public class Item11Act extends JPanel implements ItemListener,ActionListener{
 			}
 			try {
 				ResultSet resultSet = statement.executeQuery(sql);
-				jTa1 = new Table(resultSet).jt;
-				jp1.add(jTa1);
+				jsp1 = new Table(resultSet).jsp1;
+				jp1.removeAll();
+				jp1.add(jsp1);
 				jp1.updateUI();
 				statement.close();
 				resultSet.close();

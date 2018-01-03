@@ -28,12 +28,12 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import control.DBConnection;
 import toolkit.Table;
 
-public class Item13Act extends JPanel implements ItemListener,ActionListener{
+public class Item14Act extends JPanel implements ItemListener,ActionListener{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-    public Item13Act(){    	
+    public Item14Act(){    	
         createSubPage();
     }
     
@@ -150,12 +150,12 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 	void createInsertView(){
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
-    	jl12 = new JLabel("系别名称:");
-    	jl13 = new JLabel("系办地址:");
+    	jl11 = new JLabel("课程代码:");
+    	jl12 = new JLabel("课程名称:");
+    	jl13 = new JLabel("学分:");
     	
     	jb1 = new JButton("确定");
-    	jb4 = new JButton("查看当前表");
+    	jb2 = new JButton("查看当前表");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
@@ -183,7 +183,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	jp2.add(jt2);
     	jp2.add(jt3);
     	jp2.add(jb1);
-    	jp2.add(jb4);
+    	jp2.add(jb2);
     	
     	c2.fill=GridBagConstraints.BOTH;
     	c2.gridwidth=1;
@@ -224,7 +224,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridx=1;
     	c2.gridy=3;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb4, c2);
+    	gbl2.setConstraints(jb2, c2);
     	
     	//validate();
     	//updateUI();
@@ -234,18 +234,18 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	jp2.updateUI();
     	
     	jb1.addActionListener(this);
-    	jb4.addActionListener(this);
+    	jb2.addActionListener(this);
 	}
 	
 	void createUpdateView(){
 		
-		String[] stuProperties = {"dept_name","Dept_loc"};
+		String[] stuProperties = {"C_name","Credit"};
 		
 		setLayout(gbl);
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
+    	jl11 = new JLabel("课程代码:");
     	jl12 = new JLabel("属性:");
     	jl21 = new JLabel("更改为:");
 		
@@ -331,7 +331,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
+    	jl11 = new JLabel("课程代码:");
 		
     	jb5 = new JButton("确定");
     	jb6 = new JButton("查看当前表");
@@ -389,7 +389,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==jb1){
-			String sql = "insert into department (Dept_id,dept_name,Dept_loc)values ('"
+			String sql = "insert into course (C_id,C_name,Credit)values ('"
 						+jt1.getText()+"','"+jt2.getText()+"','"+jt3.getText()+"');";
 			System.out.println(sql);
 			Statement statement = null;	 
@@ -408,7 +408,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb2 || e.getSource()==jb4 || e.getSource()==jb6){
-			String sql = "select * from department order by Dept_id;";
+			String sql = "select * from course order by C_id;";
 			System.out.println(sql);
 			Statement statement = null;	 
 			try {
@@ -431,7 +431,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb3){
-			String sql = "update department set "+jc1.getSelectedItem()+" = '"+jt2.getText()+"' where Dept_id="
+			String sql = "update course set "+jc1.getSelectedItem()+" = '"+jt2.getText()+"' where C_id="
 							+jt1.getText()+";";
 			System.out.println(sql);
 			Statement statement = null;	 
@@ -450,7 +450,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb5){
-			String sql = "delete from department where Dept_id ="+jt1.getText()+";";
+			String sql = "delete from course where C_id ="+jt1.getText()+";";
 			System.out.println(sql);
 			Statement statement = null;
 			try {

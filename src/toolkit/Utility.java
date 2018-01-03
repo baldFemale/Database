@@ -27,8 +27,16 @@ public class Utility {
         Dimension screenSize=toolkit.getScreenSize();
         window.setLocation((screenSize.width-window.getWidth())/2,(screenSize.height-window.getHeight())/2);
     }
+    
+    public static void setWindowAtCenterAndFitSize(Window window){
+        Toolkit toolkit=Toolkit.getDefaultToolkit();
+        Dimension screenSize=toolkit.getScreenSize();
+        window.setSize(screenSize.width*3/4, screenSize.height*3/4);
+        window.setLocation((screenSize.width-window.getWidth())/2,(screenSize.height-window.getHeight())/2);
+    }
+    
     public static void reportErrorEmptyTable(){
-        JOptionPane.showMessageDialog(null, "Ã»ÓÐ·ûºÏÌõ¼þµÄ¼ÇÂ¼£¬Çë¼ì²é²éÑ¯Ìõ¼þ","wrong",JOptionPane.ERROR_MESSAGE);;
+        JOptionPane.showMessageDialog(null, "Ã»ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½","wrong",JOptionPane.ERROR_MESSAGE);;
     }
 
     /**
@@ -38,6 +46,7 @@ public class Utility {
      */
     public static Vector simpleUniqueQuery(String table, String attr){
         Vector vector=new Vector<String>();
+        vector.add(null);
         ResultSet resultSet=null;
         String sql="select distinct "+ attr+" from "+table;
         try {
@@ -52,7 +61,7 @@ public class Utility {
             System.out.println("Error!simpleUniqueQuery!");
             e.printStackTrace();
         }finally {
-            vector.add(null);
+            
             return vector;
         }
     }

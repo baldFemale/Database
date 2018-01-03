@@ -18,8 +18,8 @@ public class Item347Act extends Item3 implements ActionListener{
     JLabel instruct;
     JButton jb;
     public Item347Act(){
-        instruct=new JLabel("��ѯ��ǿѧ������");
-        jb=new JButton("��ѯ");
+        instruct=new JLabel("最牛学生");
+        jb=new JButton("查询");
         this.add(instruct);
         this.add(jb);
         this.add(lower);

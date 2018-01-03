@@ -23,23 +23,23 @@ import javax.swing.JTextField;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
-
-
 import control.DBConnection;
 import toolkit.Table;
 
-public class Item13Act extends JPanel implements ItemListener,ActionListener{
+public class Item16Act extends JPanel implements ItemListener,ActionListener{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-    public Item13Act(){    	
+    public Item16Act(){    	
         createSubPage();
     }
     
     JLabel jl11;
     JLabel jl12;
     JLabel jl13;
+    JLabel jl14;
+    JLabel jl15;
     JLabel jl21;
     JScrollPane jsp1;
     JButton jb1;
@@ -51,7 +51,10 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     JTextField jt1;
     JTextField jt2;
     JTextField jt3;
+    JTextField jt4;
+    JTextField jt5;
     JComboBox<String> jc1;
+    //JScrollPane js1;
     
     JRadioButton jr1;
     JRadioButton jr2;
@@ -80,13 +83,14 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	jp1 = new JPanel();
     	jl21 = new JLabel("更改为:");
     	jsp1 = new JScrollPane();
+    	//js1=new JScrollPane(jTa1);
     	
     	//add items
     	add(jr1);
     	add(jr2);
     	add(jr3);
     	add(jp1);
-    	jp1.add(jsp1);
+    	//jp1.add(jTa1);
     	
     	//set JPanel2 layout
     	jp2.setLayout(gbl2);
@@ -148,42 +152,54 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     }
 	
 	void createInsertView(){
+    	
+		setLayout(gbl);
+    	jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
-    	jl12 = new JLabel("系别名称:");
-    	jl13 = new JLabel("系办地址:");
+    	jl11 = new JLabel("学年:");
+    	jl12 = new JLabel("学期:");
+    	jl13 = new JLabel("教师号:");
+    	jl14 = new JLabel("课程代码:");
+    	jl15 = new JLabel("评教等级:");
     	
     	jb1 = new JButton("确定");
-    	jb4 = new JButton("查看当前表");
+    	jb2 = new JButton("查看当前表");
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
     	jt3 = new JTextField(14);
+    	jt4 = new JTextField(14);
+    	jt5 = new JTextField(14);
 		
 		//add items
 		add(jp2);
 		jp2.removeAll();
-    	
-		setLayout(gbl);
-    	jp2.setLayout(gbl2);
 
     	add(jl11);
     	add(jl12);
     	add(jl13);
+    	add(jl14);
+    	add(jl15);
     	add(jt1);
     	add(jt2);
     	add(jt3);
+    	add(jt4);
+    	add(jt5);
 		
 		//set jp2 layout
     	jp2.add(jl11);
     	jp2.add(jl12);
     	jp2.add(jl13);
+    	jp2.add(jl14);
+    	jp2.add(jl15);
     	jp2.add(jt1);
     	jp2.add(jt2);
     	jp2.add(jt3);
+    	jp2.add(jt4);
+    	jp2.add(jt5);
     	jp2.add(jb1);
-    	jp2.add(jb4);
+    	jp2.add(jb2);
     	
     	c2.fill=GridBagConstraints.BOTH;
     	c2.gridwidth=1;
@@ -215,16 +231,34 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridwidth=2;
     	gbl2.setConstraints(jt3, c2);
     	c2.gridwidth=1;
-    	c2.gridheight=1;
     	c2.weightx=0;
     	c2.weighty=0;
     	c2.gridx=0;
     	c2.gridy=3;
+    	gbl2.setConstraints(jl14, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt4, c2);
+    	c2.gridwidth=1;
+    	c2.weightx=0;
+    	c2.weighty=0;
+    	c2.gridx=0;
+    	c2.gridy=4;
+    	gbl2.setConstraints(jl15, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt5, c2);
+    	c2.gridwidth=1;
+    	c2.gridheight=1;
+    	c2.weightx=0;
+    	c2.weighty=0;
+    	c2.gridx=0;
+    	c2.gridy=7;
     	gbl2.setConstraints(jb1, c2);
     	c2.gridx=1;
-    	c2.gridy=3;
+    	c2.gridy=7;
     	c2.gridwidth=1;
-    	gbl2.setConstraints(jb4, c2);
+    	gbl2.setConstraints(jb2, c2);
     	
     	//validate();
     	//updateUI();
@@ -234,19 +268,22 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	jp2.updateUI();
     	
     	jb1.addActionListener(this);
-    	jb4.addActionListener(this);
+    	jb2.addActionListener(this);
 	}
 	
 	void createUpdateView(){
 		
-		String[] stuProperties = {"dept_name","Dept_loc"};
+		String[] stuProperties = {"Rating"};
 		
 		setLayout(gbl);
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
-    	jl12 = new JLabel("属性:");
+    	jl11 = new JLabel("学年:");
+    	jl12 = new JLabel("学期:");
+    	jl13 = new JLabel("教师号:");
+    	jl14 = new JLabel("课程号:");
+    	jl15 = new JLabel("属性:");
     	jl21 = new JLabel("更改为:");
 		
     	jb3 = new JButton("确定");
@@ -254,6 +291,9 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	
     	jt1 = new JTextField(14);
     	jt2 = new JTextField(14);
+    	jt3 = new JTextField(14);
+    	jt4 = new JTextField(14);
+    	jt5 = new JTextField(14);
     	
     	jc1 = new JComboBox<>(stuProperties);
     	
@@ -263,9 +303,15 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 
     	add(jl11);
     	add(jl12);
+    	add(jl13);
+    	add(jl14);
+    	add(jl15);
     	add(jl21);
     	add(jt1);
     	add(jt2);
+    	add(jt3);
+    	add(jt4);
+    	add(jt5);
     	add(jb3);
     	add(jb4);
     	add(jc1);
@@ -273,9 +319,15 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	//set jp2 layout
     	jp2.add(jl11);
     	jp2.add(jl12);
+    	jp2.add(jl13);
+    	jp2.add(jl14);
+    	jp2.add(jl15);
     	jp2.add(jl21);
     	jp2.add(jt1);
     	jp2.add(jt2);
+    	jp2.add(jt3);
+    	jp2.add(jt4);
+    	jp2.add(jt5);
     	jp2.add(jb3);
     	jp2.add(jb4);
     	jp2.add(jc1);
@@ -287,7 +339,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridx=0;
     	c2.gridy=0;
     	c2.insets=new Insets(5, 5, 5, 5);
-    	gbl2.setConstraints(jl12, c2);
+    	gbl2.setConstraints(jl15, c2);
     	c2.gridwidth=2;
     	c2.gridx=1;
     	gbl2.setConstraints(jc1, c2);
@@ -301,24 +353,43 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	c2.gridwidth=1;
     	c2.gridx=0;
     	c2.gridy=2;
+    	gbl2.setConstraints(jl12, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt2, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=3;
+    	gbl2.setConstraints(jl13, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt3, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=4;
+    	gbl2.setConstraints(jl14, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt4, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=5;
     	gbl2.setConstraints(jl21, c2);
     	c2.gridwidth=2;
     	c2.gridx=1;
-    	gbl2.setConstraints(jt2, c2);    	
+    	gbl2.setConstraints(jt5, c2);    	
     	c2.gridwidth=1;
     	c2.gridheight=1;
     	c2.weightx=0;
     	c2.weighty=0;
     	c2.gridx=0;
-    	c2.gridy=3;
+    	c2.gridy=6;
     	gbl2.setConstraints(jb3, c2);
     	c2.gridx=1;
     	c2.gridwidth=1;
     	gbl2.setConstraints(jb4, c2);
     	
-    	validate();
     	updateUI();
-    	jp2.validate();
     	jp2.updateUI();
     	
     	jb3.addActionListener(this);
@@ -331,25 +402,43 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 		jp2.setLayout(gbl2);
 		
 		//initialize items
-    	jl11 = new JLabel("系别代码:");
+    	jl11 = new JLabel("学年:");
+    	jl12 = new JLabel("学期:");
+    	jl13 = new JLabel("教师号:");
+    	jl14 = new JLabel("课程号:");
 		
     	jb5 = new JButton("确定");
     	jb6 = new JButton("查看当前表");
     	
     	jt1 = new JTextField(14);
+    	jt2 = new JTextField(14);
+    	jt3 = new JTextField(14);
+    	jt4 = new JTextField(14);
     	
     	//add items
     	add(jp2);
     	jp2.removeAll();
 
     	add(jl11);
+    	add(jl12);
+    	add(jl13);
+    	add(jl14);
     	add(jt1);
+    	add(jt2);
+    	add(jt3);
+    	add(jt4);
     	add(jb5);
     	add(jb6);
     	
     	//set jp2 layout
     	jp2.add(jl11);
+    	jp2.add(jl12);
+    	jp2.add(jl13);
+    	jp2.add(jl14);
     	jp2.add(jt1);
+    	jp2.add(jt2);
+    	jp2.add(jt3);
+    	jp2.add(jt4);
     	jp2.add(jb5);
     	jp2.add(jb6);
     	
@@ -363,22 +452,41 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
     	gbl2.setConstraints(jl11, c2);
     	c2.gridx=1;
     	c2.gridwidth=2;
-    	gbl2.setConstraints(jt1, c2);	
+    	gbl2.setConstraints(jt1, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=1;
+    	gbl2.setConstraints(jl12, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt2, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=2;
+    	gbl2.setConstraints(jl13, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt3, c2);
+    	c2.gridwidth=1;
+    	c2.gridx=0;
+    	c2.gridy=3;
+    	gbl2.setConstraints(jl14, c2);
+    	c2.gridx=1;
+    	c2.gridwidth=2;
+    	gbl2.setConstraints(jt4, c2);
     	c2.gridwidth=1;
     	c2.gridheight=1;
     	c2.weightx=0;
     	c2.weighty=0;
     	c2.gridx=0;
-    	c2.gridy=1;
+    	c2.gridy=4;
     	gbl2.setConstraints(jb5, c2);
     	c2.gridx=1;
-    	c2.gridy=1;
     	c2.gridwidth=1;
     	gbl2.setConstraints(jb6, c2);
     	
-    	validate();
+    	
     	updateUI();
-    	jp2.validate();
     	jp2.updateUI();
     	
     	jb5.addActionListener(this);
@@ -389,8 +497,9 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource()==jb1){
-			String sql = "insert into department (Dept_id,dept_name,Dept_loc)values ('"
-						+jt1.getText()+"','"+jt2.getText()+"','"+jt3.getText()+"');";
+			String sql = "insert into tc (Ayear,Semester,S_id,C_id,Rating)values ('"
+						+jt1.getText()+"','"+jt2.getText()+"','"+jt3.getText()+"','"
+						+jt4.getText()+"','"+jt5.getText()+"');";
 			System.out.println(sql);
 			Statement statement = null;	 
 			try {
@@ -408,7 +517,7 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb2 || e.getSource()==jb4 || e.getSource()==jb6){
-			String sql = "select * from department order by Dept_id;";
+			String sql = "select * from tc order by T_id;";
 			System.out.println(sql);
 			Statement statement = null;	 
 			try {
@@ -431,8 +540,9 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb3){
-			String sql = "update department set "+jc1.getSelectedItem()+" = '"+jt2.getText()+"' where Dept_id="
-							+jt1.getText()+";";
+			String sql = "update tc set "+jc1.getSelectedItem()+" = '"+jt5.getText()+"' where Ayear="
+							+jt1.getText()+",Semester="+jt2.getText()+",S_id="+jt3.getText()+",C_id="
+							+jt4.getText()+";";
 			System.out.println(sql);
 			Statement statement = null;	 
 			try {
@@ -450,7 +560,8 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 			}
 		}
 		else if(e.getSource()==jb5){
-			String sql = "delete from department where Dept_id ="+jt1.getText()+";";
+			String sql = "delete from tc where Ayear="+jt1.getText()+",Semester="
+						+jt2.getText()+",S_id="+jt3.getText()+",C_id="+jt4.getText()+";";
 			System.out.println(sql);
 			Statement statement = null;
 			try {
@@ -475,4 +586,3 @@ public class Item13Act extends JPanel implements ItemListener,ActionListener{
 		
 	}
 }
-

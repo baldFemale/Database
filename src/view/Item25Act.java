@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -16,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,16 +35,17 @@ import toolkit.Table;
 import toolkit.Utility;
 
 public final class Item25Act extends JPanel implements ActionListener{
-	private JPanel upper,top;
+	private JPanel upper,top, forTable;
     private JButton buttonQuery;
     private JLabel labelID,labelName,labelSex,labelBirth,labelProv,labelRegion,labelDept,labelProf,labelSal,labelHeading,labelTo,labelTo1,labelTo2;
     private JComboBox comboBoxSex,comboBoxProv,comboBoxRegion,comboBoxDept,comboBoxProf;
     private JTextField textIDMin, textIDMax, textName, textBirthMin, textBirthMax, textSalMin, textSalMax;
     private JTable table;
+    private JScrollPane jsp1;
     private ResultSet resultSet=null;
     
     public Item25Act (){
-        super();
+    	super();
         labelID=new JLabel("教师号");
         labelName=new JLabel("姓名");
         labelSex = new JLabel("性别");
@@ -71,6 +76,8 @@ public final class Item25Act extends JPanel implements ActionListener{
         this.upper.setLayout(createLayout());
 
         top=new JPanel();
+        forTable = new JPanel();
+        jsp1 = new JScrollPane();
         labelHeading=new JLabel("请输入需要查询的条件");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
@@ -84,10 +91,7 @@ public final class Item25Act extends JPanel implements ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("宋体",Font.ITALIC,30));//TODo 乱码问题还在；第一行提示文字没有居中。
-        /*
-        * 尝试解决GUI的中文乱码问题。
-        * */
+        this.setFont(new Font("宋体",Font.ITALIC,30));
     }
     
     private LayoutManager createLayout(){
@@ -123,30 +127,44 @@ public final class Item25Act extends JPanel implements ActionListener{
 		//System.out.print(sqlString);
 		if(this.textIDMin.getText().equals("")){}
 		else {
-			float idMin = Float.parseFloat(textIDMin.getText());
-			sqlString = sqlString+(" and " + Teacher.ID + " >= " + idMin);
+			sqlString = sqlString+(" and " + Teacher.ID + " >= 't" + textIDMin.getText().toString() + "'");
 		}
 		if(this.textIDMax.getText().equals("")){}
 		else {
-			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString = sqlString+(" and" + Teacher.ID + " <= " + idMax);
+			sqlString = sqlString+(" and " + Teacher.ID + " <= 't" + textIDMax.getText() + "'");
 		}
 		if(this.textName.getText().equals("")){}
 		else{
-			//WHERE TN LIKE ‘张%’
+			//WHERE TN LIKE ���寮�%���
 			sqlString = sqlString+(" and " + Teacher.NAME + " like '%" + textName.getText() + "%'");
 		}
 		if(this.comboBoxSex.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Teacher.SEX + " = '" + comboBoxSex.getSelectedItem() + "'");
-		if(this.textBirthMin.getText().equals("")){}
+		if(this.textBirthMin.getText().equals("")){} 
 		else {
-			float idMin = Float.parseFloat(textBirthMin.getText());
-			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + idMin);
+			String dateStringToParse = textBirthMin.getText().toString();
+			java.util.Date dateMin = null;
+		    try {
+				dateMin = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDateMin = new java.sql.Date(dateMin.getTime()); 
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= '" + sqlDateMin + "'");
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
-			float idMax = Float.parseFloat(textBirthMax.getText());
-			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + idMax);
+			String dateStringToParse = textBirthMax.getText().toString();
+			java.util.Date dateMax = null;
+		    try {
+				dateMax = new SimpleDateFormat("yyyy-MM-dd").parse(dateStringToParse);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}     
+    		java.sql.Date sqlDateMax = new java.sql.Date(dateMax.getTime()); 
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " <= '" + sqlDateMax + "'");
 		}
 		
 		if(this.comboBoxProv.getSelectedItem() != null)
@@ -154,7 +172,7 @@ public final class Item25Act extends JPanel implements ActionListener{
 		if(this.comboBoxRegion.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Teacher.REGION + " = '" + comboBoxRegion.getSelectedItem() + "'");
 		if(this.comboBoxDept.getSelectedItem() != null) {
-			//TODO 还需再确认不同表格是否也可以这样做
+			//TODO 杩�������纭�璁や�����琛ㄦ�兼�����涔����浠ヨ����峰��
 			sqlString = sqlString+(" and " + Department.NAME + " = '" + comboBoxDept.getSelectedItem() + "'");
 		}
 		if(this.comboBoxProf.getSelectedItem() != null)
@@ -167,17 +185,19 @@ public final class Item25Act extends JPanel implements ActionListener{
 		if(this.textSalMax.getText().equals("")){}
 		else {
 			float salMax = Float.parseFloat(textSalMax.getText());
-			sqlString = sqlString+(" and" + Teacher.SAL + " <= " + salMax);
+			sqlString = sqlString+(" and " + Teacher.SAL + " <= " + salMax);
 		}
 		System.out.println(sqlString);
         try {
             Statement statement = DBConnection.getConnection().createStatement();
             resultSet = statement.executeQuery(sqlString);
-            table = (new Table(resultSet)).jt;
-	    this.add(this.table);
+            forTable.removeAll();
+            jsp1 = new Table(resultSet).jsp1;
+            forTable.add(jsp1);
+            this.add(forTable);
             this.updateUI();
-            statement.close();
-            resultSet.close();
+			statement.close();
+			resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
