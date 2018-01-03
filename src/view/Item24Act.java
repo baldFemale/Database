@@ -109,7 +109,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select * from " + SC.TABLE + ", " + Course.TABLE + " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID;
+		String sqlString = "select Ayear, Semester, S_name, C_name, Score, Gpa from " + SC.TABLE + ", " + Course.TABLE + ", " + Student.TABLE+ " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID+ " and " + SC.TABLE + "."+ SC.S_ID + " = " + Student.TABLE + "."+ Student.ID;
 		//System.out.print(sqlString);
 		//String sqlString="";
 		if(this.comboBoxYear.getSelectedItem() != null)
@@ -118,13 +118,11 @@ public final class Item24Act extends JPanel implements  ActionListener{
 			sqlString = sqlString + (" and " + SC.SEMESTER + " = '" + comboBoxSemester.getSelectedItem() + "'");
 		if(this.textIDMin.getText().equals("")){}
 		else{
-			float idMin = Float.parseFloat(textIDMin.getText());
-			sqlString = sqlString + (" and " + SC.S_ID + " >= " + idMin);
+			sqlString = sqlString + (" and " + SC.TABLE + "." + SC.S_ID + " >= " + textIDMin.getText());
 		}
 		if(this.textIDMax.getText().equals("")){}
 		else{
-			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString = sqlString + (" and" + SC.S_ID + " <= " + idMax);
+			sqlString = sqlString + (" and" + SC.TABLE + "." + SC.S_ID + " <= " + textIDMax.getText());
 		}
 		if(this.comboBoxCourse.getSelectedItem() != null)
 			sqlString = sqlString + (" and " + Course.NAME + " = '" + comboBoxCourse.getSelectedItem() + "'");

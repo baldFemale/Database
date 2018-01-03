@@ -154,7 +154,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
 				e.printStackTrace();
 			}     
     		java.sql.Date sqlDateMin = new java.sql.Date(dateMin.getTime()); 
-			sqlString = sqlString+(" and " + Student.BIRTH + " >= " + sqlDateMin);
+			sqlString = sqlString+(" and " + Student.BIRTH + " >= '" + sqlDateMin + "'");
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
@@ -167,7 +167,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
 				e.printStackTrace();
 			}
     		java.sql.Date sqlDateMax = new java.sql.Date(dateMax.getTime()); 
-			sqlString = sqlString+(" and" + Student.BIRTH + " <= " + sqlDateMax);
+			sqlString = sqlString+(" and " + Student.BIRTH + " <= '" + sqlDateMax + "'");
 		}
 		if(this.comboBoxProv.getSelectedItem() != null)
 			sqlString = sqlString+(" and " + Student.PROV + " = '" + comboBoxProv.getSelectedItem() + "'");

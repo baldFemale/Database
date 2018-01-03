@@ -101,7 +101,7 @@ public final class Item26Act extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
 		// TODO Auto-generated method stub
-		String sqlString = "select * from " + TC.TABLE + ", " + Course.TABLE + ", " + Teacher.TABLE 
+		String sqlString = "select Ayear, Semester, T_name, C_name, Rating from " + TC.TABLE + ", " + Course.TABLE + ", " + Teacher.TABLE 
 				+ " where " + TC.TABLE + "." + TC.C_ID + " = " + Course.TABLE + "." + Course.ID 
 				+ " and " +  Teacher.TABLE + "." +Teacher.ID + " = " +  TC.TABLE + "." +TC.T_ID;
 		System.out.print(sqlString);

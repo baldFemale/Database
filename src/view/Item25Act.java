@@ -127,13 +127,11 @@ public final class Item25Act extends JPanel implements ActionListener{
 		//System.out.print(sqlString);
 		if(this.textIDMin.getText().equals("")){}
 		else {
-			float idMin = Float.parseFloat(textIDMin.getText());
-			sqlString = sqlString+(" and " + Teacher.ID + " >= " + idMin);
+			sqlString = sqlString+(" and " + Teacher.ID + " >= 't" + textIDMin.getText().toString() + "'");
 		}
 		if(this.textIDMax.getText().equals("")){}
 		else {
-			float idMax = Float.parseFloat(textIDMax.getText());
-			sqlString = sqlString+(" and" + Teacher.ID + " <= " + idMax);
+			sqlString = sqlString+(" and " + Teacher.ID + " <= 't" + textIDMax.getText() + "'");
 		}
 		if(this.textName.getText().equals("")){}
 		else{
@@ -153,7 +151,7 @@ public final class Item25Act extends JPanel implements ActionListener{
 				e.printStackTrace();
 			}     
     		java.sql.Date sqlDateMin = new java.sql.Date(dateMin.getTime()); 
-			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= " + sqlDateMin);
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " >= '" + sqlDateMin + "'");
 		}
 		if(this.textBirthMax.getText().equals("")){}
 		else {
@@ -166,7 +164,7 @@ public final class Item25Act extends JPanel implements ActionListener{
 				e.printStackTrace();
 			}     
     		java.sql.Date sqlDateMax = new java.sql.Date(dateMax.getTime()); 
-			sqlString = sqlString+(" and" + Teacher.BIRTH + " <= " + sqlDateMax);
+			sqlString = sqlString+(" and " + Teacher.BIRTH + " <= '" + sqlDateMax + "'");
 		}
 		
 		if(this.comboBoxProv.getSelectedItem() != null)
@@ -187,7 +185,7 @@ public final class Item25Act extends JPanel implements ActionListener{
 		if(this.textSalMax.getText().equals("")){}
 		else {
 			float salMax = Float.parseFloat(textSalMax.getText());
-			sqlString = sqlString+(" and" + Teacher.SAL + " <= " + salMax);
+			sqlString = sqlString+(" and " + Teacher.SAL + " <= " + salMax);
 		}
 		System.out.println(sqlString);
         try {
