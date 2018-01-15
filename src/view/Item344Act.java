@@ -18,8 +18,8 @@ import toolkit.Utility;
 public class Item344Act extends Item3 implements ActionListener{
     public Item344Act(){
         List<ComboBoxSearch> searchList = new ArrayList<>();
-        searchList.add(new ComboBoxSearch("学年", SC.TABLE,SC.AYEAR));
-        searchList.add(new ComboBoxSearch("系别", Department.TABLE,Department.NAME));
+        searchList.add(new ComboBoxSearch("瀛﹀勾", SC.TABLE,SC.AYEAR));
+        searchList.add(new ComboBoxSearch("绯诲埆", Department.TABLE,Department.NAME));
         this.upper=new PanelComboBox(searchList);
         this.add(upper);
         this.add(lower);

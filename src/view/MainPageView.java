@@ -121,11 +121,11 @@ public class MainPageView extends JFrame implements ActionListener{
 		item14 = new JMenuItem("课程信息");
 		item15 = new JMenuItem("学生选课情况");
 		item16 = new JMenuItem("教师授课情况");
-		item21 = new JMenuItem("学生信息");
-		item22 = new JMenuItem("教师信息");
-		item23 = new JMenuItem("系别信息");
-		item24 = new JMenuItem("课程信息");
-		item25 = new JMenuItem("学生选课情况");
+		item21 = new JMenuItem("系别信息");
+		item22 = new JMenuItem("课程信息");
+		item23 = new JMenuItem("学生信息");
+		item24 = new JMenuItem("学生选课信息");
+		item25 = new JMenuItem("老师情况");
 		item26 = new JMenuItem("教师授课情况");
 		
 		item311 = new JMenuItem("评教等级");
