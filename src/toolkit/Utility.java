@@ -36,7 +36,7 @@ public class Utility {
     }
     
     public static void reportErrorEmptyTable(){
-        JOptionPane.showMessageDialog(null, "û�з��������ļ�¼�������ѯ����","wrong",JOptionPane.ERROR_MESSAGE);;
+        JOptionPane.showMessageDialog(null, "输入错误","wrong",JOptionPane.ERROR_MESSAGE);;
     }
 
     /**
@@ -99,6 +99,9 @@ public class Utility {
             e.printStackTrace();
             jsp=new JScrollPane();
         }
+        Toolkit toolkit=Toolkit.getDefaultToolkit();
+        Dimension screenSize=toolkit.getScreenSize();
+        jsp.setPreferredSize(new Dimension(screenSize.width/4,screenSize.height/4));
         return jsp;
     }
 
