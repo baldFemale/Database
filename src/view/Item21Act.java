@@ -91,7 +91,7 @@ public final class Item21Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select * from " + Department.TABLE + " where 1 = 1 ";
+		String sqlString = "select Dept_id as '系别代码', dept_name as '系别名称', Dept_loc as '校区' from " + Department.TABLE + " where 1 = 1 ";
 		System.out.println("dfs" + sqlString);
 		if(this.comboBoxID.getSelectedItem()!=null )
 			sqlString = sqlString + (" and " + Department.ID + "=" + comboBoxID.getSelectedItem().toString());

@@ -42,18 +42,18 @@ public final class Item24Act extends JPanel implements  ActionListener{
     
     public Item24Act (){
     	super();
-        labelYear=new JLabel("å­¦å¹´");
-        labelSemester=new JLabel("å­¦æœŸ");
-        labelStudentID = new JLabel("å­¦å·");
-        labelCourse = new JLabel("è¯¾ç¨‹åç§°");
-        labelScore = new JLabel("æˆç»©");
-        labelGpa = new JLabel("ç»©ç‚¹");
-        labelTo = new JLabel("è‡³");
-        labelTo1 = new JLabel("è‡³");
-        labelTo2 = new JLabel("è‡³");
+        labelYear=new JLabel("Ñ§Äê");
+        labelSemester=new JLabel("Ñ§ÆÚ");
+        labelStudentID = new JLabel("Ñ§ºÅ");
+        labelCourse = new JLabel("¿Î³ÌÃû³Æ");
+        labelScore = new JLabel("³É¼¨");
+        labelGpa = new JLabel("¼¨µã");
+        labelTo = new JLabel("ÖÁ");
+        labelTo1 = new JLabel("ÖÁ");
+        labelTo2 = new JLabel("ÖÁ");
 
         upper=new JPanel();
-        buttonQuery= new JButton("ï¿½æŸ¥è¯¢");
+        buttonQuery= new JButton("²éÑ¯");
         comboBoxYear=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE, SC.AYEAR));
         comboBoxSemester=new JComboBox(Utility.simpleUniqueQuery(SC.TABLE,SC.SEMESTER));
         comboBoxCourse=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
@@ -68,7 +68,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
         top=new JPanel();
         forTable = new JPanel();
         jsp1 = new JScrollPane();
-        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
+        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -81,7 +81,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.ITALIC,30));
+        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));
     }
 	
     private LayoutManager createLayout(){
@@ -109,7 +109,7 @@ public final class Item24Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select Ayear, Semester, S_name, C_name, Score, Gpa from " + SC.TABLE + ", " + Course.TABLE + ", " + Student.TABLE+ " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID+ " and " + SC.TABLE + "."+ SC.S_ID + " = " + Student.TABLE + "."+ Student.ID;
+		String sqlString = "select Ayear as 'Ñ§Äê', Semester as 'Ñ§ÆÚ', S_name as 'ĞÕÃû', C_name as '¿Î³Ì', Score as '³É¼¨', Gpa as '¼¨µã' from " + SC.TABLE + ", " + Course.TABLE + ", " + Student.TABLE+ " where " + SC.TABLE + "."+ SC.C_ID + " = " + Course.TABLE + "."+ Course.ID+ " and " + SC.TABLE + "."+ SC.S_ID + " = " + Student.TABLE + "."+ Student.ID;
 		//System.out.print(sqlString);
 		//String sqlString="";
 		if(this.comboBoxYear.getSelectedItem() != null)

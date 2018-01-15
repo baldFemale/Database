@@ -125,7 +125,7 @@ public final class Item23Act extends JPanel implements  ActionListener{
     
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select * from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
+		String sqlString = "select S_id as '学号', S_name as '姓名', S_sex as '性别', S_birth as '生日', S_prov as '省份', S_into as '入学年份', dept_name as '系别', Dept_loc as '校区' from " + Student.TABLE + ", " + Department.TABLE + " where " + Student.TABLE + "." + Student.DEPT + " = " + Department.TABLE + "." + Department.ID;
 		if (this.textIDMin.getText().equals("") ){}
 		else{
 			int idMin = Integer.parseInt(textIDMin.getText());
