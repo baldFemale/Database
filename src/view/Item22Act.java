@@ -41,13 +41,13 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	
 	public Item22Act (){
 		super();
-        labelID=new JLabel("¿Î³Ì´úÂë");
-        labelName=new JLabel("¿Î³ÌÃû³Æ");
-        labelCredit = new JLabel("Ñ§·Ö");
-        labelTo = new JLabel("ÖÁ");
+        labelID=new JLabel("è¯¾ç¨‹ä»£ç ");
+        labelName=new JLabel("è¯¾ç¨‹åç§°");
+        labelCredit = new JLabel("å­¦åˆ†");
+        labelTo = new JLabel("è‡³");
 
         upper=new JPanel();
-        buttonQuery= new JButton("²éÑ¯");
+        buttonQuery= new JButton("æŸ¥è¯¢");
         comboBoxID=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE, Course.ID));
         comboBoxName=new JComboBox(Utility.simpleUniqueQuery(Course.TABLE,Course.NAME));
         textCreditMin=new JTextField(30);
@@ -57,7 +57,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
         top=new JPanel();
         forTable = new JPanel();
         jsp1 = new JScrollPane();
-        labelHeading=new JLabel("ÇëÊäÈëĞèÒª²éÑ¯µÄÌõ¼ş");
+        labelHeading=new JLabel("è¯·è¾“å…¥éœ€è¦æŸ¥è¯¢çš„æ¡ä»¶");
         //labelHeading.setHorizontalAlignment(SwingConstants.LEFT);
         top.add(labelHeading);
 
@@ -70,7 +70,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
         
 
         this.setVisible(true);
-        this.setFont(new Font("ËÎÌå",Font.ITALIC,30));
+        this.setFont(new Font("å®‹ä½“",Font.ITALIC,30));
     }
 	
 	private LayoutManager createLayout(){
@@ -93,7 +93,7 @@ public final class Item22Act extends JPanel implements  ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent actionEvent) {
-		String sqlString = "select C_id as '¿Î³Ì´úÂë', C_name as '¿Î³ÌÃû', Credit as 'Ñ§·Ö' from " + Course.TABLE+ " where 1 = 1";
+		String sqlString = "select C_id as 'è¯¾ç¨‹ä»£ç ', C_name as 'è¯¾ç¨‹å', Credit as 'å­¦åˆ†' from " + Course.TABLE+ " where 1 = 1";
 		if(this.comboBoxID.getSelectedItem() != null)
 			sqlString = sqlString + (" and " + Course.ID + " = " + comboBoxID.getSelectedItem());
 		if(this.comboBoxName.getSelectedItem() != null)
